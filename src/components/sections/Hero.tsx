@@ -170,7 +170,7 @@ export default function Hero() {
   const yOffset = ((mousePosition.y - 50) / 50) * (isMobile ? 6 : 14);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black text-white">
+    <section id="hero" className="relative min-h-screen overflow-hidden bg-black text-white">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.08),transparent_35%),linear-gradient(135deg,#000_0%,#050816_45%,#000_100%)]" />
 
@@ -226,22 +226,14 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.15 }}
-              className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-sm"
-              style={{ transform: 'translateZ(0)' }}
+              className="inline-flex items-center gap-3 rounded-full border border-transparent bg-transparent px-4 py-2"
+              style={{ transform: 'translateZ(0)', visibility: 'hidden' }}
             >
               <div className="relative flex h-2.5 w-2.5 items-center justify-center">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70" />
-                <motion.span
-                  className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400"
-                  animate={{ opacity: [0.55, 1, 0.55] }}
-                  transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-                />
+                <span className="absolute inline-flex h-full w-full rounded-full opacity-0" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full opacity-0" />
               </div>
-              <span className="font-accent text-[10px] uppercase tracking-[0.34em] text-emerald-300 sm:text-xs">
-                Live Systems / Product / Infrastructure
-              </span>
             </motion.div>
-
             <div className="space-y-4">
               <div className="overflow-visible">
                 <div className="flex flex-wrap items-center gap-x-1 gap-y-0 sm:gap-x-2">
@@ -321,7 +313,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.85 }}
               className="flex flex-wrap gap-3"
             >
-              {['Harvard IT', 'Fidelity Investments', 'AI + Infrastructure'].map((item, i) => (
+              {['Full Stack', 'System Design', 'Web Development'].map((item, i) => (
                 <motion.div
                   key={item}
                   initial={{ opacity: 0, y: 14 }}
@@ -349,7 +341,7 @@ export default function Hero() {
                   Software Engineer
                 </p>
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-gray-500 sm:text-xs">
-                  System Design / Full Stack / Human-Centered Tech
+                  System Design / Full Stack Development
                 </p>
               </div>
 
@@ -360,16 +352,16 @@ export default function Hero() {
                   transform: 'translateZ(0)',
                 }}
               >
-                I don&apos;t ship features.
+                Building software that works.
                 <br />
                 <span className="font-editorial italic text-gray-300">
-                  I ship systems that hold under pressure.
+                  Simple solutions for complex problems.
                 </span>
               </h2>
 
               <p className="max-w-xl font-editorial text-lg leading-relaxed text-gray-300 sm:text-[1.15rem]">
-                From enterprise infrastructure to AI-driven products, I build software that is
-                resilient, useful, and grounded in real-world impact.
+                I enjoy creating web applications and working on projects that solve real problems
+                for people and businesses.
               </p>
             </motion.div>
 
@@ -399,7 +391,7 @@ export default function Hero() {
               </motion.button>
 
               <div className="font-mono text-[11px] uppercase tracking-[0.24em] text-gray-500 sm:text-xs">
-                Engineering for real constraints
+                Let's build something together
               </div>
             </motion.div>
           </div>
