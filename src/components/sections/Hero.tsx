@@ -18,37 +18,55 @@ interface AnimatedElement {
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isClient, setIsClient] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [floatingSymbols, setFloatingSymbols] = useState<AnimatedElement[]>([]);
   const [ambientParticles, setAmbientParticles] = useState<AnimatedElement[]>([]);
 
   useEffect(() => {
-    setIsClient(true);
-    
-    // Generate floating symbols data
-    const symbols = Array.from({ length: 12 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 1200,
-      y: Math.random() * 800,
-      rotate: Math.random() * 360,
-      duration: 10 + Math.random() * 10,
-      delay: i * 0.5,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-    }));
-    setFloatingSymbols(symbols);
+    // Add a small delay to ensure proper hydration
+    const timer = setTimeout(() => {
+      setIsClient(true);
+      
+      // Detect mobile devices
+      const checkIsMobile = () => {
+        return window.innerWidth < 768 || 
+               /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      };
+      const mobile = checkIsMobile();
+      setIsMobile(mobile);
+      
+      // Reduce animations on mobile for better performance
+      const symbolCount = mobile ? 6 : 12;
+      const particleCount = mobile ? 8 : 20;
+      
+      // Generate floating symbols data
+      const symbols = Array.from({ length: symbolCount }, (_, i) => ({
+        id: i,
+        x: Math.random() * 1200,
+        y: Math.random() * 800,
+        rotate: Math.random() * 360,
+        duration: mobile ? 15 + Math.random() * 5 : 10 + Math.random() * 10, // Slower on mobile
+        delay: i * 0.5,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+      }));
+      setFloatingSymbols(symbols);
 
-    // Generate ambient particles data
-    const particles = Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 1200,
-      y: Math.random() * 800,
-      rotate: 0,
-      duration: 8 + Math.random() * 4,
-      delay: Math.random() * 5,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-    }));
-    setAmbientParticles(particles);
+      // Generate ambient particles data
+      const particles = Array.from({ length: particleCount }, (_, i) => ({
+        id: i,
+        x: Math.random() * 1200,
+        y: Math.random() * 800,
+        rotate: 0,
+        duration: mobile ? 12 + Math.random() * 4 : 8 + Math.random() * 4, // Slower on mobile
+        delay: Math.random() * 5,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+      }));
+      setAmbientParticles(particles);
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -64,25 +82,22 @@ export default function Hero() {
     workSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Letter animation variants
+  // Letter animation variants - optimized for performance
   const letterVariants = {
     hidden: { 
       opacity: 0, 
-      y: 100, 
-      rotateX: -90,
-      scale: 0.5
+      y: 50, // Reduced from 100 for smoother animation
+      scale: 0.8 // Less dramatic scale change
     },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      rotateX: 0,
       scale: 1,
       transition: {
-        delay: i * 0.1,
-        duration: 0.8,
+        delay: i * 0.08, // Slightly faster stagger
+        duration: 0.6, // Shorter duration for snappier feel
         ease: [0.25, 0.46, 0.45, 0.94] as const,
-        type: "spring" as const,
-        stiffness: 100
+        type: "tween" as const // Use tween instead of spring for more predictable performance
       }
     })
   };

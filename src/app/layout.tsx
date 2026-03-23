@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://jasondank.dev",
+    url: "https://jasondank.com",
     title: "Jason Dank - Software Engineer | AI Systems | Product Builder",
     description: "Building systems that actually matter. Portfolio of Jason Dank, technical leader and product builder.",
     siteName: "Jason Dank Portfolio",
@@ -58,6 +58,11 @@ export const metadata: Metadata = {
     title: "Jason Dank - Software Engineer | AI Systems | Product Builder",
     description: "Building systems that actually matter. Portfolio of Jason Dank, technical leader and product builder.",
   },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
