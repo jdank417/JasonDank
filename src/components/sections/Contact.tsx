@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Send, ArrowUpRight } from 'lucide-react';
+import { Mail, Linkedin, Send, ArrowUpRight, Github } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Contact() {
@@ -81,7 +81,7 @@ export default function Contact() {
             {/* Contact Methods */}
             <div className="space-y-6">
               <motion.a
-                href="mailto:jason.dank@example.com"
+                href="mailto:jasondank@yahoo.com"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center gap-4 p-6 bg-gray-900 rounded-xl border border-gray-800 hover:border-green-500/50 transition-all duration-300 group"
@@ -92,14 +92,14 @@ export default function Contact() {
                 <div>
                   <h4 className="text-white font-semibold text-lg">Email</h4>
                   <p className="text-gray-400 group-hover:text-green-400 transition-colors duration-300">
-                    jason.dank@example.com
+                    jasondank@yahoo.com
                   </p>
                 </div>
                 <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-green-400 ml-auto transition-colors duration-300" />
               </motion.a>
 
               <motion.a
-                href="https://linkedin.com/in/jasondank"
+                href="https://www.linkedin.com/in/jason-dank"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
@@ -117,6 +117,26 @@ export default function Contact() {
                 </div>
                 <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 ml-auto transition-colors duration-300" />
               </motion.a>
+
+              <motion.a
+                href="https://github.com/jdank417"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-4 p-6 bg-gray-900 rounded-xl border border-gray-800 hover:border-purple-500/50 transition-all duration-300 group"
+              >
+                <div className="p-3 bg-purple-500/20 rounded-lg text-purple-400 group-hover:bg-purple-500/30 transition-colors duration-300">
+                  <Github className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold text-lg">GitHub</h4>
+                  <p className="text-gray-400 group-hover:text-purple-400 transition-colors duration-300">
+                    View my code and projects
+                  </p>
+                </div>
+                <ArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-purple-400 ml-auto transition-colors duration-300" />
+              </motion.a>
             </div>
 
             {/* Quick Info */}
@@ -124,11 +144,11 @@ export default function Contact() {
               <div className="grid grid-cols-2 gap-6">
                 <div>
                   <h4 className="text-white font-semibold mb-2">Location</h4>
-                  <p className="text-gray-400">Cambridge, MA</p>
+                  <p className="text-gray-400">Boston</p>
                 </div>
                 <div>
-                  <h4 className="text-white font-semibold mb-2">Availability</h4>
-                  <p className="text-green-400">Open to opportunities</p>
+                  <h4 className="text-white font-semibold mb-2">Status</h4>
+                  <p className="text-blue-400">Employed at Fidelity</p>
                 </div>
               </div>
             </div>

@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, ArrowRight, Brain, TrendingUp, Scan, Network, Server } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight, Brain, TrendingUp, Scan, Network, Server, ChevronLeft, ChevronRight, Smartphone } from 'lucide-react';
+import { useState } from 'react';
 
 interface Project {
   id: string;
@@ -13,6 +14,9 @@ interface Project {
   gradient: string;
   year: string;
   category: string;
+  githubUrl?: string;
+  demoUrl?: string;
+  appStoreUrl?: string;
 }
 
 const projects: Project[] = [
@@ -25,7 +29,8 @@ const projects: Project[] = [
     icon: <Brain className="w-8 h-8" />,
     gradient: 'from-blue-500 to-purple-600',
     year: '2024',
-    category: 'AI Systems'
+    category: 'AI Systems',
+    githubUrl: 'https://github.com/jdank417/Flan-t5-sailing-JasonDank'
   },
   {
     id: 'wsl2-server-infrastructure',
@@ -36,7 +41,8 @@ const projects: Project[] = [
     icon: <Server className="w-8 h-8" />,
     gradient: 'from-indigo-500 to-purple-600',
     year: '2024',
-    category: 'Infrastructure'
+    category: 'Infrastructure',
+    demoUrl: 'https://drive.google.com/file/d/1kRTeivItPW3HBvMCnBD8cd3wxtmspbez/view?usp=sharing'
   },
   {
     id: 'bullbar-stock-ticker',
@@ -47,7 +53,8 @@ const projects: Project[] = [
     icon: <TrendingUp className="w-8 h-8" />,
     gradient: 'from-green-500 to-emerald-600',
     year: '2024',
-    category: 'Native Apps'
+    category: 'Native Apps',
+    appStoreUrl: 'https://apps.apple.com/us/app/bullbar/id6745433379?mt=12'
   },
   {
     id: 'bartender-gpt',
@@ -58,7 +65,8 @@ const projects: Project[] = [
     icon: <Brain className="w-8 h-8" />,
     gradient: 'from-orange-500 to-red-600',
     year: '2024',
-    category: 'Mobile Apps'
+    category: 'Mobile Apps',
+    appStoreUrl: 'https://apps.apple.com/us/app/bartender-gpt/id6743064352?platform=iphone'
   },
   {
     id: 'stock-market-predictor',
@@ -69,7 +77,8 @@ const projects: Project[] = [
     icon: <TrendingUp className="w-8 h-8" />,
     gradient: 'from-cyan-500 to-blue-600',
     year: '2023',
-    category: 'FinTech ML'
+    category: 'FinTech ML',
+    githubUrl: 'https://github.com/jdank417/Deep-Learning-for-Stock-Market-Predictions'
   },
   {
     id: 'grocery-barcode-scanner',
@@ -80,11 +89,26 @@ const projects: Project[] = [
     icon: <Scan className="w-8 h-8" />,
     gradient: 'from-purple-500 to-pink-600',
     year: '2023',
-    category: 'Web Applications'
+    category: 'Web Applications',
+    demoUrl: 'https://grocerybarcodescanner.onrender.com/'
   }
 ];
 
 export default function Work() {
+  const [currentProject, setCurrentProject] = useState(0);
+
+  const nextProject = () => {
+    setCurrentProject((prev) => (prev + 1) % projects.length);
+  };
+
+  const prevProject = () => {
+    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
+  };
+
+  const goToProject = (index: number) => {
+    setCurrentProject(index);
+  };
+
   return (
     <section id="work" className="py-24 bg-gray-950 relative overflow-hidden">
       {/* Background pattern */}
@@ -102,96 +126,185 @@ export default function Work() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="mb-32"
         >
-          <h2 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6">
+          <h2 className="font-display text-display font-bold text-white mb-8 leading-tight">
             Selected Work
           </h2>
-          <p className="font-body text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Building systems that solve real problems and create meaningful impact through thoughtful engineering and innovative design.
+          <p className="font-body text-editorial text-gray-300 max-w-2xl leading-relaxed">
+            Systems that solve real problems. Products that create meaningful impact. 
+            Engineering that matters.
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
-              viewport={{ once: true }}
-              className="group relative"
-            >
-              <div className="relative bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-gray-700 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/50">
-                {/* Project Icon & Category */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className={`p-3 rounded-xl bg-gradient-to-r ${project.gradient} text-white`}>
-                    {project.icon}
-                  </div>
-                  <div className="text-right">
-                    <span className="text-sm text-gray-400 font-medium">{project.category}</span>
-                    <div className="text-sm text-gray-500">{project.year}</div>
+        {/* Modern Carousel */}
+        <div className="relative">
+          {/* Main Project Display */}
+          <motion.div
+            key={currentProject}
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="min-h-[600px] flex items-center"
+          >
+            <div className="grid lg:grid-cols-12 gap-16 w-full">
+              {/* Project Content */}
+              <div className="lg:col-span-8 space-y-12">
+                {/* Project Number & Category */}
+                <div className="flex items-center gap-6">
+                  <span className="font-hero text-6xl font-black text-gray-800 leading-none">
+                    {String(currentProject + 1).padStart(2, '0')}
+                  </span>
+                  <div className="flex items-center gap-4">
+                    <span className="font-accent text-sm text-green-400 font-medium tracking-[0.3em] uppercase">
+                      {projects[currentProject].category}
+                    </span>
+                    <span className="w-12 h-px bg-gray-600"></span>
+                    <span className="font-accent text-sm text-gray-500 font-medium">
+                      {projects[currentProject].year}
+                    </span>
                   </div>
                 </div>
 
                 {/* Project Title */}
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:to-emerald-400 transition-all duration-300">
-                  {project.title}
+                <h3 className="font-display text-display font-bold text-white leading-tight">
+                  {projects[currentProject].title}
                 </h3>
 
-                {/* Project Description */}
-                <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  {project.description}
+                {/* Impact Statement */}
+                <blockquote className="border-l-4 border-green-400 pl-8">
+                  <p className="font-editorial text-subhead text-green-400 font-medium italic leading-tight">
+                    "{projects[currentProject].impact}"
+                  </p>
+                </blockquote>
+
+                {/* Description */}
+                <p className="font-editorial text-large text-gray-300 leading-relaxed">
+                  {projects[currentProject].description}
                 </p>
 
-                {/* Impact Statement */}
-                <div className="bg-gray-800 rounded-lg p-4 mb-6 border-l-4 border-green-500">
-                  <p className="text-green-400 font-semibold text-sm uppercase tracking-wider mb-1">
-                    Impact
-                  </p>
-                  <p className="text-white font-medium">
-                    {project.impact}
-                  </p>
+                {/* External Links */}
+                <div className="pt-8 space-y-4">
+                  {projects[currentProject].githubUrl && (
+                    <a
+                      href={projects[currentProject].githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-4 text-white font-heading text-lg font-medium border-b border-gray-600 hover:border-green-400 transition-all duration-500 hover:text-green-400 pb-2 mr-8"
+                    >
+                      <Github className="w-5 h-5" />
+                      <span className="tracking-wide">View Code</span>
+                      <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </a>
+                  )}
+                  
+                  {projects[currentProject].demoUrl && (
+                    <a
+                      href={projects[currentProject].demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-4 text-white font-heading text-lg font-medium border-b border-gray-600 hover:border-green-400 transition-all duration-500 hover:text-green-400 pb-2 mr-8"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                      <span className="tracking-wide">
+                        {projects[currentProject].id === 'wsl2-server-infrastructure' ? 'Read Paper' : 'Live Demo'}
+                      </span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </a>
+                  )}
+                  
+                  {projects[currentProject].appStoreUrl && (
+                    <a
+                      href={projects[currentProject].appStoreUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-4 text-white font-heading text-lg font-medium border-b border-gray-600 hover:border-green-400 transition-all duration-500 hover:text-green-400 pb-2 mr-8"
+                    >
+                      <Smartphone className="w-5 h-5" />
+                      <span className="tracking-wide">App Store</span>
+                      <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </a>
+                  )}
                 </div>
+              </div>
 
-                {/* Technologies */}
-                <div className="mb-8">
-                  <p className="text-gray-400 text-sm font-medium mb-3 uppercase tracking-wider">
-                    Technologies
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span
+              {/* Technologies Sidebar */}
+              <div className="lg:col-span-4 space-y-8">
+                <div>
+                  <h4 className="font-accent text-sm text-gray-400 font-medium tracking-[0.3em] uppercase mb-6">
+                    Technology Stack
+                  </h4>
+                  <div className="space-y-3">
+                    {projects[currentProject].technologies.map((tech, index) => (
+                      <motion.div
                         key={tech}
-                        className="px-3 py-1 bg-gray-800 text-gray-300 text-sm rounded-full border border-gray-700 hover:border-green-500 hover:text-green-400 transition-colors duration-300"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: index * 0.1 }}
+                        className="font-heading text-lg text-gray-400 hover:text-green-400 transition-colors duration-300 cursor-default"
                       >
                         {tech}
-                      </span>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex gap-4">
-                  <a
-                    href={`/projects/${project.id}`}
-                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-black font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25"
-                  >
-                    View Case Study
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                  <button className="flex items-center gap-2 px-6 py-3 border border-gray-600 hover:border-green-500 text-gray-300 hover:text-green-400 font-semibold rounded-lg transition-all duration-300 hover:bg-gray-800">
-                    <Github className="w-4 h-4" />
-                    Code
-                  </button>
+                {/* Project Icon */}
+                <div className="pt-8">
+                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center text-white">
+                    {projects[currentProject].icon}
+                  </div>
                 </div>
-
-                {/* Hover Gradient Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-r ${project.gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-500`} />
               </div>
-            </motion.div>
-          ))}
+            </div>
+          </motion.div>
+
+          {/* Navigation Controls */}
+          <div className="flex items-center justify-between mt-16">
+            {/* Previous Button */}
+            <button
+              onClick={prevProject}
+              className="group flex items-center gap-3 text-gray-400 hover:text-green-400 transition-colors duration-300"
+            >
+              <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform duration-300" />
+              <span className="font-heading text-lg font-medium">Previous</span>
+            </button>
+
+            {/* Project Indicators */}
+            <div className="flex items-center gap-3">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToProject(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentProject 
+                      ? 'bg-green-400 scale-125' 
+                      : 'bg-gray-600 hover:bg-gray-500'
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={nextProject}
+              className="group flex items-center gap-3 text-gray-400 hover:text-green-400 transition-colors duration-300"
+            >
+              <span className="font-heading text-lg font-medium">Next</span>
+              <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="mt-8 w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-green-400 to-emerald-400"
+              initial={{ width: 0 }}
+              animate={{ width: `${((currentProject + 1) / projects.length) * 100}%` }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+            />
+          </div>
         </div>
 
         {/* Bottom CTA */}
@@ -200,15 +313,24 @@ export default function Work() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mt-20"
+          className="mt-32 pt-16 border-t border-gray-800"
         >
-          <p className="text-gray-400 text-lg mb-8">
-            Interested in seeing more detailed case studies?
-          </p>
-          <button className="inline-flex items-center gap-3 px-8 py-4 bg-transparent border-2 border-green-500 hover:bg-green-500 text-green-500 hover:text-black font-semibold text-lg rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/25">
-            View All Projects
-            <ExternalLink className="w-5 h-5" />
-          </button>
+          <div className="max-w-2xl">
+            <h3 className="font-display text-subhead font-medium text-white mb-6 leading-tight">
+              More detailed case studies available upon request.
+            </h3>
+            <p className="font-body text-lg text-gray-400 leading-relaxed mb-8">
+              Each project represents months of research, development, and iteration. 
+              I'd be happy to walk through the technical details and decision-making process.
+            </p>
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-3 text-white font-heading text-lg font-medium border-b border-gray-600 hover:border-green-400 transition-all duration-500 hover:text-green-400 pb-2"
+            >
+              <span className="tracking-wide">Get in Touch</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

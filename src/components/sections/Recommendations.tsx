@@ -42,91 +42,72 @@ export default function Recommendations() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="mb-32"
         >
-          <h2 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6">
+          <h2 className="font-display text-display font-bold text-white mb-8 leading-tight">
             Recommendations
           </h2>
-          <p className="font-body text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Testimonials from colleagues and academic recognition highlighting technical expertise, leadership, and professional impact.
+          <p className="font-body text-editorial text-gray-300 max-w-2xl leading-relaxed">
+            Perspectives from colleagues and institutions on technical expertise and leadership impact.
           </p>
         </motion.div>
 
-        {/* Recommendations Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        {/* Testimonials */}
+        <div className="space-y-32">
           {recommendations.map((rec, index) => (
-            <motion.div
+            <motion.article
               key={rec.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
               viewport={{ once: true }}
-              className="group relative"
+              className={`group relative ${index % 2 === 1 ? 'lg:ml-24' : ''}`}
             >
-              <div className="relative bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-gray-700 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/50 h-full">
-                {/* Quote Icon */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className={`p-3 rounded-xl bg-gradient-to-r ${rec.gradient} text-white`}>
-                    {rec.icon}
-                  </div>
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                </div>
+              {/* Large Quote Mark */}
+              <div className="absolute -left-8 -top-4 text-8xl font-display text-gray-800 leading-none select-none">
+                "
+              </div>
 
+              <div className="relative max-w-4xl">
                 {/* Quote Text */}
-                <blockquote className="text-gray-300 text-lg leading-relaxed mb-8 italic">
-                  "{rec.text}"
+                <blockquote className="font-display text-subhead font-medium text-white leading-tight mb-12 italic">
+                  {rec.text}
                 </blockquote>
 
-                {/* Author Info */}
-                <div className="border-t border-gray-800 pt-6">
-                  <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${rec.gradient} flex items-center justify-center text-white font-bold`}>
-                      {rec.author.split(' ').map(n => n[0]).join('')}
-                    </div>
-                    <div>
-                      <h4 className="text-white font-semibold text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:to-emerald-400 transition-all duration-300">
-                        {rec.author}
-                      </h4>
-                      <p className="text-gray-400 font-medium">
-                        {rec.title}
-                      </p>
-                      <p className="text-gray-500 text-sm">
-                        {rec.company}
-                      </p>
+                {/* Attribution */}
+                <div className="grid lg:grid-cols-12 gap-8 items-end">
+                  <div className="lg:col-span-8">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-px bg-green-400"></div>
+                      <div>
+                        <h4 className="font-heading text-xl font-semibold text-white mb-1 group-hover:text-green-400 transition-colors duration-300">
+                          {rec.author}
+                        </h4>
+                        <p className="font-body text-gray-400 mb-1">
+                          {rec.title}
+                        </p>
+                        <p className="font-accent text-sm text-gray-500 tracking-wide">
+                          {rec.company}
+                        </p>
+                      </div>
                     </div>
                   </div>
+                  
+                  {/* Source indicator */}
+                  <div className="lg:col-span-4 lg:text-right">
+                    <span className="font-accent text-xs text-gray-600 tracking-[0.2em] uppercase">
+                      {rec.id === 'academic-recognition' ? 'Academic Profile' : 'Professional Reference'}
+                    </span>
+                  </div>
                 </div>
-
-                {/* Hover Gradient Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-r ${rec.gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-500`} />
               </div>
-            </motion.div>
+
+              {/* Subtle separator */}
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+            </motion.article>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-center mt-20"
-        >
-          <p className="text-gray-400 text-lg mb-8">
-            Interested in working together or learning more about my experience?
-          </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-black font-semibold text-lg rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/25"
-          >
-            Get In Touch
-            <Quote className="w-5 h-5" />
-          </a>
-        </motion.div>
       </div>
     </section>
   );

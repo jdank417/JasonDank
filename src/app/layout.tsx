@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Outfit } from "next/font/google";
+import { Inter, JetBrains_Mono, Playfair_Display, Oswald, Crimson_Text, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,8 +14,27 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const crimsonText = Crimson_Text({
+  variable: "--font-crimson",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
 });
@@ -49,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${outfit.variable} h-full antialiased dark`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${playfairDisplay.variable} ${oswald.variable} ${crimsonText.variable} ${spaceGrotesk.variable} h-full antialiased dark`}
     >
       <body className="min-h-full bg-black text-white font-sans overflow-x-hidden">
         {children}
