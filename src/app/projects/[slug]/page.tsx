@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github, Calendar, Tag, Target, Lightbulb, Code, TrendingUp } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Target, Lightbulb, Code, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -281,7 +281,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               Interested in this project?
             </h2>
             <p className="font-body text-lg text-gray-400">
-              Let's discuss how we can work together on similar challenges.
+              Let&apos;s discuss how we can work together on similar challenges.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

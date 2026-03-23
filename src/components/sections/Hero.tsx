@@ -1,140 +1,69 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowDown, ChevronRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
+
+const metrics = [
+  { label: 'Years Building', value: '3+' },
+  { label: 'Projects Shipped', value: '12+' },
+  { label: 'Client Collaborations', value: '5+' }
+];
 
 export default function Hero() {
-  const scrollToWork = () => {
-    const workSection = document.getElementById('work');
-    workSection?.scrollIntoView({ behavior: 'smooth' });
+  const jumpTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-50" />
-      
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }} />
-      </div>
+    <section className="relative overflow-hidden px-6 pb-20 pt-28 sm:px-8 lg:px-12">
+      <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top,#2a325f_0%,#0b0f1c_35%,#05070f_100%)]" />
+      <div className="absolute inset-0 -z-10 opacity-40 [background:linear-gradient(to_right,rgba(120,130,180,.16)_1px,transparent_1px),linear-gradient(to_bottom,rgba(120,130,180,.16)_1px,transparent_1px)] [background-size:72px_72px]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-        {/* Main content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-8"
-        >
-          {/* Name */}
-          <motion.h1 
-            className="font-heading text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-          >
-            <span className="block text-white">Jason</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
-              Dank
-            </span>
-          </motion.h1>
-
-          {/* Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="space-y-6"
-          >
-            <p className="font-body text-xl sm:text-2xl lg:text-3xl text-gray-300 font-light tracking-wide">
-              Software Engineer | AI Systems | Product Builder
-            </p>
-            
-            {/* Tagline */}
-            <p className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold text-white max-w-4xl mx-auto leading-tight">
-              Building systems that actually matter.
-            </p>
-          </motion.div>
-
-          {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            className="pt-8"
-          >
-            <button
-              onClick={scrollToWork}
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-black font-semibold text-lg rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/25"
-            >
-              View Work
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2 text-gray-400 cursor-pointer hover:text-green-400 transition-colors duration-300"
-            onClick={scrollToWork}
-          >
-            <span className="text-sm font-medium tracking-wider uppercase">Scroll</span>
-            <ArrowDown className="w-5 h-5" />
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Floating elements */}
       <motion.div
-        className="absolute top-1/4 left-1/4 w-2 h-2 bg-green-400 rounded-full opacity-60"
-        animate={{
-          y: [0, -20, 0],
-          opacity: [0.6, 1, 0.6]
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute top-1/3 right-1/4 w-1 h-1 bg-emerald-400 rounded-full opacity-40"
-        animate={{
-          y: [0, -15, 0],
-          opacity: [0.4, 0.8, 0.4]
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      />
-      <motion.div
-        className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-green-300 rounded-full opacity-50"
-        animate={{
-          y: [0, -25, 0],
-          opacity: [0.5, 1, 0.5]
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      />
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="mx-auto max-w-6xl"
+      >
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-indigo-100 backdrop-blur">
+          <Sparkles className="h-4 w-4 text-cyan-300" />
+          Boston-based full stack engineer + endpoint systems specialist
+        </div>
+
+        <h1 className="mt-8 max-w-5xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
+          Jason Dank builds high-impact software, infrastructure, and AI-powered tooling.
+        </h1>
+
+        <p className="mt-8 max-w-3xl text-lg text-slate-300 sm:text-xl">
+          From enterprise endpoint automation at Harvard to production-ready product MVPs, I design systems that are fast,
+          resilient, and built for real users.
+        </p>
+
+        <div className="mt-10 flex flex-wrap gap-4">
+          <button
+            onClick={() => jumpTo('work')}
+            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-slate-950 transition hover:scale-[1.02]"
+          >
+            Explore Projects
+            <ArrowRight className="h-4 w-4" />
+          </button>
+          <button
+            onClick={() => jumpTo('contact')}
+            className="rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200"
+          >
+            Contact Jason
+          </button>
+        </div>
+
+        <div className="mt-14 grid gap-4 sm:grid-cols-3">
+          {metrics.map((item) => (
+            <div key={item.label} className="rounded-2xl border border-white/15 bg-slate-900/50 p-6 backdrop-blur">
+              <p className="text-3xl font-semibold text-white">{item.value}</p>
+              <p className="mt-1 text-sm uppercase tracking-[0.2em] text-slate-400">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }
