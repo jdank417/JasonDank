@@ -95,9 +95,9 @@ const clubs: ClubEntry[] = [
     id: 'wentworth',
     name: 'Wentworth Sailing',
     location: 'Boston, MA',
-    period: '2022 — Present',
+    period: '2022 — 2026',
     bullets: [
-      'Joined as a freshman in 2022; quickly moved into the Captain role starting spring of freshman year.',
+      'Joined as a freshman in 2022; moved into the Captain role in the spring of freshman year and later served as President.',
       'Built the team from two to twenty-five members.',
       'Fall 2024: achieved the highest-scoring season since 2019.',
     ],
@@ -132,13 +132,13 @@ const clubs: ClubEntry[] = [
 
 export default function SailingPage() {
   return (
-    <main className="min-h-screen">
+    <main id="main" className="min-h-screen">
       <section className="relative overflow-hidden border-b border-border">
         <div
           className="pointer-events-none absolute inset-0 bg-graph opacity-60"
           style={{ maskImage: 'linear-gradient(to bottom, black, transparent)' }}
         />
-        <div className="relative mx-auto max-w-6xl px-6 py-20 sm:px-8 lg:py-24">
+        <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -164,7 +164,7 @@ export default function SailingPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-huge italic font-normal text-muted"
           >
-            sailing r&eacute;sum&eacute;.
+            sailing résumé.
           </motion.p>
 
           <motion.p
@@ -173,33 +173,33 @@ export default function SailingPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-8 max-w-2xl text-lg leading-relaxed text-muted"
           >
-            Racing, instructing, and club sailing since 2012 &mdash; currently
-            Captain of the Wentworth Sailing Team and racing dinghies and
-            keelboats around Boston Harbor and Marblehead.
+            Racing, instructing, and club sailing since 2012 — President and
+            Captain of the Wentworth Sailing Team through 2026, racing dinghies
+            and keelboats around Boston Harbor and Marblehead.
           </motion.p>
         </div>
       </section>
 
       <section className="border-b border-border py-16">
-        <div className="mx-auto max-w-6xl px-6 sm:px-8">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mb-10 flex items-baseline gap-4 border-b border-border pb-4">
-            <span className="text-sm text-muted">&sect;00</span>
+            <span className="text-sm text-muted">§00</span>
             <h2 className="text-display font-bold">Certifications</h2>
           </div>
           <div className="flex gap-3">
             <span className="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-muted" />
             <p className="text-muted">
               <span className="font-medium text-foreground">US Sailing: Small Boat Instructor Level 1</span>
-              {' '}&mdash; Teaching and Coaching Fundamentals.
+              {' '}— Teaching and Coaching Fundamentals.
             </p>
           </div>
         </div>
       </section>
 
       <section className="border-b border-border py-16">
-        <div className="mx-auto max-w-6xl px-6 sm:px-8">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mb-10 flex items-baseline gap-4 border-b border-border pb-4">
-            <span className="text-sm text-muted">&sect;01</span>
+            <span className="text-sm text-muted">§01</span>
             <h2 className="text-display font-bold">Racing</h2>
           </div>
 
@@ -234,9 +234,9 @@ export default function SailingPage() {
       </section>
 
       <section className="py-16">
-        <div className="mx-auto max-w-6xl px-6 sm:px-8">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mb-10 flex items-baseline gap-4 border-b border-border pb-4">
-            <span className="text-sm text-muted">&sect;02</span>
+            <span className="text-sm text-muted">§02</span>
             <h2 className="text-display font-bold">Clubs</h2>
           </div>
 

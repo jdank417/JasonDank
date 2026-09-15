@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Quote } from 'lucide-react';
+import SectionHeading from '../SectionHeading';
 
 const recommendations = [
   {
@@ -12,42 +14,38 @@ const recommendations = [
   },
   {
     id: 'academic-recognition',
-    text: "A computer science major with minors in data science, business analytics, applied mathematics, and computer networking, Jason Dank's pursuit of a wide variety of academic knowledge has also led him to be actively engaged in various organizations on campus. Jason serves on the Wentworth Student Government as Executive Vice President and Chair to the Board of Directors, and represents the student body on the university's IT Steering Committee and the School of Computing and Data Sciences AI task force. He is also President and Captain of the Wentworth Sailing Team, competing in yacht racing in Marblehead, MA during the summer.",
-    author: 'Academic Recognition',
-    title: 'Wentworth Institute of Technology',
-    company: 'Official Academic Profile',
+    text: "Jason Dank's pursuit of a wide variety of academic knowledge has also led him to be actively engaged in various organizations on campus. Jason serves on the Wentworth Student Government as Executive Vice President and Chair to the Board of Directors. He represents the student body on the university's Information Technology Steering Committee and the School of Computing and Data Sciences AI task force. He is also president and captain of the Wentworth Sailing Team, and during the summer he competes in large yacht racing in Marblehead, MA. Jason is passionate about developing resources for artificial intelligence, specifically in fine-tuning AI modeling and application development.",
+    author: 'Wentworth Institute of Technology',
+    title: '2025–2026 Scholarship Report Recognition',
+    company: 'Official academic profile',
   },
 ];
 
 export default function Recommendations() {
   return (
-    <section id="recommendations" className="border-b border-border py-20">
-      <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="mb-12 flex items-baseline gap-4 border-b border-border pb-4"
-        >
-          <span className="text-sm text-muted">&sect;06</span>
-          <h2 className="text-display font-bold">Recommendations</h2>
-        </motion.div>
+    <section id="recommendations" className="border-b border-border py-16 sm:py-20">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <SectionHeading index="06" title="Recommendations" />
 
-        <div className="space-y-12">
+        <div className="grid gap-4 lg:grid-cols-2">
           {recommendations.map((rec, index) => (
             <motion.blockquote
               key={rec.id}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
-              viewport={{ once: true }}
-              className="border-l-2 border-border pl-6"
+              viewport={{ once: true, margin: '-40px' }}
+              className="flex flex-col rounded-md border border-border bg-card p-5 transition-colors hover:border-foreground sm:p-6"
             >
-              <p className="italic leading-relaxed text-muted">&ldquo;{rec.text}&rdquo;</p>
-              <footer className="mt-4 text-sm">
+              <Quote className="h-5 w-5 flex-shrink-0 text-accent" aria-hidden />
+              <p className="mt-4 flex-1 text-sm italic leading-relaxed text-muted sm:text-base">
+                {rec.text}
+              </p>
+              <footer className="mt-5 border-t border-border pt-4 text-sm">
                 <span className="font-medium">{rec.author}</span>
-                <span className="text-muted"> &mdash; {rec.title}, {rec.company}</span>
+                <span className="mt-0.5 block text-muted">
+                  {rec.title} — {rec.company}
+                </span>
               </footer>
             </motion.blockquote>
           ))}
