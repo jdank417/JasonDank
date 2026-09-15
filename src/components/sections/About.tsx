@@ -1,12 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import SectionHeading from '../SectionHeading';
 
 const focusAreas = [
   {
+    title: 'Private markets & fintech',
+    description:
+      'Full-stack work on the Fidelity Private Shares platform — building for private equity and venture transactions end to end.',
+  },
+  {
     title: 'Systems design',
     description:
-      'Architecting full-stack, desktop, and mobile solutions end to end — from data model to deployment.',
+      'Architecting web, desktop, and mobile solutions from data model to deployment, with the operational side handled too.',
   },
   {
     title: 'Automation & AI/ML',
@@ -22,52 +28,53 @@ const focusAreas = [
 
 export default function About() {
   return (
-    <section id="about" className="border-b border-border py-20">
-      <div className="mx-auto max-w-6xl px-6 sm:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="mb-12 flex items-baseline gap-4 border-b border-border pb-4"
-        >
-          <span className="text-sm text-muted">&sect;00</span>
-          <h2 className="text-display font-bold">About</h2>
-        </motion.div>
+    <section id="about" className="border-b border-border py-16 sm:py-20">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <SectionHeading index="00" title="About" />
 
-        <div className="grid gap-16 lg:grid-cols-12">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="space-y-5 text-lg leading-relaxed text-muted lg:col-span-7"
+            className="space-y-5 text-base leading-relaxed text-muted sm:text-lg lg:col-span-7"
           >
             <p>
-              Full-stack software engineer with experience across enterprise IT
-              operations, AI/ML systems, and product development. I&apos;m
-              currently an <span className="font-medium text-foreground">Endpoint Systems Engineer Intern</span> at
-              Harvard University Information Technology, and finishing my B.S.
-              in Computer Science &mdash; with minors in Business Analytics,
-              Applied Mathematics, and Data Science &mdash; at Wentworth
-              Institute of Technology, graduating April 2026.
+              Full-stack software engineer with experience across fintech, enterprise IT
+              operations, AI/ML systems, and product development. I’m currently a{' '}
+              <span className="font-medium text-foreground">Full Stack Software Engineer</span>{' '}
+              at Fidelity Investments, working on the{' '}
+              <span className="font-medium text-foreground">Fidelity Private Shares</span>{' '}
+              platform — building scalable solutions for private market investments
+              that serve both institutional and individual investors.
             </p>
             <p>
-              Outside of coursework, I&apos;ve fine-tuned language models, built
-              CI/CD pipelines, shipped a published macOS app, and stood up a
-              GPU-accelerated remote compute environment for model training.
+              I got here by way of Harvard University Information Technology, where I spent two
+              terms as an Endpoint Systems Engineer across a fleet of 20,000+ macOS, Windows, and
+              Linux devices. Along the way I’ve fine-tuned language models, built CI/CD
+              pipelines, shipped two apps to the Apple App Store, and stood up a GPU-accelerated
+              remote compute environment for model training.
             </p>
             <p>
-              I also serve as <span className="font-medium text-foreground">Executive Vice President</span> of the
-              Wentworth Student Government and <span className="font-medium text-foreground">Captain</span> of the
-              Wentworth Sailing Team &mdash; more on that on the{' '}
-              <a href="/sailing" className="underline decoration-border underline-offset-4 hover:text-foreground">
+              I hold a B.S. in Computer Science — with minors in Data Science, Applied
+              Mathematics, Business Analytics, and Computer Networking — from Wentworth
+              Institute of Technology, where I served as{' '}
+              <span className="font-medium text-foreground">Executive Vice President</span>{' '}
+              of Student Government and{' '}
+              <span className="font-medium text-foreground">President & Captain</span>{' '}
+              of the Sailing Team. More on that on the{' '}
+              <a
+                href="/sailing"
+                className="underline decoration-border underline-offset-4 hover:text-foreground hover:decoration-foreground"
+              >
                 sailing page
-              </a>.
+              </a>
+              .
             </p>
           </motion.div>
 
-          <div className="space-y-8 lg:col-span-5">
+          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1 lg:gap-5">
             {focusAreas.map((area, index) => (
               <motion.div
                 key={area.title}
@@ -75,10 +82,10 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
                 viewport={{ once: true }}
-                className="border-l-2 border-border pl-5"
+                className="rounded-md border border-border bg-card p-5 transition-colors hover:border-foreground"
               >
                 <h3 className="font-bold">{area.title}</h3>
-                <p className="mt-1.5 text-muted">{area.description}</p>
+                <p className="mt-1.5 text-sm text-muted sm:text-base">{area.description}</p>
               </motion.div>
             ))}
           </div>
