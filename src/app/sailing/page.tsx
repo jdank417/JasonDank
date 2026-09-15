@@ -295,7 +295,7 @@ export default function SailingPage() {
                 <div className="sm:col-span-4">
                   <div className="mb-2 flex items-center gap-1.5">
                     {entry.flags.map((flag) => (
-                      <Burgee key={flag} name={flag} />
+                      <Burgee key={flag} name={flag} className="h-8 w-12" />
                     ))}
                   </div>
                   <h3 className="font-bold leading-snug">{entry.boat}</h3>
@@ -353,7 +353,7 @@ export default function SailingPage() {
               >
                 <div className="sm:col-span-4">
                   <div className="mb-2">
-                    <Burgee name={club.flag} className="h-6 w-9" />
+                    <Burgee name={club.flag} className="h-9 w-[54px]" />
                   </div>
                   <h3 className="font-bold leading-snug">{club.name}</h3>
                   <p className="mt-1 text-muted">{club.location}</p>

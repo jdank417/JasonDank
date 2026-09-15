@@ -64,11 +64,11 @@ const flags: Record<string, FlagSpec> = {
     art: (
       <>
         <rect width="60" height="40" fill="#12356f" />
-        {/* Twin gold arrows — thin shafts so they stay distinct at 30px */}
-        <path d="M5,13 H24" stroke="#f2c230" strokeWidth="3" fill="none" />
-        <path d="M24,9 L32,13 L24,17 Z" fill="#f2c230" />
-        <path d="M5,26 H22" stroke="#f2c230" strokeWidth="3" fill="none" />
-        <path d="M22,22 L29,26 L22,30 Z" fill="#f2c230" />
+        {/* Twin gold arrows — parallel, identical length, one above the other */}
+        <path d="M7,14 H22" stroke="#f2c230" strokeWidth="3.4" fill="none" />
+        <path d="M21,9.5 L31,14 L21,18.5 Z" fill="#f2c230" />
+        <path d="M7,26 H22" stroke="#f2c230" strokeWidth="3.4" fill="none" />
+        <path d="M21,21.5 L31,26 L21,30.5 Z" fill="#f2c230" />
       </>
     ),
   },
@@ -156,7 +156,7 @@ export default function Burgee({
       viewBox="0 0 60 40"
       role="img"
       aria-label={`${spec.label} burgee`}
-      className={`h-5 w-[30px] flex-shrink-0 rounded-[2px] ${className}`}
+      className={`flex-shrink-0 rounded-[2px] ${className || 'h-5 w-[30px]'}`}
     >
       <title>{spec.label}</title>
       <defs>
