@@ -15,6 +15,23 @@ interface LeadershipItem {
 
 const items: LeadershipItem[] = [
   {
+    id: 'paragon-award',
+    title: 'Paragon Award',
+    org: 'Wentworth Institute of Technology',
+    period: 'March 2026',
+    description: [
+      'Presented to a graduating student who has exhibited energy and enthusiasm for their leadership role during their years at Wentworth.',
+      'Awarded for significant and noteworthy contributions to the Wentworth community and for serving as a strong role model for classmates.',
+    ],
+  },
+  {
+    id: 'honors-program',
+    title: 'Wentworth Honors Program',
+    org: 'Wentworth Institute of Technology',
+    period: 'March 2026',
+    description: ['Inducted into the university honors program.'],
+  },
+  {
     id: 'sailing-captain',
     title: 'President & Captain, Wentworth Sailing Team',
     org: 'NEISA Conference — Dinghy Class (FJ / 420 / Lark)',
@@ -99,7 +116,7 @@ export default function Certifications() {
   return (
     <section id="leadership" className="border-b border-border py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeading index="03" title="Leadership & Certifications" />
+        <SectionHeading index="03" title="Leadership, Honors & Certifications" />
 
         <div className="space-y-4 sm:space-y-0 sm:divide-y sm:divide-border">
           {items.map((item, index) => (

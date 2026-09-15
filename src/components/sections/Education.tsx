@@ -19,8 +19,6 @@ const courses = [
 
 const honors = [
   'Cum Laude — April 2026',
-  'Paragon Award — March 2026, presented to a graduating student for energy and enthusiasm in their leadership role at Wentworth',
-  'Wentworth Honors Program — March 2026',
   "Dean's List — every semester",
   'Wentworth 2025–2026 Scholarship Report Recognition',
 ];

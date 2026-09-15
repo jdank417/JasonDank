@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ExternalLink, FileText, Github, Smartphone } from 'lucide-react';
+import { ExternalLink, FileText, FlaskConical, Github, Smartphone } from 'lucide-react';
 import SectionHeading from '../SectionHeading';
 
 type Category = 'ml' | 'web' | 'apple' | 'automation';
@@ -19,6 +19,7 @@ interface Project {
   demoLabel?: string;
   appStoreUrl?: string;
   paperUrl?: string;
+  betaUrl?: string;
 }
 
 const filters: { id: Category | 'all'; label: string }[] = [
@@ -44,6 +45,19 @@ const projects: Project[] = [
     githubUrl: 'https://github.com/Dexteritize/HumanAuth',
     paperUrl:
       'https://drive.google.com/file/d/1OIx32NCxWxwVYz6PbNBdLCoa11eFes2q/view?usp=drivesdk',
+  },
+  {
+    id: 'regatta-positioning-system',
+    title: 'RegattaTrack — Regatta Positioning System',
+    year: '2026',
+    categories: ['web', 'apple'],
+    description: [
+      'A course-plotting tool for one-design yacht racing: pick your club and the night’s mark list, build the course the way the Race Committee posted it, and get it plotted on a chart with true and magnetic headings and a distance for every leg.',
+      'Ported a static single-club reference app into a full client/server platform any yacht club can run — an Angular front end (standalone components and signals) over a FastAPI and PostgreSQL backend with JWT auth, plus a club-admin console for mark list CRUD and spreadsheet uploads.',
+      'Ships as a one-command Docker Compose stack and a Render blueprint, seeded with four Massachusetts Bay yacht clubs and their real mark data.',
+    ],
+    technologies: ['Angular', 'FastAPI', 'PostgreSQL', 'Docker', 'JWT', 'Render'],
+    betaUrl: 'https://testflight.apple.com/join/MG4VxcvY',
   },
   {
     id: 'bullbar',
@@ -157,7 +171,7 @@ export default function Work() {
   return (
     <section id="work" className="border-b border-border py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeading index="02" title="Work" kicker="9 projects — 2 of them live on the App Store, 1 written up as a paper." />
+        <SectionHeading index="02" title="Work" kicker="10 projects — 2 on the App Store, 1 in public beta, 1 written up as a paper." />
 
         {/* Horizontally scrollable on phones so the filters never wrap into a wall. */}
         <div className="-mx-5 mb-8 overflow-x-auto px-5 pb-2 sm:mx-0 sm:px-0">
@@ -216,7 +230,11 @@ export default function Work() {
                   ))}
                 </div>
 
-                {(project.githubUrl || project.demoUrl || project.appStoreUrl || project.paperUrl) && (
+                {(project.githubUrl ||
+                  project.demoUrl ||
+                  project.appStoreUrl ||
+                  project.paperUrl ||
+                  project.betaUrl) && (
                   <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-t border-border pt-4">
                     {project.githubUrl && (
                       <a
@@ -249,6 +267,17 @@ export default function Work() {
                       >
                         <FileText className="h-3.5 w-3.5" />
                         read the paper
+                      </a>
+                    )}
+                    {project.betaUrl && (
+                      <a
+                        href={project.betaUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
+                      >
+                        <FlaskConical className="h-3.5 w-3.5" />
+                        testflight beta
                       </a>
                     )}
                     {project.appStoreUrl && (
