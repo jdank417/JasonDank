@@ -5,16 +5,14 @@ import { useId, type ReactNode } from 'react';
 interface FlagSpec {
   label: string;
   /** Real burgee artwork, drawn on the 60x40 field before the pennant clip. */
-  art?: ReactNode;
-  /** Monogram shown when there is no artwork for this club or fleet. */
-  initials?: string;
+  art: ReactNode;
 }
 
 /**
  * Burgee artwork and the pennant silhouette are ported from the Regatta
  * Positioning System's `burgee.util.ts` — same 60x40 field, same
- * `M0,0 L60,20 L0,40 Z` clip, and the same initials-monogram fallback for
- * entries whose real burgee we don't have.
+ * `M0,0 L60,20 L0,40 Z` clip. Only clubs whose real artwork we have appear
+ * here; there is deliberately no generic fallback.
  */
 const flags: Record<string, FlagSpec> = {
   byc: {
@@ -143,10 +141,6 @@ const flags: Record<string, FlagSpec> = {
       </>
     ),
   },
-  mra: { label: 'Marblehead Racing Association', initials: 'MRA' },
-  mbsa: { label: 'Massachusetts Bay Sailing Association', initials: 'MBS' },
-  iod: { label: 'International One Design class', initials: 'IOD' },
-  figawi: { label: 'Figawi', initials: 'FIG' },
 };
 
 export type BurgeeKey = keyof typeof flags;
@@ -165,8 +159,6 @@ export default function Burgee({
 
   if (!spec) return null;
 
-  const initials = spec.initials ?? '?';
-
   return (
     <svg
       viewBox="0 0 60 40"
@@ -181,22 +173,7 @@ export default function Burgee({
         </clipPath>
       </defs>
       <g clipPath={`url(#${clipId})`}>
-        {spec.art ?? (
-          <>
-            <rect width="60" height="40" fill="#1d6fa5" />
-            <text
-              x="22"
-              y="25"
-              fontSize={initials.length > 2 ? 13 : 16}
-              fontWeight="800"
-              fill="#fff"
-              textAnchor="middle"
-              fontFamily="sans-serif"
-            >
-              {initials}
-            </text>
-          </>
-        )}
+        {spec.art}
       </g>
       <path
         d="M0,0 L60,20 L0,40 Z"

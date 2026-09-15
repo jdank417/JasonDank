@@ -20,7 +20,7 @@ const racing: RaceEntry[] = [
     boat: 'Fawn Libowitz — MAT 1070',
     period: 'Apr 2025 — Present',
     venue: 'Boston Harbor — MBSA',
-    flags: ['mbsa', 'figawi'],
+    flags: ['eyc'],
     result: 'Won Figawi 2026',
     bullets: [
       'Circulated between mast, pit, and bow throughout the season.',
@@ -34,14 +34,14 @@ const racing: RaceEntry[] = [
     id: 'tango',
     boat: 'Tango — IOD 16',
     venue: 'Marblehead — MRA',
-    flags: ['iod', 'mra'],
+    flags: ['eyc'],
     bullets: ['Jib trim and spinnaker for various MRA races.', 'Marblehead Race Week.'],
   },
   {
     id: 'gypsey',
     boat: 'Gypsey — IOD 7',
     venue: 'Marblehead & Fishers Island, NY',
-    flags: ['iod', 'cyc'],
+    flags: ['cyc'],
     result: 'IOD North Americans',
     bullets: [
       'My most-sailed keelboat — many seasons of racing aboard IOD 7.',
@@ -53,7 +53,7 @@ const racing: RaceEntry[] = [
     id: 'etchells',
     boat: 'Etchells (1071 / 1099)',
     venue: 'Marblehead — MRA',
-    flags: ['mra'],
+    flags: ['eyc'],
     bullets: [
       'Bow on Etchells 1071 for a few MRA races.',
       'Bow on Etchells 1099 (LiRuPa) for an MRA race.',
@@ -64,7 +64,7 @@ const racing: RaceEntry[] = [
     boat: 'Crew Call',
     period: 'Jul 2024 — Present',
     venue: 'Boston Harbor & Marblehead',
-    flags: ['byc', 'eyc', 'iod'],
+    flags: ['byc', 'eyc'],
     bullets: [
       'Raced on the BYC team racing team (bow) for the Eastern Yacht Club Halloween team race.',
       'Raced with ARES (C&C 40), doing bow for a few PHRF and pursuit events.',
@@ -86,6 +86,15 @@ interface ClubEntry {
 }
 
 const clubs: ClubEntry[] = [
+  {
+    id: 'eastern',
+    flag: 'eyc',
+    name: 'Eastern Yacht Club',
+    location: 'Marblehead, MA',
+    period: 'May 2026 — Present',
+    bullets: ['Junior sailing member.'],
+    boats: '',
+  },
   {
     id: 'squantum',
     flag: 'syc',
@@ -157,10 +166,12 @@ const clubs: ClubEntry[] = [
 ];
 
 // Every burgee shown on the page, clubs first, in the order they appear.
-const allFlags: BurgeeKey[] = [
-  ...clubs.map((club) => club.flag),
-  ...Array.from(new Set(racing.flatMap((entry) => entry.flags))),
-];
+const allFlags: BurgeeKey[] = Array.from(
+  new Set<BurgeeKey>([
+    ...clubs.map((club) => club.flag),
+    ...racing.flatMap((entry) => entry.flags),
+  ]),
+);
 
 const highlights = [
   { label: 'Won Figawi 2026', detail: 'Fawn Libowitz — MAT 1070' },
@@ -332,7 +343,7 @@ export default function SailingPage() {
           </div>
 
           {/* Burgee key — every club and fleet flown across the page. */}
-          <div className="mb-10 flex flex-wrap gap-x-5 gap-y-3">
+          <div className="mb-10 grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
             {allFlags.map((flag) => (
               <span key={flag} className="flex items-center gap-2 text-xs text-muted">
                 <Burgee name={flag} />
@@ -380,7 +391,7 @@ export default function SailingPage() {
                     ))}
                   </ul>
                   <div className="mt-4 flex flex-wrap gap-1.5">
-                    {club.boats.split(' / ').map((boat) => (
+                    {(club.boats ? club.boats.split(' / ') : []).map((boat) => (
                       <span
                         key={boat}
                         className="rounded border border-border px-1.5 py-0.5 text-xs text-muted"
