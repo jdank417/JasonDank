@@ -123,18 +123,19 @@ const flags: Record<string, FlagSpec> = {
     label: 'Community Boating Inc.',
     art: (
       <>
-        <rect width="60" height="40" fill="#efede5" />
-        {/* Green above and red below, both tapering out before the fly */}
-        <polygon points="0,0 40,13.33 0,13" fill="#1e7a3c" />
-        <polygon points="0,40 38,27.33 0,27" fill="#a32b25" />
+        {/* Same construction as Westhampton: a green and a red triangle at the
+            hoist, one above the other, and a white diamond filling the rest. */}
+        <polygon points="0,20 30,10 60,20 30,30" fill="#f4f2ec" />
+        <polygon points="0,0 30,10 0,20" fill="#16794a" />
+        <polygon points="0,20 30,30 0,40" fill="#c8102e" />
         <text
-          x="28"
-          y="25"
-          fontSize="13"
+          x="33"
+          y="26"
+          fontSize="17"
           fontWeight="700"
-          fill="#12356f"
+          fill="#e9b824"
           textAnchor="middle"
-          fontFamily="Georgia, serif"
+          fontFamily="Helvetica, Arial, sans-serif"
         >
           C
         </text>
