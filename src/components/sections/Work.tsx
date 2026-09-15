@@ -58,7 +58,7 @@ const projects: Project[] = [
     id: 'barcode-scanning-webapp',
     title: 'Barcode Scanning WebApp',
     year: '2023',
-    categories: ['web'],
+    categories: ['web', 'ml'],
     description: [
       'Led design and delivery as chief architect / service owner / PM, owning the product roadmap for ML-based barcode detection.',
       'Drove the full-stack integration effort and delivered a production-ready web application with 80%+ barcode detection accuracy.',
