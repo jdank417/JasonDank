@@ -59,11 +59,43 @@ const flags: Record<string, FlagSpec> = {
     ),
   },
 
+  pjyc: {
+    label: 'Port Jefferson Yacht Club',
+    art: (
+      <>
+        <rect width="60" height="40" fill="#12356f" />
+        {/* Twin gold arrows — thin shafts so they stay distinct at 30px */}
+        <path d="M5,13 H24" stroke="#f2c230" strokeWidth="3" fill="none" />
+        <path d="M24,9 L32,13 L24,17 Z" fill="#f2c230" />
+        <path d="M5,26 H22" stroke="#f2c230" strokeWidth="3" fill="none" />
+        <path d="M22,22 L29,26 L22,30 Z" fill="#f2c230" />
+      </>
+    ),
+  },
+  wys: {
+    label: 'Westhampton Yacht Squadron',
+    art: (
+      <>
+        {/* Divided black over red, meeting at the fly */}
+        <path d="M0,0 L60,20 L0,20 Z" fill="#141414" />
+        <path d="M0,20 L60,20 L0,40 Z" fill="#d6242c" />
+      </>
+    ),
+  },
+  wit: {
+    label: 'Wentworth Sailing',
+    art: (
+      <>
+        <rect width="60" height="40" fill="#141414" />
+        {/* Double chevron, white then gold */}
+        <path d="M8,7 L24,20 L8,33 L15,20 Z" fill="#ffffff" />
+        <path d="M22,9 L38,20 L22,31 L29,20 Z" fill="#f2c230" />
+      </>
+    ),
+  },
+
   syc: { label: 'Squantum Yacht Club', initials: 'SYC' },
   cbi: { label: 'Community Boating Inc.', initials: 'CBI' },
-  wit: { label: 'Wentworth Sailing', initials: 'WIT' },
-  pjyc: { label: 'Port Jefferson Yacht Club', initials: 'PJ' },
-  wys: { label: 'Westhampton Yacht Squadron', initials: 'WYS' },
   mra: { label: 'Marblehead Racing Association', initials: 'MRA' },
   mbsa: { label: 'Massachusetts Bay Sailing Association', initials: 'MBS' },
   iod: { label: 'International One Design class', initials: 'IOD' },
@@ -119,6 +151,13 @@ export default function Burgee({
           </>
         )}
       </g>
+      <path
+        d="M0,0 L60,20 L0,40 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1"
+        opacity="0.3"
+      />
     </svg>
   );
 }
