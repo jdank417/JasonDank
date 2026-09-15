@@ -76,9 +76,12 @@ const flags: Record<string, FlagSpec> = {
     label: 'Westhampton Yacht Squadron',
     art: (
       <>
-        {/* Divided black over red, meeting at the fly */}
-        <path d="M0,0 L60,20 L0,20 Z" fill="#141414" />
-        <path d="M0,20 L60,20 L0,40 Z" fill="#d6242c" />
+        {/* Two black triangles at the hoist, one above the other, and a red
+            diamond filling the rest — the diamond's area is exactly the two
+            triangles combined. */}
+        <polygon points="0,20 30,10 60,20 30,30" fill="#d6242c" />
+        <polygon points="0,0 30,10 0,20" fill="#141414" />
+        <polygon points="0,20 30,30 0,40" fill="#141414" />
       </>
     ),
   },
@@ -87,9 +90,22 @@ const flags: Record<string, FlagSpec> = {
     art: (
       <>
         <rect width="60" height="40" fill="#141414" />
-        {/* Double chevron, white then gold */}
-        <path d="M8,7 L24,20 L8,33 L15,20 Z" fill="#ffffff" />
-        <path d="M22,9 L38,20 L22,31 L29,20 Z" fill="#f2c230" />
+        {/* Two chevrons, each a pair of lines meeting at a point, running out
+            to the edges of the flag (the pennant clip trims them). */}
+        <path
+          d="M-4,-5 L32,20 L-4,45"
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="5"
+          strokeLinejoin="miter"
+        />
+        <path
+          d="M14,0 L50,20 L14,40"
+          fill="none"
+          stroke="#f2c230"
+          strokeWidth="5"
+          strokeLinejoin="miter"
+        />
       </>
     ),
   },
