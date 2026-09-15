@@ -94,8 +94,39 @@ const flags: Record<string, FlagSpec> = {
     ),
   },
 
-  syc: { label: 'Squantum Yacht Club', initials: 'SYC' },
-  cbi: { label: 'Community Boating Inc.', initials: 'CBI' },
+  syc: {
+    label: 'Squantum Yacht Club',
+    art: (
+      <>
+        <rect width="60" height="40" fill="#1b2a6b" />
+        {/* White tomahawk */}
+        <path d="M15,11 L30,12.5 L30,17.5 L15,16 Z" fill="#ffffff" />
+        <path d="M13,29 L22,11" stroke="#ffffff" strokeWidth="3.2" strokeLinecap="round" />
+      </>
+    ),
+  },
+  cbi: {
+    label: 'Community Boating Inc.',
+    art: (
+      <>
+        <rect width="60" height="40" fill="#efede5" />
+        {/* Green above and red below, both tapering out before the fly */}
+        <polygon points="0,0 40,13.33 0,13" fill="#1e7a3c" />
+        <polygon points="0,40 38,27.33 0,27" fill="#a32b25" />
+        <text
+          x="28"
+          y="25"
+          fontSize="13"
+          fontWeight="700"
+          fill="#12356f"
+          textAnchor="middle"
+          fontFamily="Georgia, serif"
+        >
+          C
+        </text>
+      </>
+    ),
+  },
   mra: { label: 'Marblehead Racing Association', initials: 'MRA' },
   mbsa: { label: 'Massachusetts Bay Sailing Association', initials: 'MBS' },
   iod: { label: 'International One Design class', initials: 'IOD' },
