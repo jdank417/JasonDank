@@ -37,14 +37,14 @@ export const metadata: Metadata = {
     url: "https://jasondank.com",
     title: "Jason Dank — Software Engineer",
     description:
-      "Full-stack software engineer at Fidelity Investments, on the Private Shares platform. Fintech, systems design, and AI/ML.",
+      "Full-stack software engineer at Fidelity Investments, on the Private Shares platform. Fintech and systems design, plus AI/ML and automation side projects.",
     siteName: "Jason Dank",
   },
   twitter: {
     card: "summary_large_image",
     title: "Jason Dank — Software Engineer",
     description:
-      "Full-stack software engineer at Fidelity Investments, on the Private Shares platform. Fintech, systems design, and AI/ML.",
+      "Full-stack software engineer at Fidelity Investments, on the Private Shares platform. Fintech and systems design, plus AI/ML and automation side projects.",
   },
 };
 

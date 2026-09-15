@@ -17,7 +17,7 @@ const focusAreas = [
   {
     title: 'Automation & AI/ML',
     description:
-      'Fine-tuning language models, building ML pipelines, and scripting away repetitive operational work.',
+      'Outside the day job: fine-tuning language models, building ML pipelines, and scripting away repetitive operational work.',
   },
   {
     title: 'Leadership in practice',
@@ -42,7 +42,7 @@ export default function About() {
           >
             <p>
               Full-stack software engineer with experience across fintech, enterprise IT
-              operations, AI/ML systems, and product development. I’m currently a{' '}
+              operations, and product development. I’m currently a{' '}
               <span className="font-medium text-foreground">Full Stack Software Engineer</span>{' '}
               at Fidelity Investments, working on the{' '}
               <span className="font-medium text-foreground">Fidelity Private Shares</span>{' '}
