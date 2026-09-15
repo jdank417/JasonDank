@@ -53,7 +53,7 @@ const racing: RaceEntry[] = [
     id: 'etchells',
     boat: 'Etchells (1071 / 1099)',
     venue: 'Marblehead — MRA',
-    flags: ['cyc'],
+    flags: ['cyc', 'byc'],
     bullets: [
       'Bow on Etchells 1071 for a few MRA races.',
       'Bow on Etchells 1099 (LiRuPa) for an MRA race.',
