@@ -1,193 +1,160 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Menu, X, ArrowLeft, ArrowUpRight, Anchor } from 'lucide-react';
 
 interface NavItem {
   name: string;
-  href: string;
   id: string;
 }
 
 const navItems: NavItem[] = [
-  { name: 'Home', href: '#hero', id: 'hero' },
-  { name: 'Work', href: '#work', id: 'work' },
-  { name: 'About', href: '#about', id: 'about' },
-  { name: 'Experience', href: '#experience', id: 'experience' },
-  { name: 'Certifications', href: '#certifications', id: 'certifications' },
-  { name: 'Recommendations', href: '#recommendations', id: 'recommendations' },
-  { name: 'Contact', href: '#contact', id: 'contact' },
+  { name: 'about', id: 'about' },
+  { name: 'experience', id: 'experience' },
+  { name: 'work', id: 'work' },
+  { name: 'leadership', id: 'leadership' },
+  { name: 'education', id: 'education' },
+  { name: 'contact', id: 'contact' },
 ];
 
 export default function Navigation() {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-  const { scrollY } = useScroll();
-  
-  const headerOpacity = useTransform(scrollY, [0, 100], [0.95, 0.98]);
-  const headerBlur = useTransform(scrollY, [0, 100], [8, 12]);
 
   useEffect(() => {
+    if (!isHome) return;
+
     const handleScroll = () => {
-      const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 100;
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atBottom) {
+        setActiveSection('contact');
+        return;
+      }
+
+      const sections = ['hero', ...navItems.map((item) => item.id)]
+        .map((id) => document.getElementById(id));
+      const scrollPosition = window.scrollY + 120;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navItems[i].id);
+          setActiveSection(section.id);
           break;
         }
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHome]);
 
   const scrollToSection = (sectionId: string) => {
+    if (!isHome) return;
     const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    element?.scrollIntoView({ behavior: 'smooth' });
     setIsOpen(false);
   };
 
+  if (!isHome) {
+    return (
+      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8">
+          <div className="flex items-baseline gap-2">
+            <Link href="/" className="text-sm font-bold tracking-tight">
+              jasondank.com
+            </Link>
+            <span className="text-sm text-muted">/sailing</span>
+          </div>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            back to portfolio
+          </Link>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <>
-      <motion.header
-        className="fixed top-0 left-0 right-0 z-50 px-6 py-4 sm:px-8 lg:px-12"
-        style={{
-          backdropFilter: `blur(${headerBlur}px)`,
-        }}
-      >
-        <motion.div
-          className="mx-auto max-w-7xl rounded-2xl border border-white/10 bg-black/80 px-6 py-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-          style={{ opacity: headerOpacity }}
-        >
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <motion.button
-              onClick={() => scrollToSection('hero')}
-              className="group relative"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400 to-green-500" />
-                  <motion.div
-                    className="absolute inset-0 rounded-lg bg-gradient-to-br from-emerald-400 to-green-500 opacity-50"
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                  />
-                </div>
-                <span className="font-heading text-lg font-bold text-white">
-                  JD
-                </span>
-              </div>
-            </motion.button>
+      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8">
+          <button
+            onClick={() => scrollToSection('hero')}
+            className="flex items-baseline gap-2 text-left"
+          >
+            <span className="text-sm font-bold tracking-tight">jasondank.com</span>
+            <span className="hidden text-sm text-muted sm:inline">{'// software engineer'}</span>
+          </button>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {navItems.slice(1).map((item) => (
-                <motion.button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`relative px-4 py-2 rounded-full font-mono text-sm transition-all duration-300 ${
-                    activeSection === item.id
-                      ? 'text-emerald-300'
-                      : 'text-gray-300 hover:text-white'
-                  }`}
-                  whileHover={{ y: -1 }}
-                  whileTap={{ y: 0 }}
-                >
-                  {activeSection === item.id && (
-                    <motion.div
-                      layoutId="activeSection"
-                      className="absolute inset-0 rounded-full border border-emerald-400/20 bg-emerald-400/10"
-                      transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                  <span className="relative z-10 uppercase tracking-[0.1em]">
-                    {item.name}
-                  </span>
-                </motion.button>
-              ))}
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <motion.button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden relative p-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div
-                animate={{ rotate: isOpen ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
+          <nav className="hidden items-center gap-1 lg:flex">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`border-b-2 px-3 py-1 text-sm transition-colors ${
+                  activeSection === item.id
+                    ? 'border-foreground text-foreground'
+                    : 'border-transparent text-muted hover:text-foreground'
+                }`}
               >
-                {isOpen ? (
-                  <X className="h-5 w-5 text-white" />
-                ) : (
-                  <Menu className="h-5 w-5 text-white" />
-                )}
-              </motion.div>
-            </motion.button>
-          </div>
-        </motion.div>
-      </motion.header>
-
-      {/* Mobile Menu */}
-      <motion.div
-        className="lg:hidden fixed inset-0 z-40"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-        style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-      >
-        <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
-        <motion.nav
-          className="relative z-10 flex flex-col items-center justify-center min-h-screen gap-8 px-6"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: isOpen ? 0 : 50, opacity: isOpen ? 1 : 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-        >
-          {navItems.map((item, index) => (
-            <motion.button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className={`group relative font-heading text-3xl font-bold transition-all duration-300 ${
-                activeSection === item.id
-                  ? 'text-emerald-300'
-                  : 'text-white hover:text-emerald-300'
-              }`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ 
-                opacity: isOpen ? 1 : 0, 
-                y: isOpen ? 0 : 30 
-              }}
-              transition={{ 
-                duration: 0.4, 
-                delay: isOpen ? 0.2 + index * 0.1 : 0 
-              }}
-              whileHover={{ scale: 1.05, x: 10 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="relative">
                 {item.name}
-                <motion.div
-                  className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-emerald-400 to-green-500"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: '100%' }}
-                  transition={{ duration: 0.3 }}
-                />
-              </span>
-            </motion.button>
-          ))}
-        </motion.nav>
-      </motion.div>
+              </button>
+            ))}
+            <Link
+              href="/sailing"
+              className="ml-3 inline-flex items-center gap-1.5 rounded-md border border-foreground bg-accent px-3 py-1.5 text-sm font-medium text-accent-ink transition-transform hover:-translate-y-0.5"
+            >
+              <Anchor className="h-3.5 w-3.5" />
+              sailing
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </Link>
+          </nav>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="rounded-md border border-border p-2 lg:hidden"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </header>
+
+      {isOpen && (
+        <div className="fixed inset-0 z-40 bg-background lg:hidden">
+          <nav className="flex min-h-screen flex-col items-start justify-center gap-6 px-8">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`text-3xl font-bold ${
+                  activeSection === item.id ? 'text-foreground' : 'text-muted'
+                }`}
+              >
+                {item.name}
+              </button>
+            ))}
+            <Link
+              href="/sailing"
+              className="mt-4 inline-flex items-center gap-2 rounded-md border border-foreground bg-accent px-4 py-2 text-lg font-medium text-accent-ink"
+            >
+              <Anchor className="h-4 w-4" />
+              sailing resume
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </nav>
+        </div>
+      )}
     </>
   );
 }

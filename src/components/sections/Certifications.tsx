@@ -1,141 +1,139 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Award, Shield, CheckCircle } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
-const certifications = [
+interface LeadershipItem {
+  id: string;
+  title: string;
+  org: string;
+  period: string;
+  description: string[];
+  credlyId?: string;
+}
+
+const items: LeadershipItem[] = [
   {
-    id: 'jamf-protect',
-    title: 'Jamf Certified Associate',
-    subtitle: 'Jamf Protect',
-    issuer: 'Jamf',
-    date: '2025',
-    description: 'Professional certification validating expertise in Jamf Protect endpoint security solutions, threat detection, and enterprise security management.',
-    icon: <Shield className="w-8 h-8" />,
-    gradient: 'from-blue-500 to-indigo-600',
-    credlyId: '992f9097-6f64-4d9d-8e86-1091323b05ae'
+    id: 'evp',
+    title: 'Executive Vice President',
+    org: 'Wentworth Student Government',
+    period: 'Fall 2025 — Present',
+    description: [
+      'Led the Board of Directors in reorganizing and optimizing all processes, facilitating increased collaboration between directors and university officials as chairman.',
+      'Oversaw the creation of a committee to run a hackathon brokered between Student Government and the School of Computing and Data Science; continues to advise the committee and the Dean.',
+      'Implemented communication pipelines/protocols between all university units and board directors, optimizing feedback delivery.',
+      'Coordinated with the Provost, Registrar, and faculty to resolve a clerical application error involving minor completion requirements.',
+    ],
   },
   {
-    id: 'jamf-pro',
-    title: 'Jamf Certified Associate',
-    subtitle: 'Jamf Pro',
-    issuer: 'Jamf',
-    date: '2025',
-    description: 'Professional certification demonstrating proficiency in Jamf Pro mobile device management, macOS administration, and enterprise endpoint management.',
-    icon: <Award className="w-8 h-8" />,
-    gradient: 'from-green-500 to-emerald-600',
-    credlyId: 'e5fd2530-7870-4762-9f30-2c537853b165'
-  }
+    id: 'ai-task-force',
+    title: 'Task Force on Gen AI & Academic Integrity',
+    org: 'Student Body Representative, Wentworth Institute of Technology',
+    period: 'Fall 2025 — Present',
+    description: [
+      'Advised the task force on AI-based enhancements across campus and how to better integrate AI into the curriculum.',
+      'Paneled at an AI Alliance event hosted at Wentworth alongside founders and CTOs of Boston-area AI and tech firms.',
+    ],
+  },
+  {
+    id: 'itsc',
+    title: 'Information Technology Steering Committee',
+    org: 'Student Body Representative, Wentworth Institute of Technology',
+    period: 'Fall 2025 — Present',
+    description: [
+      'Reviewed business proposals ahead of meetings, guiding campus technology procurement and implementation strategy.',
+      'Contributed to a seven-figure learning management system procurement.',
+    ],
+  },
+  {
+    id: 'sailing-captain',
+    title: 'Captain, Wentworth Sailing Team',
+    org: 'NEISA Conference — Dinghy Class (FJ / 420 / Lark)',
+    period: 'Spring 2023 — Present',
+    description: ['Led a 25-member competitive sailing team across 15+ regional regattas per season.'],
+  },
+  {
+    id: 'business-affairs',
+    title: 'Director of Business Affairs',
+    org: 'Wentworth Student Government',
+    period: 'Fall 2024 — Fall 2025',
+    description: ['Chaired the Business Affairs Committee; coordinated efforts between the student body and Dining, IT, Police, and Facilities.'],
+  },
+  {
+    id: 'hacking-injustice',
+    title: 'Director of Technologies',
+    org: 'Engineering Hope (Non-Profit) — Hacking Injustice 2025',
+    period: 'Fall 2024 — Spring 2025',
+    description: ['Director of Technologies for Hacking Injustice, an intercollegiate hackathon hosted at Harvard University.'],
+  },
+  {
+    id: 'jamf',
+    title: 'Jamf Certified Associate — Jamf Protect / Jamf Pro',
+    org: 'Jamf',
+    period: 'Jan 2025 — Mar 2025',
+    description: [
+      'Certified in Jamf Protect and Jamf Pro, endpoint security and mobile device management (MDM) solutions for Apple products.',
+    ],
+  },
 ];
+
+const credlyIds: Record<string, string> = {
+  jamf: 'e5fd2530-7870-4762-9f30-2c537853b165',
+};
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-24 bg-black relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(30deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%)`,
-          backgroundSize: '30px 30px'
-        }} />
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Section Header */}
+    <section id="leadership" className="border-b border-border py-20">
+      <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="mb-12 flex items-baseline gap-4 border-b border-border pb-4"
         >
-          <h2 className="font-hero text-display font-black text-white mb-8 leading-tight tracking-tight">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500">
-              CERTIFICATIONS
-            </span>
-          </h2>
-          <p className="font-body text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Professional certifications and credentials that validate technical expertise and knowledge in enterprise systems management.
-          </p>
+          <span className="text-sm text-muted">&sect;03</span>
+          <h2 className="text-display font-bold">Leadership &amp; Certifications</h2>
         </motion.div>
 
-        {/* Certifications Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {certifications.map((cert, index) => (
+        <div className="divide-y divide-border">
+          {items.map((item, index) => (
             <motion.div
-              key={cert.id}
-              initial={{ opacity: 0, y: 50 }}
+              key={item.id}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.3) }}
               viewport={{ once: true }}
-              className="group relative"
+              className="grid gap-4 py-8 sm:grid-cols-12 sm:gap-8"
             >
-              <div className="relative bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-gray-700 transition-all duration-500 hover:transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/50">
-                {/* Certification Icon & Date */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className={`p-4 rounded-xl bg-gradient-to-r ${cert.gradient} text-white`}>
-                    {cert.icon}
-                  </div>
-                  <div className="text-right">
-                    <span className="text-sm text-gray-400 font-medium">{cert.issuer}</span>
-                    <div className="text-sm text-gray-500">{cert.date}</div>
-                  </div>
-                </div>
-
-                {/* Certification Title */}
-                <div className="mb-6">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:to-emerald-400 transition-all duration-300">
-                    {cert.title}
-                  </h3>
-                  <p className="text-xl text-gray-300 font-semibold">
-                    {cert.subtitle}
-                  </p>
-                </div>
-
-                {/* Description */}
-                <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  {cert.description}
-                </p>
-
-                {/* Verification Badge */}
-                <div className="flex items-center gap-3 mb-6">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-green-400 font-semibold text-sm uppercase tracking-wider">
-                    Verified Credential
-                  </span>
-                </div>
-
-                {/* Action Button */}
-                <div className="flex gap-4">
+              <div className="sm:col-span-4">
+                <h3 className="font-bold leading-snug">{item.title}</h3>
+                <p className="mt-1 text-muted">{item.org}</p>
+                <p className="mt-3 text-xs uppercase tracking-[0.1em] text-muted">{item.period}</p>
+                {credlyIds[item.id] && (
                   <a
-                    href={`https://www.credly.com/badges/${cert.credlyId}`}
+                    href={`https://www.credly.com/badges/${credlyIds[item.id]}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-black font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25"
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
                   >
-                    View Credential
-                    <Award className="w-4 h-4" />
+                    view credential
+                    <ExternalLink className="h-3 w-3" />
                   </a>
-                </div>
-
-                {/* Hover Gradient Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-r ${cert.gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-500`} />
+                )}
               </div>
+
+              <ul className="sm:col-span-8 space-y-2.5">
+                {item.description.map((line, i) => (
+                  <li key={i} className="flex gap-3 text-muted">
+                    <span className="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-muted" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
-
-        {/* Bottom Note */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-center mt-16"
-        >
-          <p className="text-gray-400 text-lg">
-            Credentials verified through Credly digital badge platform
-          </p>
-        </motion.div>
       </div>
     </section>
   );
