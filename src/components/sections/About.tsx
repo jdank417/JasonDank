@@ -53,8 +53,9 @@ export default function About() {
               I got here by way of Harvard University Information Technology, where I spent two
               terms as an Endpoint Systems Engineer across a fleet of 20,000+ macOS, Windows, and
               Linux devices. Along the way I’ve fine-tuned language models, built CI/CD
-              pipelines, shipped two apps to the Apple App Store, and stood up a GPU-accelerated
-              remote compute environment for model training.
+              pipelines, shipped two apps to the Apple App Store, stood up a GPU-accelerated
+              remote compute environment for model training, and published a senior capstone on
+              replacing CAPTCHA with real-time computer vision.
             </p>
             <p>
               I hold a B.S. in Computer Science — with minors in Data Science, Applied

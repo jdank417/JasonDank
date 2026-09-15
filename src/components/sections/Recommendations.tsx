@@ -7,9 +7,9 @@ import SectionHeading from '../SectionHeading';
 const recommendations = [
   {
     id: 'kurt-levitan',
-    text: "Jason worked with our Endpoint Systems Management team as a co-op. He quickly integrated himself into the team and found several ways to add value. He helped solve a long running problem of automating and standardizing the names for Mac computers. He then switched platforms and coded a solution for a Windows issue. Jason is a strong team player, an inventive problem solver, and an excellent programmer. I am confident that he will add value to any organization he works for.",
+    text: "Jason worked with our Endpoint Systems Management team as a coop. He quickly integrated himself into the team and found several ways to add value. He helped solve a long running problem of automating and standardizing the names for Mac computers. He then switched platforms and coded a solution for a Windows issue. Jason is a strong team player, an inventive problem solver, and an excellent programmer. I am confident that he will add value to any organization he works for.",
     author: 'Kurt Levitan',
-    title: 'Microsoft Endpoint Architect & Team Lead',
+    title: 'Technical Architect, Endpoint Systems Management',
     company: 'Harvard University',
   },
   {

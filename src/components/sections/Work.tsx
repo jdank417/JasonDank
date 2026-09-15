@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ExternalLink, Github, Smartphone } from 'lucide-react';
+import { ExternalLink, FileText, Github, Smartphone } from 'lucide-react';
 import SectionHeading from '../SectionHeading';
 
 type Category = 'ml' | 'web' | 'apple' | 'automation';
@@ -18,6 +18,7 @@ interface Project {
   demoUrl?: string;
   demoLabel?: string;
   appStoreUrl?: string;
+  paperUrl?: string;
 }
 
 const filters: { id: Category | 'all'; label: string }[] = [
@@ -29,6 +30,21 @@ const filters: { id: Category | 'all'; label: string }[] = [
 ];
 
 const projects: Project[] = [
+  {
+    id: 'humanauth',
+    title: 'HumanAuth — Replacing CAPTCHA with Real-Time Computer Vision',
+    year: '2026',
+    categories: ['ml', 'web'],
+    description: [
+      'Senior capstone with Jack Denholm: a web-based biometric system that tells humans from automated agents in real time, using continuous behavioral analysis instead of static challenge solving.',
+      'An Angular front end streams webcam frames over a persistent WebSocket to a Python Flask backend, where MediaPipe face and hand landmark models feed six complementary liveness checks — micro-movement, 3D facial consistency, blink patterns, texture analysis, gesture challenge-response, and hand tracking.',
+      'Across 50 trials with four participants: 3.3s average completion against 7.0s for traditional CAPTCHA, a 92% authentication success rate against 80%, and 76% of simulated presentation attacks blocked against 67%.',
+    ],
+    technologies: ['Angular', 'Python', 'Flask', 'MediaPipe', 'WebSocket', 'Computer Vision'],
+    githubUrl: 'https://github.com/Dexteritize/HumanAuth',
+    paperUrl:
+      'https://drive.google.com/file/d/1OIx32NCxWxwVYz6PbNBdLCoa11eFes2q/view?usp=drivesdk',
+  },
   {
     id: 'bullbar',
     title: 'BullBar — SwiftUI macOS App',
@@ -141,7 +157,7 @@ export default function Work() {
   return (
     <section id="work" className="border-b border-border py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeading index="02" title="Work" kicker="8 projects — 2 of them live on the App Store." />
+        <SectionHeading index="02" title="Work" kicker="9 projects — 2 of them live on the App Store, 1 written up as a paper." />
 
         {/* Horizontally scrollable on phones so the filters never wrap into a wall. */}
         <div className="-mx-5 mb-8 overflow-x-auto px-5 pb-2 sm:mx-0 sm:px-0">
@@ -200,7 +216,7 @@ export default function Work() {
                   ))}
                 </div>
 
-                {(project.githubUrl || project.demoUrl || project.appStoreUrl) && (
+                {(project.githubUrl || project.demoUrl || project.appStoreUrl || project.paperUrl) && (
                   <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-t border-border pt-4">
                     {project.githubUrl && (
                       <a
@@ -222,6 +238,17 @@ export default function Work() {
                       >
                         <ExternalLink className="h-3.5 w-3.5" />
                         {project.demoLabel ?? 'demo'}
+                      </a>
+                    )}
+                    {project.paperUrl && (
+                      <a
+                        href={project.paperUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
+                      >
+                        <FileText className="h-3.5 w-3.5" />
+                        read the paper
                       </a>
                     )}
                     {project.appStoreUrl && (

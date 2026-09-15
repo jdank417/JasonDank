@@ -18,7 +18,10 @@ const courses = [
 ];
 
 const honors = [
-  "Dean's List — Fall 2022 through Fall 2024",
+  'Cum Laude — April 2026',
+  'Paragon Award — March 2026, presented to a graduating student for energy and enthusiasm in their leadership role at Wentworth',
+  'Wentworth Honors Program — March 2026',
+  "Dean's List — every semester",
   'Wentworth 2025–2026 Scholarship Report Recognition',
 ];
 
@@ -46,6 +49,7 @@ export default function Education() {
               <div className="bg-card px-5 py-4">
                 <p className="text-xs uppercase tracking-[0.12em] text-muted">Degree</p>
                 <p className="mt-1 font-bold">B.S. Computer Science</p>
+                <p className="mt-0.5 text-xs text-muted">Cum Laude, a semester early</p>
               </div>
               <div className="bg-card px-5 py-4">
                 <p className="text-xs uppercase tracking-[0.12em] text-muted">GPA</p>
