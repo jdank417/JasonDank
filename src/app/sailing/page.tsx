@@ -41,7 +41,7 @@ const racing: RaceEntry[] = [
     id: 'gypsey',
     boat: 'Gypsey — IOD 7',
     venue: 'Marblehead & Fishers Island, NY',
-    flags: ['cyc'],
+    flags: ['eyc'],
     result: 'IOD North Americans',
     bullets: [
       'My most-sailed keelboat — many seasons of racing aboard IOD 7.',
@@ -53,7 +53,7 @@ const racing: RaceEntry[] = [
     id: 'etchells',
     boat: 'Etchells (1071 / 1099)',
     venue: 'Marblehead — MRA',
-    flags: ['eyc'],
+    flags: ['cyc'],
     bullets: [
       'Bow on Etchells 1071 for a few MRA races.',
       'Bow on Etchells 1099 (LiRuPa) for an MRA race.',
