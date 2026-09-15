@@ -58,7 +58,7 @@ export default function About() {
             </p>
             <p>
               I hold a B.S. in Computer Science — with minors in Data Science, Applied
-              Mathematics, Business Analytics, and Computer Networking — from Wentworth
+              Mathematics, and Business Analytics — from Wentworth
               Institute of Technology, where I served as{' '}
               <span className="font-medium text-foreground">Executive Vice President</span>{' '}
               of Student Government and{' '}

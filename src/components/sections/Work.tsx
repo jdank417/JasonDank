@@ -33,7 +33,7 @@ const projects: Project[] = [
     id: 'bullbar',
     title: 'BullBar — SwiftUI macOS App',
     year: '2025',
-    categories: ['apple'],
+    categories: ['apple', 'automation'],
     description: [
       'Built a lightweight SwiftUI macOS utility that floats above all windows with an always-on-top strip of real-time stock quotes.',
       'Routed market data through a secure Cloudflare Workers proxy so no user credentials are required, with clamped refresh intervals to stay inside free-tier limits.',
@@ -46,19 +46,19 @@ const projects: Project[] = [
     id: 'bartender-gpt',
     title: 'Bartender-GPT — iOS App',
     year: '2025',
-    categories: ['apple', 'ml'],
+    categories: ['apple'],
     description: [
-      'Shipped a Swift iOS app (with iPad support) to the App Store, pairing a conversational LLM interface with a drink recipe engine.',
-      'Maintained as an ongoing project, with feature updates released continuously.',
+      'Built and published an iOS app in Swift, optimized for iPhone with full functionality on iPad.',
+      'An ongoing project on the App Store that continues to receive feature updates.',
     ],
-    technologies: ['Swift', 'iOS', 'LLM', 'App Store'],
+    technologies: ['Swift', 'iOS', 'iPadOS', 'App Store'],
     appStoreUrl: 'https://apps.apple.com/us/app/bartender-gpt/id6743064352?platform=iphone',
   },
   {
     id: 'barcode-scanning-webapp',
     title: 'Barcode Scanning WebApp',
     year: '2023',
-    categories: ['web', 'ml'],
+    categories: ['web'],
     description: [
       'Led design and delivery as chief architect / service owner / PM, owning the product roadmap for ML-based barcode detection.',
       'Drove the full-stack integration effort and delivered a production-ready web application with 80%+ barcode detection accuracy.',
@@ -78,7 +78,7 @@ const projects: Project[] = [
       'Designed and implemented a Flan-T5 fine-tuning solution (Python-only codebase) to answer sailing rules questions and interpret racing scenarios.',
       'Trained on structured JSON of instructions, optional context, and expected outputs; wrote the training and evaluation pipelines.',
     ],
-    technologies: ['Python', 'Flan-T5', 'NLP', 'Fine-tuning', 'W&B'],
+    technologies: ['Python', 'Flan-T5', 'NLP', 'Fine-tuning'],
     githubUrl: 'https://github.com/jdank417/Flan-t5-sailing-JasonDank',
   },
   {

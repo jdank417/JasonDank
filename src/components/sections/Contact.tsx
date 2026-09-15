@@ -8,8 +8,8 @@ const channels = [
   {
     id: 'email',
     label: 'email',
-    value: 'jasondank@yahoo.com',
-    href: 'mailto:jasondank@yahoo.com',
+    value: 'jason.dank@outlook.com',
+    href: 'mailto:jason.dank@outlook.com',
     icon: Mail,
   },
   {

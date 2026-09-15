@@ -14,7 +14,7 @@ const recommendations = [
   },
   {
     id: 'academic-recognition',
-    text: "A computer science major with minors in data science, business analytics, applied mathematics, and computer networking, Jason Dank's pursuit of a wide variety of academic knowledge has also led him to be actively engaged in various organizations on campus. Jason serves on the Wentworth Student Government as Executive Vice President and Chair to the Board of Directors. He represents the student body on the university's Information Technology Steering Committee and the School of Computing and Data Sciences AI task force. He is also president and captain of the Wentworth Sailing Team, and during the summer he competes in large yacht racing in Marblehead, MA. Jason is passionate about developing resources for artificial intelligence, specifically in fine-tuning AI modeling and application development.",
+    text: "Jason Dank's pursuit of a wide variety of academic knowledge has also led him to be actively engaged in various organizations on campus. Jason serves on the Wentworth Student Government as Executive Vice President and Chair to the Board of Directors. He represents the student body on the university's Information Technology Steering Committee and the School of Computing and Data Sciences AI task force. He is also president and captain of the Wentworth Sailing Team, and during the summer he competes in large yacht racing in Marblehead, MA. Jason is passionate about developing resources for artificial intelligence, specifically in fine-tuning AI modeling and application development.",
     author: 'Wentworth Institute of Technology',
     title: '2025–2026 Scholarship Report Recognition',
     company: 'Official academic profile',

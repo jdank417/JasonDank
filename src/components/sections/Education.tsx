@@ -3,12 +3,7 @@
 import { motion } from 'framer-motion';
 import SectionHeading from '../SectionHeading';
 
-const minors = [
-  'Data Science',
-  'Applied Mathematics',
-  'Business Analytics',
-  'Computer Networking',
-];
+const minors = ['Data Science', 'Applied Mathematics', 'Business Analytics'];
 
 const courses = [
   'Machine Learning (R)',
@@ -41,7 +36,7 @@ export default function Education() {
           className="grid gap-6 sm:grid-cols-12 sm:gap-8"
         >
           <div className="sm:col-span-4">
-            <p className="text-xs uppercase tracking-[0.1em] text-muted">2022 — August 2026</p>
+            <p className="text-xs uppercase tracking-[0.1em] text-muted">2022 — April 2026</p>
             <h3 className="mt-2 font-bold leading-snug">Wentworth Institute of Technology</h3>
             <p className="mt-1 text-muted">Boston, MA</p>
           </div>

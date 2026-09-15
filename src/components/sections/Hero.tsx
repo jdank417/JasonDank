@@ -92,8 +92,8 @@ export default function Hero() {
           I build full-stack systems for <mark>private markets</mark> on the{' '}
           <span className="font-medium text-foreground">Fidelity Private Shares</span>{' '}
           platform. Before Fidelity I ran endpoint engineering across 20,000+ devices
-          at Harvard University IT. On my own time I ship <mark>automation</mark> and{' '}
-          <mark>AI/ML</mark> projects — two of them live on the App Store.
+          at Harvard University IT. On my own time I ship Swift apps — two of them on
+          the App Store — alongside <mark>automation</mark> and <mark>AI/ML</mark> projects.
         </motion.p>
 
         <motion.div

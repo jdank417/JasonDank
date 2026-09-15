@@ -25,7 +25,7 @@ const navItems: NavItem[] = [
 const quickLinks = [
   { label: 'github', href: 'https://github.com/jdank417', icon: Github },
   { label: 'linkedin', href: 'https://www.linkedin.com/in/jason-dank', icon: Linkedin },
-  { label: 'email', href: 'mailto:jasondank@yahoo.com', icon: Mail },
+  { label: 'email', href: 'mailto:jason.dank@outlook.com', icon: Mail },
 ];
 
 export default function Navigation() {
