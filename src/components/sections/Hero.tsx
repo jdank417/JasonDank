@@ -106,10 +106,10 @@ export default function Hero() {
               neither label wraps; everything sits inline from sm up. */}
           <div className="flex gap-2.5">
             <button
-              onClick={() => scrollTo('work')}
+              onClick={() => scrollTo('projects')}
               className="inline-flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-0.5 sm:flex-none"
             >
-              view work
+              view projects
               <ArrowDown className="h-4 w-4" />
             </button>
             <button

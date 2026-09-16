@@ -1,7 +1,7 @@
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
-import Experience from '@/components/sections/Experience';
 import Work from '@/components/sections/Work';
+import Projects from '@/components/sections/Projects';
 import Certifications from '@/components/sections/Certifications';
 import Education from '@/components/sections/Education';
 import Skills from '@/components/sections/Skills';
@@ -13,8 +13,8 @@ export default function Home() {
     <main id="main" className="min-h-screen">
       <Hero />
       <About />
-      <Experience />
       <Work />
+      <Projects />
       <Certifications />
       <Education />
       <Skills />
