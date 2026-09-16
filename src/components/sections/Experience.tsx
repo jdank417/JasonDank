@@ -19,7 +19,7 @@ const experiences: ExperienceItem[] = [
     id: 'fidelity-private-shares',
     title: 'Full Stack Software Engineer',
     company: 'Fidelity Investments',
-    location: 'Merrimack, NH — Hybrid',
+    location: 'Boston Seaport, MA — On-site',
     period: 'Apr 2026 — Present',
     current: true,
     achievements: [
