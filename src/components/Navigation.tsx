@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, ArrowLeft, ArrowUpRight, Anchor, Github, Linkedin, Mail } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from '@/data/site';
 
 interface NavItem {
   name: string;
@@ -23,9 +24,9 @@ const navItems: NavItem[] = [
 ];
 
 const quickLinks = [
-  { label: 'github', href: 'https://github.com/jdank417', icon: Github },
-  { label: 'linkedin', href: 'https://www.linkedin.com/in/jason-dank', icon: Linkedin },
-  { label: 'email', href: 'mailto:jason.dank@outlook.com', icon: Mail },
+  { label: 'github', href: GITHUB_URL, icon: Github },
+  { label: 'linkedin', href: LINKEDIN_URL, icon: Linkedin },
+  { label: 'email', href: `mailto:${EMAIL}`, icon: Mail },
 ];
 
 export default function Navigation() {

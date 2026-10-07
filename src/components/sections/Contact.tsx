@@ -3,27 +3,28 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Github, Linkedin, Mail } from 'lucide-react';
 import SectionHeading from '../SectionHeading';
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from '@/data/site';
 
 const channels = [
   {
     id: 'email',
     label: 'email',
-    value: 'jason.dank@outlook.com',
-    href: 'mailto:jason.dank@outlook.com',
+    value: EMAIL,
+    href: `mailto:${EMAIL}`,
     icon: Mail,
   },
   {
     id: 'linkedin',
     label: 'linkedin',
     value: 'linkedin.com/in/jason-dank',
-    href: 'https://www.linkedin.com/in/jason-dank',
+    href: LINKEDIN_URL,
     icon: Linkedin,
   },
   {
     id: 'github',
     label: 'github',
     value: 'github.com/jdank417',
-    href: 'https://github.com/jdank417',
+    href: GITHUB_URL,
     icon: Github,
   },
 ];
