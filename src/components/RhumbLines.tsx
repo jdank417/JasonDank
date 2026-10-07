@@ -1,15 +1,15 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { cssToken, monoFont, onThemeChange, prefersReducedMotion, sizeCanvas, withAlpha } from '@/lib/canvas';
+import { cssToken, monoFont, onThemeChange, sizeCanvas, withAlpha } from '@/lib/canvas';
 
 /**
  * A portolan-chart backdrop: compass roses throwing out 32 straight rhumb
  * lines, one per point of the compass. The main rose sits in the top-right
- * with a coordinate label; a fainter one anchors the bottom-left. Lines drift a
- * few pixels with the pointer (mouse only, and never under reduced motion).
- *
- * Renders an absolutely positioned canvas — place it inside a `relative` box.
+ * with a coordinate label; a fainter one anchors the bottom-left. Each rose is
+ * centred on a crossing of the `.bg-graph` grid, so the canvas must share its
+ * box (and so its origin) with that grid: place it inside the same `relative`
+ * box as the grid element.
  */
 export default function RhumbLines({ label }: { label?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -19,8 +19,6 @@ export default function RhumbLines({ label }: { label?: string }) {
     const host = canvas?.parentElement;
     if (!canvas || !host) return;
 
-    let px = 0;
-    let py = 0;
     let frame = 0;
 
     const drawRose = (
@@ -86,14 +84,19 @@ export default function RhumbLines({ label }: { label?: string }) {
       const card = cssToken('--card');
       const muted = cssToken('--muted');
 
+      // Grid lines are 1px wide at every multiple of --grid from the box's top
+      // left, so a line's centre is at n * grid + 0.5. Snap each rose to one.
+      const grid = parseFloat(cssToken('--grid')) || 28;
+      const snap = (v: number) => Math.round(v / grid) * grid + 0.5;
+
       // Phones: tuck the rose into the top-right corner, above the hero copy.
       const narrow = w < 640;
       const R = narrow ? 22 : Math.min(44, Math.max(28, w * 0.03));
-      const roseX = (narrow ? w - 44 : w * 0.82) + px * 14;
-      const roseY = (narrow ? 46 : Math.min(150, Math.max(70, h * 0.15))) + py * 10;
+      const roseX = snap(narrow ? w - 44 : w * 0.82);
+      const roseY = snap(narrow ? 46 : Math.min(150, Math.max(70, h * 0.15)));
       const roses: [number, number, number][] = [
         [roseX, roseY, 1],
-        [w * 0.04 - px * 8, h * 0.98 - py * 6, 0.55],
+        [snap(w * 0.04), snap(h * 0.98), 0.55],
       ];
 
       // Lines fade out with distance from their rose, the way they thin out
@@ -153,24 +156,6 @@ export default function RhumbLines({ label }: { label?: string }) {
       if (!frame) frame = requestAnimationFrame(draw);
     };
 
-    const onMove = (e: PointerEvent) => {
-      if (e.pointerType !== 'mouse') return;
-      const r = host.getBoundingClientRect();
-      px = (e.clientX - r.left) / r.width - 0.5;
-      py = (e.clientY - r.top) / r.height - 0.5;
-      queue();
-    };
-    const onLeave = () => {
-      px = 0;
-      py = 0;
-      queue();
-    };
-
-    const reduced = prefersReducedMotion();
-    if (!reduced) {
-      host.addEventListener('pointermove', onMove);
-      host.addEventListener('pointerleave', onLeave);
-    }
     const resize = new ResizeObserver(queue);
     resize.observe(host);
     const stopTheme = onThemeChange(queue);
@@ -179,8 +164,6 @@ export default function RhumbLines({ label }: { label?: string }) {
 
     return () => {
       if (frame) cancelAnimationFrame(frame);
-      host.removeEventListener('pointermove', onMove);
-      host.removeEventListener('pointerleave', onLeave);
       resize.disconnect();
       stopTheme();
     };
