@@ -45,8 +45,13 @@ export function toggleTheme(): Theme {
   return next;
 }
 
+/** The theme currently showing, kept in sync with the toggle and the OS. */
+export function useTheme(): Theme {
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
+
 export default function ThemeToggle({ className = '' }: { className?: string }) {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const theme = useTheme();
 
   const toggle = useCallback(() => {
     toggleTheme();

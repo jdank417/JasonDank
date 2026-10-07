@@ -38,7 +38,7 @@ export default function Projects() {
                   gridRef.current?.scrollTo({ left: 0 });
                 }}
                 aria-pressed={active === filter.id}
-                className={`whitespace-nowrap rounded-full border px-3.5 py-2 text-xs uppercase tracking-[0.1em] transition-colors ${
+                className={`press whitespace-nowrap rounded-full border px-3.5 py-2 text-xs uppercase tracking-[0.1em] transition-colors ${
                   active === filter.id
                     ? 'border-foreground bg-foreground text-background'
                     : 'border-border text-muted hover:border-foreground hover:text-foreground'

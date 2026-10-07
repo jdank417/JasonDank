@@ -43,7 +43,7 @@ export function ExpandOverlay({
         aria-expanded={open}
         aria-controls={controls}
         aria-label={`${open ? 'Hide' : 'Show'} details: ${label}`}
-        className="absolute inset-0 rounded-[inherit] sm:hidden"
+        className="absolute inset-0 rounded-[inherit] transition-colors active:bg-foreground/5 sm:hidden"
       />
       <span
         aria-hidden
