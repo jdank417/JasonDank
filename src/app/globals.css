@@ -155,17 +155,12 @@ mark {
   display: none;
 }
 
-/* Graph-paper grid backdrop. The cell size is a variable so the canvas
-   compass rose (RhumbLines) can read it and sit on a grid crossing. */
-:root {
-  --grid: 28px;
-}
-
+/* Graph-paper grid backdrop */
 .bg-graph {
   background-image:
     linear-gradient(var(--border) 1px, transparent 1px),
     linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: var(--grid) var(--grid);
+  background-size: 28px 28px;
 }
 
 /* Faint diagonal hatch used behind the hero on small screens, where the

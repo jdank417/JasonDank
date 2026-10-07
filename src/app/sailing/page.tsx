@@ -22,11 +22,8 @@ export default function SailingPage() {
   return (
     <main id="main" className="min-h-screen">
       <section className="relative overflow-hidden border-b border-border">
-        <div
-          className="pointer-events-none absolute inset-0 bg-graph opacity-35"
-          style={{ maskImage: 'linear-gradient(to bottom, black, transparent)' }}
-        />
-        <RhumbLines />
+        {/* The label row below sits just above this line from lg up: keep 118 in step with its padding. */}
+        <RhumbLines deskRoseY={118} />
         <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
           <motion.div
             initial={{ opacity: 0, y: 8 }}

@@ -6,12 +6,11 @@ import { cssToken, monoFont, onThemeChange, sizeCanvas, withAlpha } from '@/lib/
 /**
  * A portolan-chart backdrop: compass roses throwing out 32 straight rhumb
  * lines, one per point of the compass. The main rose sits in the top-right
- * with a coordinate label; a fainter one anchors the bottom-left. Each rose is
- * centred on a crossing of the `.bg-graph` grid, so the canvas must share its
- * box (and so its origin) with that grid: place it inside the same `relative`
- * box as the grid element.
+ * with a coordinate label; a fainter one anchors the bottom-left.
+ *
+ * Renders an absolutely positioned canvas — place it inside a `relative` box.
  */
-export default function RhumbLines({ label }: { label?: string }) {
+export default function RhumbLines({ label, deskRoseY }: { label?: string; deskRoseY?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -84,19 +83,20 @@ export default function RhumbLines({ label }: { label?: string }) {
       const card = cssToken('--card');
       const muted = cssToken('--muted');
 
-      // Grid lines are 1px wide at every multiple of --grid from the box's top
-      // left, so a line's centre is at n * grid + 0.5. Snap each rose to one.
-      const grid = parseFloat(cssToken('--grid')) || 28;
-      const snap = (v: number) => Math.round(v / grid) * grid + 0.5;
-
       // Phones: tuck the rose into the top-right corner, above the hero copy.
       const narrow = w < 640;
       const R = narrow ? 22 : Math.min(44, Math.max(28, w * 0.03));
-      const roseX = snap(narrow ? w - 44 : w * 0.82);
-      const roseY = snap(narrow ? 46 : Math.min(150, Math.max(70, h * 0.15)));
+      // From lg up a page can pin the rose's east-west line to a fixed height
+      // (`deskRoseY`), so content can be placed against it.
+      const roseX = narrow ? w - 44 : w * 0.82;
+      const roseY = narrow
+        ? 46
+        : w >= 1024 && deskRoseY !== undefined
+          ? deskRoseY
+          : Math.min(150, Math.max(70, h * 0.15));
       const roses: [number, number, number][] = [
         [roseX, roseY, 1],
-        [snap(w * 0.04), snap(h * 0.98), 0.55],
+        [w * 0.04, h * 0.98, 0.55],
       ];
 
       // Lines fade out with distance from their rose, the way they thin out
@@ -167,7 +167,7 @@ export default function RhumbLines({ label }: { label?: string }) {
       resize.disconnect();
       stopTheme();
     };
-  }, [label]);
+  }, [label, deskRoseY]);
 
   return (
     <canvas
