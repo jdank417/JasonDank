@@ -1,8 +1,10 @@
 'use client';
 
+import { useId, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import SectionHeading from '../SectionHeading';
+import { CarouselControls, useCarousel } from '../mobile/Carousel';
 
 const recommendations = [
   {
@@ -22,12 +24,21 @@ const recommendations = [
 ];
 
 export default function Recommendations() {
+  const rowRef = useRef<HTMLDivElement>(null);
+  const { index, goTo } = useCarousel(rowRef);
+
   return (
     <section id="recommendations" className="border-b border-border py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading index="06" title="Recommendations" />
 
-        <div className="grid gap-4 lg:grid-cols-2">
+        {/* Below md: a swipeable row. From md up: the original stacked/two-column grid. */}
+        <div
+          ref={rowRef}
+          role="region"
+          aria-label="Recommendations"
+          className="no-scrollbar relative -mx-5 flex snap-x snap-mandatory scroll-px-5 items-start gap-3 overflow-x-auto px-5 pb-1 sm:-mx-8 sm:scroll-px-8 sm:px-8 md:mx-0 md:grid md:snap-none md:items-stretch md:gap-4 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-2"
+        >
           {recommendations.map((rec, index) => (
             <motion.blockquote
               key={rec.id}
@@ -35,12 +46,10 @@ export default function Recommendations() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
               viewport={{ once: true, margin: '-40px' }}
-              className="flex flex-col rounded-md border border-border bg-card p-5 transition-colors hover:border-foreground sm:p-6"
+              className="flex w-[88%] shrink-0 snap-start flex-col rounded-md border border-border bg-card p-5 transition-colors hover:border-foreground sm:w-[75%] sm:p-6 md:w-auto"
             >
               <Quote className="h-5 w-5 flex-shrink-0 text-accent" aria-hidden />
-              <p className="mt-4 flex-1 text-sm italic leading-relaxed text-muted sm:text-base">
-                {rec.text}
-              </p>
+              <QuoteText text={rec.text} />
               <footer className="mt-5 border-t border-border pt-4 text-sm">
                 <span className="font-medium">{rec.author}</span>
                 <span className="mt-0.5 block text-muted">
@@ -50,7 +59,35 @@ export default function Recommendations() {
             </motion.blockquote>
           ))}
         </div>
+        <CarouselControls index={index} count={recommendations.length} onGo={goTo} label="quotes" />
       </div>
     </section>
+  );
+}
+
+/** On phones a long quote is clamped to eight lines with a "read more". */
+function QuoteText({ text }: { text: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const id = useId();
+  return (
+    <>
+      <p
+        id={id}
+        className={`mt-4 flex-1 text-sm italic leading-relaxed text-muted sm:text-base ${
+          expanded ? '' : 'line-clamp-[8] md:line-clamp-none'
+        }`}
+      >
+        {text}
+      </p>
+      <button
+        type="button"
+        onClick={() => setExpanded((e) => !e)}
+        aria-expanded={expanded}
+        aria-controls={id}
+        className="press mt-3 self-start rounded border border-border px-2.5 py-1.5 text-xs uppercase tracking-[0.1em] text-foreground md:hidden"
+      >
+        {expanded ? 'show less' : 'read more'}
+      </button>
+    </>
   );
 }

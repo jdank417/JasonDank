@@ -136,6 +136,25 @@ mark {
   }
 }
 
+/* Tap feedback: buttons give a little on press. Touch screens only, so the
+   desktop experience is unchanged. */
+@media (hover: none) and (pointer: coarse) {
+  .press {
+    transition: transform 0.12s ease;
+  }
+  .press:active {
+    transform: scale(0.96);
+  }
+}
+
+/* Horizontal carousels scroll by swipe; the scrollbar would only add noise. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Graph-paper grid backdrop */
 .bg-graph {
   background-image:
