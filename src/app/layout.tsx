@@ -81,7 +81,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
-      <body className="min-h-full bg-background text-foreground font-mono overflow-x-hidden max-lg:pb-[calc(env(safe-area-inset-bottom)+5.5rem)]">
+      <body className="min-h-full bg-background text-foreground font-mono overflow-x-hidden">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-md focus:border focus:border-foreground focus:bg-background focus:px-4 focus:py-2 focus:text-sm"
