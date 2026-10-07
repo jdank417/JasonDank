@@ -258,3 +258,49 @@ mark {
     animation: none !important;
   }
 }
+
+/* "Where I've sailed" map (SailedMap). Land is a tint between the border and
+   card tokens, so the chart follows the theme like everything else. */
+.sailed-map {
+  --land: color-mix(in srgb, var(--border) 75%, var(--card));
+  --coast: color-mix(in srgb, var(--muted) 55%, transparent);
+}
+.map-land {
+  fill: var(--land);
+  stroke: var(--coast);
+  stroke-width: 0.75px;
+}
+.map-river-bank,
+.map-river {
+  fill: none;
+  stroke-linejoin: round;
+}
+.map-river-bank {
+  stroke: var(--coast);
+  stroke-width: 5.5px;
+}
+.map-river {
+  stroke: var(--card);
+  stroke-width: 4px;
+}
+.map-route {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2px;
+  stroke-dasharray: 5 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.map-fade {
+  animation: map-fade 0.35s ease-out;
+}
+@keyframes map-fade {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .map-fade {
+    animation: none;
+  }
+}

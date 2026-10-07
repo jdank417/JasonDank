@@ -8,6 +8,8 @@ import { CollapsePanel, ExpandOverlay, useDisclosure } from '@/components/mobile
 import RhumbLines from '@/components/RhumbLines';
 import ScrambleText from '@/components/ScrambleText';
 import SailChart from '@/components/SailChart';
+import SailedMap from '@/components/SailedMap';
+import HarborConditions from '@/components/HarborConditions';
 
 // Every burgee shown on the page, clubs first, in the order they appear.
 const allFlags: BurgeeKey[] = Array.from(
@@ -105,6 +107,26 @@ export default function SailingPage() {
             opacity="0.5"
           />
         </svg>
+      </section>
+
+      <section className="border-b border-border py-12 sm:py-16" aria-labelledby="conditions-heading">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <HarborConditions />
+        </div>
+      </section>
+
+      <section className="border-b border-border py-12 sm:py-16" aria-labelledby="map-heading">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <h2 id="map-heading" className="text-xl font-bold sm:text-2xl">
+              <ScrambleText text="Where I've sailed" />
+            </h2>
+            <p className="text-xs uppercase tracking-[0.12em] text-muted">
+              Florida to Marblehead · plotted from my Navionics log
+            </p>
+          </div>
+          <SailedMap />
+        </div>
       </section>
 
       <section className="border-b border-border py-12 sm:py-16" aria-labelledby="course-heading">
