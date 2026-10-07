@@ -1,14 +1,17 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ExternalLink, FileText, FlaskConical, Github, Smartphone } from 'lucide-react';
 import SectionHeading from '../SectionHeading';
 import { filters, projects, type Category } from '@/data/projects';
+import { useSpotlight } from '@/lib/useSpotlight';
 
 
 export default function Projects() {
   const [active, setActive] = useState<Category | 'all'>('all');
+  const gridRef = useRef<HTMLDivElement>(null);
+  useSpotlight(gridRef);
 
   const visible = useMemo(
     () => (active === 'all' ? projects : projects.filter((p) => p.categories.includes(active))),
@@ -40,7 +43,7 @@ export default function Projects() {
           </div>
         </div>
 
-        <motion.div layout className="grid gap-4 md:grid-cols-2">
+        <motion.div ref={gridRef} layout className="spotlight-group grid gap-4 md:grid-cols-2">
           <AnimatePresence mode="popLayout">
             {visible.map((project) => (
               <motion.article
@@ -50,7 +53,8 @@ export default function Projects() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.3 }}
-                className="flex flex-col rounded-md border border-border bg-card p-5 transition-colors hover:border-foreground sm:p-6"
+                data-spotlight
+                className="spotlight-card relative flex flex-col rounded-md border border-border bg-card p-5 transition-colors hover:border-foreground sm:p-6"
               >
                 <span className="text-xs uppercase tracking-[0.1em] text-muted">
                   {project.year}

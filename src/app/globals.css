@@ -106,6 +106,32 @@ mark {
   padding: 0 0.15em;
 }
 
+/* Cursor spotlight: a soft accent glow that follows the mouse across a group
+   of cards. Positions come from useSpotlight(); only pointers that can hover. */
+@media (hover: hover) and (pointer: fine) {
+  .spotlight-card {
+    isolation: isolate;
+  }
+  .spotlight-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+      340px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      color-mix(in srgb, var(--accent) 30%, transparent),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .spotlight-group:hover .spotlight-card::before {
+    opacity: 1;
+  }
+}
+
 /* Graph-paper grid backdrop */
 .bg-graph {
   background-image:

@@ -1,18 +1,23 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import SectionHeading from '../SectionHeading';
 import { experiences } from '@/data/work';
+import { useSpotlight } from '@/lib/useSpotlight';
 
 
 export default function Work() {
+  const listRef = useRef<HTMLDivElement>(null);
+  useSpotlight(listRef);
+
   return (
     <section id="work" className="border-b border-border py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading index="01" title="Work" kicker="7 roles, newest first." />
 
         {/* Timeline rail: a continuous hairline with a node per role. */}
-        <div className="relative space-y-4 sm:space-y-0">
+        <div ref={listRef} className="spotlight-group relative space-y-4 sm:space-y-0">
           <div
             className="absolute bottom-6 left-[5px] top-3 hidden w-px bg-border sm:block"
             aria-hidden
@@ -25,7 +30,8 @@ export default function Work() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.3) }}
               viewport={{ once: true, margin: '-40px' }}
-              className={`relative rounded-md border p-5 transition-colors sm:rounded-none sm:border-0 sm:border-b sm:border-border sm:py-8 sm:pl-8 ${
+              data-spotlight
+              className={`spotlight-card relative rounded-md border p-5 transition-colors sm:rounded-none sm:border-0 sm:border-b sm:border-border sm:py-8 sm:pl-8 ${
                 exp.current
                   ? 'border-foreground bg-card sm:bg-transparent'
                   : 'border-border bg-card hover:border-foreground sm:bg-transparent'
