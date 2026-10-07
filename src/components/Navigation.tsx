@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X, ArrowLeft, ArrowUpRight, Anchor, Github, Linkedin, Mail } from 'lucide-react';
+import { Menu, X, ArrowLeft, ArrowUpRight, Anchor, Github, Linkedin, Mail, Search } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import { openCommandPalette, useShortcutLabel } from './CommandPalette';
 import { EMAIL, GITHUB_URL, LINKEDIN_URL } from '@/data/site';
 
 interface NavItem {
@@ -32,6 +33,8 @@ const quickLinks = [
 export default function Navigation() {
   const pathname = usePathname();
   const isHome = pathname === '/';
+  // Shown as the breadcrumb on inner pages, e.g. "/sailing" or "/terminal".
+  const path = pathname.replace(/\/$/, '') || '/';
 
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -103,9 +106,10 @@ export default function Navigation() {
             <Link href="/" className="text-sm font-bold tracking-tight">
               jasondank.com
             </Link>
-            <span className="truncate text-sm text-muted">/sailing</span>
+            <span className="truncate text-sm text-muted">{path}</span>
           </div>
           <div className="flex items-center gap-2">
+            <PaletteButton keyHint="sm" />
             <ThemeToggle />
             <Link
               href="/"
@@ -147,7 +151,7 @@ export default function Navigation() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`relative px-3 py-1.5 text-sm transition-colors ${
+                className={`relative px-2.5 py-1.5 text-sm transition-colors xl:px-3 ${
                   activeSection === item.id
                     ? 'text-foreground'
                     : 'text-muted hover:text-foreground'
@@ -171,10 +175,12 @@ export default function Navigation() {
               sailing
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
+            <PaletteButton keyHint="xl" className="ml-2" />
             <ThemeToggle className="ml-2" />
           </nav>
 
           <div className="flex items-center gap-2 lg:hidden">
+            <PaletteButton keyHint="never" />
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -261,5 +267,29 @@ export default function Navigation() {
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+/** Opens the ⌘K palette. Shows the shortcut where there's room and a keyboard is likely. */
+function PaletteButton({
+  keyHint,
+  className = '',
+}: {
+  keyHint: 'xl' | 'sm' | 'never';
+  className?: string;
+}) {
+  const label = useShortcutLabel();
+  const kbdClass = keyHint === 'xl' ? 'hidden xl:inline' : keyHint === 'sm' ? 'hidden sm:inline' : 'hidden';
+  return (
+    <button
+      type="button"
+      onClick={openCommandPalette}
+      aria-label={`Search and commands (${label})`}
+      aria-keyshortcuts="Meta+K Control+K"
+      className={`inline-flex h-10 min-w-10 items-center justify-center gap-2 rounded-md border border-border px-2.5 text-muted transition-colors hover:border-foreground hover:text-foreground ${className}`}
+    >
+      <Search className="h-4 w-4" />
+      <kbd className={`${kbdClass} whitespace-nowrap font-mono text-xs`}>{label}</kbd>
+    </button>
   );
 }

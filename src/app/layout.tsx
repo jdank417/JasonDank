@@ -3,6 +3,7 @@ import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
+import CommandPalette from "@/components/CommandPalette";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jbmono",
@@ -89,6 +90,7 @@ export default function RootLayout({
         </a>
         <ScrollProgress />
         <Navigation />
+        <CommandPalette />
         {children}
       </body>
     </html>

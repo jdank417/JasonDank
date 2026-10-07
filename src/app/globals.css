@@ -181,6 +181,13 @@ mark {
   outline-offset: 2px;
 }
 
+/* The palette's search field is its dialog's only focus stop and the caret
+   already marks it, so the ring would just draw a box inside the box. This has
+   to live here: the rule above is unlayered, so it beats any utility class. */
+#command-palette-input:focus-visible {
+  outline: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

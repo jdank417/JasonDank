@@ -32,18 +32,24 @@ function subscribe(onChange: () => void) {
   };
 }
 
+/** Flips the site theme and persists the choice. Returns the theme now showing. */
+export function toggleTheme(): Theme {
+  const next: Theme = getSnapshot() === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  try {
+    localStorage.setItem('theme', next);
+  } catch {
+    /* private mode — the choice just won't persist */
+  }
+  window.dispatchEvent(new Event(THEME_EVENT));
+  return next;
+}
+
 export default function ThemeToggle({ className = '' }: { className?: string }) {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const toggle = useCallback(() => {
-    const next: Theme = getSnapshot() === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    try {
-      localStorage.setItem('theme', next);
-    } catch {
-      /* private mode — the choice just won't persist */
-    }
-    window.dispatchEvent(new Event(THEME_EVENT));
+    toggleTheme();
   }, []);
 
   return (
