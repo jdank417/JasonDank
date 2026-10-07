@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, Github, Linkedin } from 'lucide-react';
+import RhumbLines from '../RhumbLines';
+import { GITHUB_URL, LINKEDIN_URL, SEAPORT_COORDS } from '@/data/site';
 
 const scrollTo = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -37,13 +39,10 @@ export default function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden border-b border-border">
       <div
-        className="pointer-events-none absolute inset-0 bg-graph opacity-60"
+        className="pointer-events-none absolute inset-0 bg-graph opacity-35"
         style={{ maskImage: 'linear-gradient(to bottom, black, transparent)' }}
       />
-      <div
-        className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent opacity-20 blur-3xl sm:h-96 sm:w-96"
-        aria-hidden
-      />
+      <RhumbLines label={SEAPORT_COORDS} />
 
       <div className="relative mx-auto max-w-6xl px-5 pb-12 pt-14 sm:px-8 sm:pb-16 sm:pt-20 lg:pb-20 lg:pt-28">
         <motion.div
@@ -59,8 +58,8 @@ export default function Hero() {
             </span>
             <span className="text-foreground">@ Fidelity Investments</span>
           </span>
-          <span className="rounded-full border border-border px-3 py-1.5">Boston, MA</span>
-          <span className="hidden rounded-full border border-border px-3 py-1.5 sm:inline">
+          <span className="rounded-full border border-border bg-card px-3 py-1.5">Boston, MA</span>
+          <span className="hidden rounded-full border border-border bg-card px-3 py-1.5 sm:inline">
             B.S. CS — Wentworth
           </span>
         </motion.div>
@@ -123,7 +122,7 @@ export default function Hero() {
 
           <div className="flex gap-2.5">
             <a
-              href="https://github.com/jdank417"
+              href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted transition-colors hover:border-foreground hover:text-foreground"
@@ -132,7 +131,7 @@ export default function Hero() {
               <Github className="h-4 w-4" />
             </a>
             <a
-              href="https://www.linkedin.com/in/jason-dank"
+              href={LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted transition-colors hover:border-foreground hover:text-foreground"

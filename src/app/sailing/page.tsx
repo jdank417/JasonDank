@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Trophy } from 'lucide-react';
 import Burgee, { burgeeLabel, type BurgeeKey } from '@/components/Burgee';
 import { clubs, highlights, racing } from '@/data/sailing';
+import RhumbLines from '@/components/RhumbLines';
 
 // Every burgee shown on the page, clubs first, in the order they appear.
 const allFlags: BurgeeKey[] = Array.from(
@@ -19,9 +20,10 @@ export default function SailingPage() {
     <main id="main" className="min-h-screen">
       <section className="relative overflow-hidden border-b border-border">
         <div
-          className="pointer-events-none absolute inset-0 bg-graph opacity-60"
+          className="pointer-events-none absolute inset-0 bg-graph opacity-35"
           style={{ maskImage: 'linear-gradient(to bottom, black, transparent)' }}
         />
+        <RhumbLines />
         <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:py-24">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
