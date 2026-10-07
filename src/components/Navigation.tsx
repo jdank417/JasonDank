@@ -139,7 +139,7 @@ export default function Navigation() {
             className="flex min-w-0 items-baseline gap-2 text-left"
           >
             <span className="whitespace-nowrap text-sm font-bold tracking-tight">jasondank.com</span>
-            <span className="hidden whitespace-nowrap text-sm text-muted sm:inline lg:hidden xl:inline">
+            <span className="hidden whitespace-nowrap text-sm text-muted sm:inline lg:hidden">
               {'// software engineer'}
             </span>
             {/* On phones the slot is used for a live section readout instead. */}
