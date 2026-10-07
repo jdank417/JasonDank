@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import ScrambleText from './ScrambleText';
 
 export default function SectionHeading({
   index,
@@ -21,7 +22,9 @@ export default function SectionHeading({
     >
       <div className="flex items-baseline gap-3 sm:gap-4">
         <span className="text-sm text-muted">§{index}</span>
-        <h2 className="text-display font-bold">{title}</h2>
+        <h2 className="text-display font-bold">
+          <ScrambleText text={title} />
+        </h2>
       </div>
       {kicker && (
         <p className="mt-2 pl-7 text-sm text-muted sm:pl-9">{kicker}</p>

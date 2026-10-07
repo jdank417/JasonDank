@@ -5,6 +5,7 @@ import { ExternalLink, Trophy } from 'lucide-react';
 import Burgee, { burgeeLabel, type BurgeeKey } from '@/components/Burgee';
 import { clubs, highlights, racing } from '@/data/sailing';
 import RhumbLines from '@/components/RhumbLines';
+import ScrambleText from '@/components/ScrambleText';
 
 // Every burgee shown on the page, clubs first, in the order they appear.
 const allFlags: BurgeeKey[] = Array.from(
@@ -111,7 +112,9 @@ export default function SailingPage() {
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mb-10 flex items-baseline gap-4 border-b border-border pb-4">
             <span className="text-sm text-muted">§00</span>
-            <h2 className="text-display font-bold">Certifications</h2>
+            <h2 className="text-display font-bold">
+              <ScrambleText text="Certifications" />
+            </h2>
           </div>
           <div className="flex gap-3">
             <span className="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-muted" />
@@ -127,7 +130,9 @@ export default function SailingPage() {
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mb-10 flex items-baseline gap-4 border-b border-border pb-4">
             <span className="text-sm text-muted">§01</span>
-            <h2 className="text-display font-bold">Racing</h2>
+            <h2 className="text-display font-bold">
+              <ScrambleText text="Racing" />
+            </h2>
           </div>
 
           <div className="divide-y divide-border">
@@ -176,7 +181,9 @@ export default function SailingPage() {
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mb-6 flex items-baseline gap-4 border-b border-border pb-4">
             <span className="text-sm text-muted">§02</span>
-            <h2 className="text-display font-bold">Clubs</h2>
+            <h2 className="text-display font-bold">
+              <ScrambleText text="Clubs" />
+            </h2>
           </div>
 
           {/* Burgee key — every club and fleet flown across the page. */}

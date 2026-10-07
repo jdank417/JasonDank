@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, Github, Linkedin } from 'lucide-react';
 import RhumbLines from '../RhumbLines';
+import ScrambleText from '../ScrambleText';
 import { GITHUB_URL, LINKEDIN_URL, SEAPORT_COORDS } from '@/data/site';
 
 const scrollTo = (id: string) => {
@@ -152,7 +153,7 @@ export default function Hero() {
             <div key={stat.label} className="bg-card px-4 py-5">
               <dt className="sr-only">{stat.label}</dt>
               <dd>
-                <span className="block text-2xl font-bold sm:text-3xl">{stat.value}</span>
+                <ScrambleText text={stat.value} className="block text-2xl font-bold sm:text-3xl" />
                 <span className="mt-1 block text-xs uppercase tracking-[0.12em] text-muted">
                   {stat.label}
                 </span>
