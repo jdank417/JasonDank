@@ -15,6 +15,7 @@
   --accent: #f7d046;
   --accent-ink: #111111;
   --signal: #1f7a4d;
+  --danger: #b4321f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,6 +30,7 @@
     --accent: #f7d046;
     --accent-ink: #100f0d;
     --signal: #4ade80;
+    --danger: #f87171;
   }
 }
 
@@ -43,6 +45,7 @@
   --accent: #f7d046;
   --accent-ink: #100f0d;
   --signal: #4ade80;
+  --danger: #f87171;
 }
 
 /* ---------------------------------------------------------------
@@ -58,6 +61,7 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-signal: var(--signal);
+  --color-danger: var(--danger);
 
   --font-mono: var(--font-jbmono), ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-sans: var(--font-jbmono), ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -207,10 +211,12 @@ mark {
   outline-offset: 2px;
 }
 
-/* The palette's search field is its dialog's only focus stop and the caret
-   already marks it, so the ring would just draw a box inside the box. This has
-   to live here: the rule above is unlayered, so it beats any utility class. */
-#command-palette-input:focus-visible {
+/* The palette's search field and the terminal's prompt each sit inside a
+   framed box, and the caret already marks focus, so the ring would just draw a
+   box inside the box. This has to live here: the rule above is unlayered, so
+   it beats any utility class. */
+#command-palette-input:focus-visible,
+#terminal-input:focus-visible {
   outline: none;
 }
 

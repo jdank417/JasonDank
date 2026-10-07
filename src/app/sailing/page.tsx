@@ -200,6 +200,7 @@ export default function SailingPage() {
             {clubs.map((club, index) => (
               <motion.div
                 key={club.id}
+                id={`club-${club.id}`}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.3) }}

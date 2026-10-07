@@ -74,9 +74,14 @@ export default function Contact() {
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6 text-xs uppercase tracking-[0.1em] text-muted sm:mt-16">
           <span>jasondank.com — Boston, MA</span>
-          <a href="/sailing" className="transition-colors hover:text-foreground">
-            sailing résumé →
-          </a>
+          <span className="flex flex-wrap gap-x-5 gap-y-2">
+            <a href="/terminal" className="transition-colors hover:text-foreground">
+              terminal →
+            </a>
+            <a href="/sailing" className="transition-colors hover:text-foreground">
+              sailing résumé →
+            </a>
+          </span>
         </div>
       </div>
     </section>
