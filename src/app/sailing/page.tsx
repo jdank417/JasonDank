@@ -6,6 +6,7 @@ import Burgee, { burgeeLabel, type BurgeeKey } from '@/components/Burgee';
 import { clubs, highlights, racing } from '@/data/sailing';
 import RhumbLines from '@/components/RhumbLines';
 import ScrambleText from '@/components/ScrambleText';
+import SailChart from '@/components/SailChart';
 
 // Every burgee shown on the page, clubs first, in the order they appear.
 const allFlags: BurgeeKey[] = Array.from(
@@ -106,6 +107,20 @@ export default function SailingPage() {
             opacity="0.5"
           />
         </svg>
+      </section>
+
+      <section className="border-b border-border py-12 sm:py-16" aria-labelledby="course-heading">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <h2 id="course-heading" className="text-xl font-bold sm:text-2xl">
+              <ScrambleText text="Sail the course" />
+            </h2>
+            <p className="text-xs uppercase tracking-[0.12em] text-muted">
+              One mark per club · 2012 → today
+            </p>
+          </div>
+          <SailChart />
+        </div>
       </section>
 
       <section className="border-b border-border py-16">
