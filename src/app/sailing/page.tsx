@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Trophy } from 'lucide-react';
 import Burgee, { burgeeLabel, type BurgeeKey } from '@/components/Burgee';
-import { clubs, highlights, racing } from '@/data/sailing';
+import { clubs, highlights, racing, type ClubEntry, type RaceEntry } from '@/data/sailing';
+import { CollapsePanel, ExpandOverlay, useDisclosure } from '@/components/mobile/Disclosure';
 import RhumbLines from '@/components/RhumbLines';
 import ScrambleText from '@/components/ScrambleText';
 import SailChart from '@/components/SailChart';
@@ -152,41 +153,7 @@ export default function SailingPage() {
 
           <div className="divide-y divide-border">
             {racing.map((entry, index) => (
-              <motion.div
-                key={entry.id}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.3) }}
-                viewport={{ once: true }}
-                className="grid gap-4 py-7 sm:grid-cols-12 sm:gap-8"
-              >
-                <div className="sm:col-span-4">
-                  <div className="mb-2 flex items-center gap-1.5">
-                    {entry.flags.map((flag) => (
-                      <Burgee key={flag} name={flag} className="h-8 w-12" />
-                    ))}
-                  </div>
-                  <h3 className="font-bold leading-snug">{entry.boat}</h3>
-                  <p className="mt-1 text-sm text-muted">{entry.venue}</p>
-                  {entry.period && (
-                    <p className="mt-2 text-xs uppercase tracking-[0.1em] text-muted">{entry.period}</p>
-                  )}
-                  {entry.result && (
-                    <p className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-foreground bg-accent px-2.5 py-1 text-xs font-medium text-accent-ink">
-                      <Trophy className="h-3 w-3" />
-                      {entry.result}
-                    </p>
-                  )}
-                </div>
-                <ul className="sm:col-span-8 space-y-2.5">
-                  {entry.bullets.map((bullet, i) => (
-                    <li key={i} className="flex gap-3 text-muted">
-                      <span className="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-muted" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
+              <RaceRow key={entry.id} entry={entry} index={index} />
             ))}
           </div>
         </div>
@@ -213,59 +180,113 @@ export default function SailingPage() {
 
           <div className="divide-y divide-border">
             {clubs.map((club, index) => (
-              <motion.div
-                key={club.id}
-                id={`club-${club.id}`}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.3) }}
-                viewport={{ once: true }}
-                className="grid gap-4 py-7 sm:grid-cols-12 sm:gap-8"
-              >
-                <div className="sm:col-span-4">
-                  <div className="mb-2">
-                    <Burgee name={club.flag} className="h-9 w-[54px]" />
-                  </div>
-                  <h3 className="font-bold leading-snug">{club.name}</h3>
-                  <p className="mt-1 text-muted">{club.location}</p>
-                  <p className="mt-3 text-xs uppercase tracking-[0.1em] text-muted">{club.period}</p>
-                  {club.link && (
-                    <a
-                      href={club.link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
-                    >
-                      {club.link.label}
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-                  )}
-                </div>
-                <div className="sm:col-span-8">
-                  <ul className="space-y-2.5">
-                    {club.bullets.map((bullet, i) => (
-                      <li key={i} className="flex gap-3 text-muted">
-                        <span className="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-muted" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {(club.boats ? club.boats.split(' / ') : []).map((boat) => (
-                      <span
-                        key={boat}
-                        className="rounded border border-border px-1.5 py-0.5 text-xs text-muted"
-                      >
-                        {boat}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+              <ClubRow key={club.id} club={club} index={index} />
             ))}
           </div>
         </div>
       </section>
     </main>
+  );
+}
+
+/** One boat. Burgees, venue and result stay visible; the bullets collapse on phones. */
+function RaceRow({ entry, index }: { entry: RaceEntry; index: number }) {
+  const { open, toggle, panelId } = useDisclosure(false);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.3) }}
+      viewport={{ once: true }}
+      className="relative grid py-7 sm:grid-cols-12 sm:gap-8"
+    >
+      <div className="pr-12 sm:col-span-4 sm:pr-0">
+        <div className="mb-2 flex items-center gap-1.5">
+          {entry.flags.map((flag) => (
+            <Burgee key={flag} name={flag} className="h-8 w-12" />
+          ))}
+        </div>
+        <h3 className="font-bold leading-snug">{entry.boat}</h3>
+        <p className="mt-1 text-sm text-muted">{entry.venue}</p>
+        {entry.period && (
+          <p className="mt-2 text-xs uppercase tracking-[0.1em] text-muted">{entry.period}</p>
+        )}
+        {entry.result && (
+          <p className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-foreground bg-accent px-2.5 py-1 text-xs font-medium text-accent-ink">
+            <Trophy className="h-3 w-3" />
+            {entry.result}
+          </p>
+        )}
+      </div>
+      <CollapsePanel open={open} id={panelId} className="sm:col-span-8">
+        <ul className="space-y-2.5 pt-4 sm:pt-0">
+          {entry.bullets.map((bullet, i) => (
+            <li key={i} className="flex gap-3 text-muted">
+              <span className="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-muted" />
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+      </CollapsePanel>
+
+      <ExpandOverlay open={open} onToggle={toggle} controls={panelId} label={entry.boat} />
+    </motion.div>
+  );
+}
+
+/** One club. Burgee, years and links stay visible; the bullets and fleet collapse on phones. */
+function ClubRow({ club, index }: { club: ClubEntry; index: number }) {
+  const { open, toggle, panelId } = useDisclosure(false);
+  return (
+    <motion.div
+      id={`club-${club.id}`}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.3) }}
+      viewport={{ once: true }}
+      className="relative grid py-7 sm:grid-cols-12 sm:gap-8"
+    >
+      <div className="pr-12 sm:col-span-4 sm:pr-0">
+        <div className="mb-2">
+          <Burgee name={club.flag} className="h-9 w-[54px]" />
+        </div>
+        <h3 className="font-bold leading-snug">{club.name}</h3>
+        <p className="mt-1 text-muted">{club.location}</p>
+        <p className="mt-3 text-xs uppercase tracking-[0.1em] text-muted">{club.period}</p>
+        {club.link && (
+          <a
+            href={club.link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative z-[1] mt-3 inline-flex items-center gap-1.5 text-xs font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
+          >
+            {club.link.label}
+            <ExternalLink className="h-3 w-3" />
+          </a>
+        )}
+      </div>
+      <CollapsePanel open={open} id={panelId} className="sm:col-span-8">
+        <ul className="space-y-2.5 pt-4 sm:pt-0">
+          {club.bullets.map((bullet, i) => (
+            <li key={i} className="flex gap-3 text-muted">
+              <span className="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-muted" />
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {(club.boats ? club.boats.split(' / ') : []).map((boat) => (
+            <span
+              key={boat}
+              className="rounded border border-border px-1.5 py-0.5 text-xs text-muted"
+            >
+              {boat}
+            </span>
+          ))}
+        </div>
+      </CollapsePanel>
+
+      <ExpandOverlay open={open} onToggle={toggle} controls={panelId} label={club.name} />
+    </motion.div>
   );
 }
