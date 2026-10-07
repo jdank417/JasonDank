@@ -40,7 +40,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden border-b border-border">
       {/* The badge row below sits just above this line from lg up: keep 140 in step with its padding. */}
-      <RhumbLines label={SEAPORT_COORDS} deskRoseY={140} />
+      <RhumbLines label={SEAPORT_COORDS} deskRoseY={140} chart="/charts/hero-boston.json" />
 
       <div className="relative mx-auto max-w-6xl px-5 pb-12 pt-14 sm:px-8 sm:pb-16 sm:pt-20 lg:pb-20 lg:pt-[6.5rem]">
         <motion.div
