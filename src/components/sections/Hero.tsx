@@ -66,7 +66,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.05 }}
-          className="text-huge font-bold text-foreground"
+          className="font-display text-huge font-extrabold text-foreground"
         >
           Jason Dank
         </motion.h1>
@@ -75,7 +75,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-huge italic font-normal text-muted"
+          className="font-display text-huge font-medium italic text-muted"
         >
           full-stack engineer.
         </motion.p>

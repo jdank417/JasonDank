@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -9,6 +9,16 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jbmono",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+// Display face for names, section headings and card titles: Archivo, set
+// expanded (see the font-display utility in globals.css). Mono does the rest.
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin"],
+  axes: ["wdth"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -77,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jetbrainsMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${jetbrainsMono.variable} ${archivo.variable} h-full antialiased`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>

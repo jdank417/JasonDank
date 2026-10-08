@@ -155,6 +155,17 @@ mark {
   display: none;
 }
 
+/* Display face: Archivo at its widest, like the readouts on a boat's
+   instrument displays. Names, section headings and card titles use it. */
+@utility font-display {
+  font-family: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  font-stretch: 125%;
+  /* A touch narrower on phones, so long headings fit a 360px screen. */
+  @media (width < 40rem) {
+    font-stretch: 112%;
+  }
+}
+
 /* Graph-paper grid backdrop */
 .bg-graph {
   background-image:

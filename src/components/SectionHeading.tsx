@@ -20,9 +20,9 @@ export default function SectionHeading({
       viewport={{ once: true }}
       className="mb-10 border-b border-border pb-4 sm:mb-12"
     >
-      <div className="flex items-baseline gap-3 sm:gap-4">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 sm:gap-x-4">
         <span className="text-sm text-muted">§{index}</span>
-        <h2 className="text-display font-bold">
+        <h2 className="font-display text-display font-extrabold max-sm:text-[1.6rem]">
           <ScrambleText text={title} />
         </h2>
       </div>

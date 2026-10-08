@@ -93,7 +93,7 @@ function ProjectBody({ project }: { project: Project }) {
       <span className="text-xs uppercase tracking-[0.1em] text-muted">
         {project.year}
       </span>
-      <h3 className="mt-2 font-bold leading-snug">{project.title}</h3>
+      <h3 className="font-display mt-2 font-bold leading-snug">{project.title}</h3>
 
       <ul id={listId} className="mt-4 flex-1 space-y-2.5">
         {project.description.map((line, i) => (

@@ -6,6 +6,7 @@ import Burgee, { burgeeLabel, type BurgeeKey } from '@/components/Burgee';
 import { clubs, highlights, racing, type ClubEntry, type RaceEntry } from '@/data/sailing';
 import { CollapsePanel, ExpandOverlay, useDisclosure } from '@/components/mobile/Disclosure';
 import RhumbLines from '@/components/RhumbLines';
+import LatitudeRuler, { type RulerSection } from '@/components/LatitudeRuler';
 import ScrambleText from '@/components/ScrambleText';
 import SailedMap from '@/components/SailedMap';
 import HarborConditions from '@/components/HarborConditions';
@@ -19,9 +20,19 @@ const allFlags: BurgeeKey[] = Array.from(
 );
 
 
+// The sailing page's sections for the latitude ruler, numbered as their headings are.
+const SAILING_SECTIONS: RulerSection[] = [
+  { id: 'conditions', name: 'right now' },
+  { id: 'where-sailed', name: "where I've sailed" },
+  { id: 'certifications', name: 'certifications', mark: '00' },
+  { id: 'racing', name: 'racing', mark: '01' },
+  { id: 'clubs', name: 'clubs', mark: '02' },
+];
+
 export default function SailingPage() {
   return (
     <main id="main" className="min-h-screen">
+      <LatitudeRuler sections={SAILING_SECTIONS} />
       <section className="relative overflow-hidden border-b border-border">
         {/* The label row below sits just above this line from lg up: keep 118 in step with its padding. */}
         <RhumbLines deskRoseY={118} />
@@ -41,7 +52,7 @@ export default function SailingPage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05 }}
-            className="text-huge font-bold"
+            className="font-display text-huge font-extrabold"
           >
             Jason Dank
           </motion.h1>
@@ -49,7 +60,7 @@ export default function SailingPage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-huge italic font-normal text-muted"
+            className="font-display text-huge font-medium italic text-muted"
           >
             sailing résumé.
           </motion.p>
@@ -108,16 +119,16 @@ export default function SailingPage() {
         </svg>
       </section>
 
-      <section className="border-b border-border py-12 sm:py-16" aria-labelledby="conditions-heading">
+      <section id="conditions" className="border-b border-border py-12 sm:py-16" aria-labelledby="conditions-heading">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <HarborConditions />
         </div>
       </section>
 
-      <section className="border-b border-border py-12 sm:py-16" aria-labelledby="map-heading">
+      <section id="where-sailed" className="border-b border-border py-12 sm:py-16" aria-labelledby="map-heading">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <h2 id="map-heading" className="text-xl font-bold sm:text-2xl">
+            <h2 id="map-heading" className="font-display text-xl font-extrabold sm:text-2xl">
               <ScrambleText text="Where I've sailed" />
             </h2>
             <p className="text-xs uppercase tracking-[0.12em] text-muted">
@@ -128,11 +139,11 @@ export default function SailingPage() {
         </div>
       </section>
 
-      <section className="border-b border-border py-16">
+      <section id="certifications" className="border-b border-border py-16">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <div className="mb-10 flex items-baseline gap-4 border-b border-border pb-4">
+          <div className="mb-10 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border pb-4">
             <span className="text-sm text-muted">§00</span>
-            <h2 className="text-display font-bold">
+            <h2 className="font-display text-display font-extrabold max-sm:text-[1.6rem]">
               <ScrambleText text="Certifications" />
             </h2>
           </div>
@@ -146,11 +157,11 @@ export default function SailingPage() {
         </div>
       </section>
 
-      <section className="border-b border-border py-16">
+      <section id="racing" className="border-b border-border py-16">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <div className="mb-10 flex items-baseline gap-4 border-b border-border pb-4">
+          <div className="mb-10 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border pb-4">
             <span className="text-sm text-muted">§01</span>
-            <h2 className="text-display font-bold">
+            <h2 className="font-display text-display font-extrabold max-sm:text-[1.6rem]">
               <ScrambleText text="Racing" />
             </h2>
           </div>
@@ -163,11 +174,11 @@ export default function SailingPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section id="clubs" className="py-16">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <div className="mb-6 flex items-baseline gap-4 border-b border-border pb-4">
+          <div className="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-border pb-4">
             <span className="text-sm text-muted">§02</span>
-            <h2 className="text-display font-bold">
+            <h2 className="font-display text-display font-extrabold max-sm:text-[1.6rem]">
               <ScrambleText text="Clubs" />
             </h2>
           </div>
@@ -210,7 +221,7 @@ function RaceRow({ entry, index }: { entry: RaceEntry; index: number }) {
             <Burgee key={flag} name={flag} className="h-8 w-12" />
           ))}
         </div>
-        <h3 className="font-bold leading-snug">{entry.boat}</h3>
+        <h3 className="font-display font-bold leading-snug">{entry.boat}</h3>
         <p className="mt-1 text-sm text-muted">{entry.venue}</p>
         {entry.period && (
           <p className="mt-2 text-xs uppercase tracking-[0.1em] text-muted">{entry.period}</p>
@@ -254,7 +265,7 @@ function ClubRow({ club, index }: { club: ClubEntry; index: number }) {
         <div className="mb-2">
           <Burgee name={club.flag} className="h-9 w-[54px]" />
         </div>
-        <h3 className="font-bold leading-snug">{club.name}</h3>
+        <h3 className="font-display font-bold leading-snug">{club.name}</h3>
         <p className="mt-1 text-muted">{club.location}</p>
         <p className="mt-3 text-xs uppercase tracking-[0.1em] text-muted">{club.period}</p>
         {club.link && (

@@ -2,22 +2,26 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-// The home page's sections, numbered as their headings are (§00, §01, …).
-const SECTIONS: [id: string, name: string][] = [
-  ['about', 'about'],
-  ['work', 'work'],
-  ['projects', 'projects'],
-  ['leadership', 'leadership'],
-  ['education', 'education'],
-  ['skills', 'skills'],
-  ['recommendations', 'recommendations'],
-  ['contact', 'contact'],
-];
-
-interface Mark {
+export interface RulerSection {
   id: string;
   name: string;
-  index: number;
+  /** The section's number as its heading shows it (§00 → "00"); unnumbered ones get a dot. */
+  mark?: string;
+}
+
+// The home page's sections, numbered as their headings are (§00, §01, …).
+export const HOME_SECTIONS: RulerSection[] = [
+  'about',
+  'work',
+  'projects',
+  'leadership',
+  'education',
+  'skills',
+  'recommendations',
+  'contact',
+].map((id, i) => ({ id, name: id, mark: String(i).padStart(2, '0') }));
+
+interface Mark extends RulerSection {
   /** Where on the ruler (0–1) the pointer sits when this section reaches the top. */
   at: number;
 }
@@ -25,10 +29,10 @@ interface Mark {
 /**
  * A latitude scale down the left edge, like the border of a printed chart:
  * alternating bars, a tick and number per section, and a brass pointer that
- * tracks the scroll. Desktop home page only; it sits in the page's side
- * padding, so it never covers content.
+ * tracks the scroll. Desktop only; it sits in the page's side padding, so it
+ * never covers content.
  */
-export default function LatitudeRuler() {
+export default function LatitudeRuler({ sections = HOME_SECTIONS }: { sections?: RulerSection[] }) {
   const [marks, setMarks] = useState<Mark[]>([]);
   const [current, setCurrent] = useState<string | null>(null);
   const pointer = useRef<HTMLDivElement>(null);
@@ -39,9 +43,9 @@ export default function LatitudeRuler() {
     const measure = () => {
       const max = range();
       setMarks(
-        SECTIONS.flatMap(([id, name], index) => {
-          const el = document.getElementById(id);
-          return el ? [{ id, name, index, at: Math.min(1, Math.max(0, (el.offsetTop - 80) / max)) }] : [];
+        sections.flatMap((section) => {
+          const el = document.getElementById(section.id);
+          return el ? [{ ...section, at: Math.min(1, Math.max(0, (el.offsetTop - 80) / max)) }] : [];
         }),
       );
     };
@@ -51,11 +55,11 @@ export default function LatitudeRuler() {
       if (pointer.current) pointer.current.style.top = `${f * 100}%`;
       const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
       let here: string | null = null;
-      for (const [id] of SECTIONS) {
+      for (const { id } of sections) {
         const el = document.getElementById(id);
         if (el && el.offsetTop - 120 <= window.scrollY) here = id;
       }
-      setCurrent(atBottom ? 'contact' : here);
+      setCurrent(atBottom ? sections[sections.length - 1].id : here);
     };
 
     // The observer fires once on observe, which also takes the first measurement.
@@ -69,7 +73,7 @@ export default function LatitudeRuler() {
       resize.disconnect();
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [sections]);
 
   const name = marks.find((m) => m.id === current)?.name;
 
@@ -94,7 +98,7 @@ export default function LatitudeRuler() {
                 current === m.id ? 'text-foreground' : 'text-muted'
               }`}
             >
-              {String(m.index).padStart(2, '0')}
+              {m.mark ?? '·'}
             </span>
           </button>
         ))}

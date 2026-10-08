@@ -206,7 +206,7 @@ export default function HarborConditions() {
   return (
     <div>
       <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-        <h2 id="conditions-heading" className="flex items-center gap-2.5 text-xl font-bold sm:text-2xl">
+        <h2 id="conditions-heading" className="flex items-center gap-2.5 font-display text-xl font-extrabold sm:text-2xl">
           <span className="relative flex h-2.5 w-2.5" aria-hidden>
             {state.status === 'ready' && (
               <span className="absolute inline-flex h-full w-full animate-ping-slow rounded-full bg-signal opacity-75" />

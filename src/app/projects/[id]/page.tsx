@@ -45,13 +45,20 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     <main id="main" className="min-h-screen">
       <section className="border-b border-border">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
-          <p className="text-xs uppercase tracking-[0.15em] text-muted">
-            <Link href="/#projects" className="underline decoration-border underline-offset-4 hover:text-foreground">
-              Projects
-            </Link>{' '}
-            / {project.year}
-          </p>
-          <h1 className="mt-4 text-display font-bold">{name}</h1>
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted">
+              <Link href="/#projects" className="underline decoration-border underline-offset-4 hover:text-foreground">
+                Projects
+              </Link>{' '}
+              / {project.year} · {index + 1} of {projects.length}
+            </p>
+            {/* Step through the case studies without going back to the list. */}
+            <nav aria-label="More projects" className="flex shrink-0 gap-2">
+              <StepLink project={prev} direction="previous" />
+              <StepLink project={next} direction="next" />
+            </nav>
+          </div>
+          <h1 className="mt-4 font-display text-display font-extrabold">{name}</h1>
           {subtitle && <p className="mt-2 max-w-3xl text-lg italic text-muted sm:text-xl">{subtitle}</p>}
           <ProjectLinks project={project} />
         </div>
@@ -160,23 +167,22 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         </div>
       </section>
 
-      <nav aria-label="More projects" className="mx-auto grid max-w-6xl gap-px px-5 py-10 sm:grid-cols-2 sm:px-8">
-        <Link href={`/projects/${prev.id}`} className="group flex items-center gap-3 py-3 text-sm text-muted hover:text-foreground">
-          <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
-          <span>
-            <span className="block text-xs uppercase tracking-[0.12em]">Previous</span>
-            <span className="text-foreground">{split(prev.title).name}</span>
-          </span>
-        </Link>
-        <Link href={`/projects/${next.id}`} className="group flex items-center justify-end gap-3 py-3 text-right text-sm text-muted hover:text-foreground">
-          <span>
-            <span className="block text-xs uppercase tracking-[0.12em]">Next</span>
-            <span className="text-foreground">{split(next.title).name}</span>
-          </span>
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-        </Link>
-      </nav>
     </main>
+  );
+}
+
+function StepLink({ project, direction }: { project: Project; direction: 'previous' | 'next' }) {
+  const label = `${direction === 'previous' ? 'Previous' : 'Next'} project: ${split(project.title).name}`;
+  const Icon = direction === 'previous' ? ArrowLeft : ArrowRight;
+  return (
+    <Link
+      href={`/projects/${project.id}`}
+      aria-label={label}
+      title={label}
+      className="press inline-flex h-10 w-10 items-center justify-center rounded-md border border-border text-muted transition-colors hover:border-foreground hover:text-foreground"
+    >
+      <Icon className="h-4 w-4" />
+    </Link>
   );
 }
 

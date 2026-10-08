@@ -106,7 +106,7 @@ export default function About() {
                 viewport={{ once: true }}
                 className="rounded-md border border-border bg-card p-4 transition-colors hover:border-foreground sm:p-5"
               >
-                <h3 className="font-bold max-sm:text-sm max-sm:leading-snug">{area.title}</h3>
+                <h3 className="font-display font-bold max-sm:text-sm max-sm:leading-snug">{area.title}</h3>
                 <p className="mt-1.5 text-xs text-muted sm:hidden">{area.short}</p>
                 <p className="mt-1.5 hidden text-sm text-muted sm:block sm:text-base">{area.description}</p>
               </motion.div>

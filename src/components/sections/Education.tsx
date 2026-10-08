@@ -19,7 +19,7 @@ export default function Education() {
         >
           <div className="sm:col-span-4">
             <p className="text-xs uppercase tracking-[0.1em] text-muted">{school.period}</p>
-            <h3 className="mt-2 font-bold leading-snug">{school.name}</h3>
+            <h3 className="font-display mt-2 font-bold leading-snug">{school.name}</h3>
             <p className="mt-1 text-muted">{school.location}</p>
           </div>
 

@@ -69,7 +69,7 @@ function WorkEntry({ exp, index }: { exp: ExperienceItem; index: number }) {
               </span>
             )}
           </div>
-          <h3 className="mt-2 font-bold leading-snug">{exp.title}</h3>
+          <h3 className="font-display mt-2 font-bold leading-snug">{exp.title}</h3>
           <p className="mt-1 text-muted">{exp.company}</p>
           <p className="mt-1 text-xs uppercase tracking-[0.1em] text-muted">
             {exp.location}

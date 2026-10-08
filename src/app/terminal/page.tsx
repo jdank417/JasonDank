@@ -16,7 +16,7 @@ export default function TerminalPage() {
         />
         <div className="relative mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
           <p className="mb-4 text-xs uppercase tracking-[0.15em] text-muted">jasondank.com / terminal</p>
-          <h1 className="text-display font-bold">Same résumé, more keyboard.</h1>
+          <h1 className="font-display text-display font-extrabold">Same résumé, more keyboard.</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
             Everything on the site, as files. Try <code className="text-foreground">ls</code>,{' '}
             <code className="text-foreground">cat about.txt</code> or{' '}

@@ -35,7 +35,7 @@ function LeadershipEntry({ item, index }: { item: LeadershipItem; index: number 
     >
       <div className="pr-10 sm:col-span-4 sm:pr-0">
         <p className="text-xs uppercase tracking-[0.1em] text-muted">{item.period}</p>
-        <h3 className="mt-2 font-bold leading-snug">{item.title}</h3>
+        <h3 className="font-display mt-2 font-bold leading-snug">{item.title}</h3>
         <p className="mt-1 text-sm text-muted sm:text-base">{item.org}</p>
         {credlyIds[item.id] && (
           <a
