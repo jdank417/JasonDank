@@ -308,3 +308,38 @@ mark {
     var(--background) 14px 28px
   );
 }
+
+/* Résumé (/resume): print just the sheet, black on white, on US Letter. */
+@page {
+  size: letter;
+  margin: 0.5in 0.55in;
+}
+@media print {
+  /* Listed at the dark theme's own specificity so paper always wins. */
+  :root,
+  :root:not([data-theme="light"]),
+  :root[data-theme="dark"] {
+    --background: #ffffff;
+    --foreground: #000000;
+    --muted: #3a3a3a;
+    --border: #bdbdbd;
+    --card: #ffffff;
+    color-scheme: light;
+  }
+  body:has(#resume) > :not(:has(#resume)) {
+    display: none !important;
+  }
+  /* Every résumé size is in rem, so this scales the whole sheet for paper. */
+  html:has(#resume) {
+    font-size: 14px;
+  }
+  #resume {
+    max-width: none;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+  .resume-entry {
+    break-inside: avoid;
+  }
+}

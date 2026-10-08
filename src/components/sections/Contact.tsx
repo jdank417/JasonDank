@@ -75,6 +75,9 @@ export default function Contact() {
         <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6 text-xs uppercase tracking-[0.1em] text-muted sm:mt-16">
           <span>jasondank.com — Boston, MA</span>
           <span className="flex flex-wrap gap-x-5 gap-y-2">
+            <a href="/resume" className="transition-colors hover:text-foreground">
+              résumé →
+            </a>
             <a href="/terminal" className="transition-colors hover:text-foreground">
               terminal →
             </a>

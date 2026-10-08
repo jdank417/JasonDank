@@ -129,6 +129,9 @@ export default function CommandPalette() {
     if (path !== '/sailing') {
       list.push({ id: 'sailing', group: 'Navigate', label: 'Sailing résumé', hint: '/sailing', keywords: 'boat regatta race club burgee figawi', icon: Anchor, run: () => goTo('/sailing') });
     }
+    if (path !== '/resume') {
+      list.push({ id: 'resume', group: 'Navigate', label: 'Résumé', hint: '/resume', keywords: 'cv pdf download print experience', icon: FileText, run: () => goTo('/resume') });
+    }
     if (path !== '/terminal') {
       list.push({ id: 'terminal', group: 'Navigate', label: 'Terminal', hint: '/terminal', keywords: 'shell command line cli easter egg', icon: Terminal, run: () => goTo('/terminal') });
     }

@@ -2,26 +2,7 @@
 
 import { motion } from 'framer-motion';
 import SectionHeading from '../SectionHeading';
-
-const minors = ['Data Science', 'Applied Mathematics', 'Business Analytics'];
-
-const courses = [
-  'Machine Learning (R)',
-  'System Administration (Linux)',
-  'Operating Systems (C)',
-  'Algorithms (Java)',
-  'Probability & Statistics for Engineers (R)',
-  'Network Programming (Python)',
-  'Linear Algebra & Matrix Theory',
-  'Differential Equations',
-  'Parallel Computing (C)',
-];
-
-const honors = [
-  'Cum Laude — April 2026',
-  "Dean's List — every semester",
-  'Wentworth 2025–2026 Scholarship Report Recognition',
-];
+import { courses, honors, minors, school } from '@/data/education';
 
 export default function Education() {
   return (
@@ -37,21 +18,21 @@ export default function Education() {
           className="grid gap-6 sm:grid-cols-12 sm:gap-8"
         >
           <div className="sm:col-span-4">
-            <p className="text-xs uppercase tracking-[0.1em] text-muted">2022 — April 2026</p>
-            <h3 className="mt-2 font-bold leading-snug">Wentworth Institute of Technology</h3>
-            <p className="mt-1 text-muted">Boston, MA</p>
+            <p className="text-xs uppercase tracking-[0.1em] text-muted">{school.period}</p>
+            <h3 className="mt-2 font-bold leading-snug">{school.name}</h3>
+            <p className="mt-1 text-muted">{school.location}</p>
           </div>
 
           <div className="space-y-6 sm:col-span-8">
             <div className="grid gap-px overflow-hidden rounded-md border border-border sm:grid-cols-2">
               <div className="bg-card px-5 py-4">
                 <p className="text-xs uppercase tracking-[0.12em] text-muted">Degree</p>
-                <p className="mt-1 font-bold">B.S. Computer Science</p>
-                <p className="mt-0.5 text-xs text-muted">Cum Laude, a semester early</p>
+                <p className="mt-1 font-bold">{school.degree}</p>
+                <p className="mt-0.5 text-xs text-muted">{school.note}</p>
               </div>
               <div className="bg-card px-5 py-4">
                 <p className="text-xs uppercase tracking-[0.12em] text-muted">GPA</p>
-                <p className="mt-1 font-bold">3.7 / 4.0</p>
+                <p className="mt-1 font-bold">{school.gpa}</p>
               </div>
             </div>
 
