@@ -161,6 +161,10 @@ export const clubs: ClubEntry[] = [
   },
 ];
 
+export const certifications = [
+  { name: 'US Sailing: Small Boat Instructor Level 1', detail: 'Teaching and Coaching Fundamentals' },
+];
+
 export const highlights = [
   { label: 'Won Figawi 2026', detail: 'Fawn Libowitz — MAT 1070' },
   { label: 'IOD North Americans', detail: 'Fishers Island, NY — IOD 7' },

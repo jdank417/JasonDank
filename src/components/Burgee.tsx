@@ -186,3 +186,8 @@ export default function Burgee({
     </svg>
   );
 }
+
+/** Club names for a set of burgees, as text: renderable from server components. */
+export function BurgeeNames({ names, before }: { names: BurgeeKey[]; before?: string }) {
+  return <>{[before, names.map(burgeeLabel).join(' / ')].filter(Boolean).join(' · ')}</>;
+}

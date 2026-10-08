@@ -1,9 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Trophy } from 'lucide-react';
+import Link from 'next/link';
+import { Download, ExternalLink, Trophy } from 'lucide-react';
 import Burgee, { burgeeLabel, type BurgeeKey } from '@/components/Burgee';
-import { clubs, highlights, racing, type ClubEntry, type RaceEntry } from '@/data/sailing';
+import { certifications, clubs, highlights, racing, type ClubEntry, type RaceEntry } from '@/data/sailing';
 import { CollapsePanel, ExpandOverlay, useDisclosure } from '@/components/mobile/Disclosure';
 import RhumbLines from '@/components/RhumbLines';
 import LatitudeRuler, { type RulerSection } from '@/components/LatitudeRuler';
@@ -94,6 +95,14 @@ export default function SailingPage() {
               </div>
             ))}
           </motion.div>
+
+          <Link
+            href="/sailing/resume"
+            className="press mt-6 inline-flex items-center gap-2 rounded-md border border-foreground px-4 py-2 text-sm font-medium transition-colors hover:bg-foreground hover:text-background"
+          >
+            <Download className="h-4 w-4" aria-hidden />
+            Sailing résumé (PDF)
+          </Link>
         </div>
 
         {/* Horizon line — a bit of water under the masthead. */}
@@ -150,8 +159,8 @@ export default function SailingPage() {
           <div className="flex gap-3">
             <span className="mt-2.5 h-1 w-1 flex-shrink-0 rounded-full bg-muted" />
             <p className="text-muted">
-              <span className="font-medium text-foreground">US Sailing: Small Boat Instructor Level 1</span>
-              {' '}— Teaching and Coaching Fundamentals.
+              <span className="font-medium text-foreground">{certifications[0].name}</span>
+              {' '}— {certifications[0].detail}.
             </p>
           </div>
         </div>

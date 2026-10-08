@@ -129,6 +129,9 @@ export default function CommandPalette() {
     if (path !== '/sailing') {
       list.push({ id: 'sailing', group: 'Navigate', label: 'Sailing résumé', hint: '/sailing', keywords: 'boat regatta race club burgee figawi', icon: Anchor, run: () => goTo('/sailing') });
     }
+    if (path !== '/sailing/resume') {
+      list.push({ id: 'sailing-resume', group: 'Navigate', label: 'Sailing résumé (PDF)', hint: '/sailing/resume', keywords: 'sailing cv pdf download print racing clubs', icon: FileText, run: () => goTo('/sailing/resume') });
+    }
     if (path !== '/resume') {
       list.push({ id: 'resume', group: 'Navigate', label: 'Résumé', hint: '/resume', keywords: 'cv pdf download print experience', icon: FileText, run: () => goTo('/resume') });
     }
