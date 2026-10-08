@@ -1,12 +1,14 @@
 'use client';
 
-import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import Burgee from './Burgee';
+import { prefersReducedMotion } from '@/lib/canvas';
 import {
   charlesRiver,
   delivery,
   mapViews,
   places,
+  tracks,
   type MapView,
   type MapViewId,
   type Place,
@@ -41,6 +43,8 @@ export default function SailedMap() {
   const [viewId, setViewId] = useState<MapViewId>('east-coast');
   const [coasts, setCoasts] = useState<Partial<Record<MapViewId, string>>>({});
   const [active, setActive] = useState<string | null>(null);
+  // The pin the boat is tied up at, lit like a hovered one.
+  const [docked, setDocked] = useState<string | null>(null);
 
   const view = mapViews.find((v) => v.id === viewId)!;
   const project = useMemo(() => projector(view), [view]);
@@ -74,11 +78,9 @@ export default function SailedMap() {
       )
     : [];
 
-  const route = isCoast ? delivery.map((pt) => project(pt.lat, pt.lon)) : [];
-  const figawi = viewId === 'cape' ? (['hyannis', 'nantucket'] as const).map((id) => {
-    const p = places.find((q) => q.id === id)!;
-    return project(p.lat, p.lon);
-  }) : [];
+  // Stable per view, so the boat's animation isn't restarted by re-renders.
+  const track = useMemo(() => tracks[viewId].map((pt) => project(pt.lat, pt.lon)), [viewId, project]);
+  const docks = useMemo(() => tracks[viewId].map((pt) => pt.at), [viewId]);
   const river = viewId === 'boston' ? charlesRiver.map(([lat, lon]) => project(lat, lon)) : [];
 
   const activeMarker = [...pins, ...stops].find((m) => m.id === active);
@@ -87,6 +89,7 @@ export default function SailedMap() {
   const select = (id: MapViewId) => {
     setViewId(id);
     setActive(null);
+    setDocked(null);
   };
 
   return (
@@ -134,8 +137,7 @@ export default function SailedMap() {
                 <polyline points={points(river)} className="map-river" vectorEffect="non-scaling-stroke" />
               </>
             )}
-            {route.length > 0 && <polyline points={points(route)} className="map-route" vectorEffect="non-scaling-stroke" />}
-            {figawi.length > 0 && <polyline points={points(figawi)} className="map-route" vectorEffect="non-scaling-stroke" />}
+            <polyline points={points(track)} className="map-route" vectorEffect="non-scaling-stroke" />
           </svg>
 
           {/* Overlay: labels and markers in CSS pixels, so they stay crisp at any size. */}
@@ -162,15 +164,24 @@ export default function SailedMap() {
               >
                 <span
                   className={`block rounded-full border border-foreground transition-transform ${
-                    active === m.id ? 'h-3 w-3 bg-accent' : 'h-2 w-2 bg-card'
+                    active === m.id || docked === m.id ? 'h-3 w-3 bg-accent' : 'h-2 w-2 bg-card'
                   }`}
                 />
               </button>
             ))}
 
             {pins.map((m) => (
-              <Pin key={m.id} marker={m} style={at(view, m.xy)} compact={isCoast} active={active === m.id} onActive={setActive} />
+              <Pin
+                key={m.id}
+                marker={m}
+                style={at(view, m.xy)}
+                compact={isCoast}
+                active={active === m.id || docked === m.id}
+                onActive={setActive}
+              />
             ))}
+
+            <Boat key={viewId} view={view} points={track} docks={docks} onDock={setDocked} travel={TRAVEL_SECONDS[viewId]} />
 
             {activeMarker && <Callout marker={activeMarker} view={view} />}
           </div>
@@ -238,6 +249,140 @@ export default function SailedMap() {
           </ol>
         </div>
       )}
+    </div>
+  );
+}
+
+// Seconds under way for one pass of each track, not counting stops.
+const TRAVEL_SECONDS: Record<MapViewId, number> = { 'east-coast': 22, boston: 16, cape: 7, 'long-island': 18 };
+const DOCK_SECONDS = 1.1;
+const END_SECONDS = 1.6;
+
+/**
+ * A small boat that sails the view's track on a loop, tying up for a moment
+ * at each pin. It only runs while the map is on screen, and stays parked at
+ * the first pin under reduced motion.
+ */
+function Boat({
+  view,
+  points,
+  docks,
+  onDock,
+  travel,
+}: {
+  view: MapView;
+  points: [number, number][];
+  docks: (string | undefined)[];
+  onDock: (id: string | null) => void;
+  travel: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || points.length < 2) return;
+
+    const lengths = points.slice(1).map(([x, y], i) => Math.hypot(x - points[i][0], y - points[i][1]));
+    const speed = lengths.reduce((a, b) => a + b, 0) / travel; // viewBox units a second
+    const pause = view.id === 'east-coast' ? 0.45 : DOCK_SECONDS;
+    const course = (i: number) => {
+      const [x0, y0] = points[i];
+      const [x1, y1] = points[i + 1];
+      return (Math.atan2(y1 - y0, x1 - x0) * 180) / Math.PI + 90; // the icon's bow points up
+    };
+
+    let leg = 0; // index of the leg under way
+    let along = 0; // distance into that leg
+    let wait = 0; // seconds left tied up
+    let heading = course(0);
+    const put = () => {
+      const [x0, y0] = points[leg];
+      const [x1, y1] = points[leg + 1];
+      const f = lengths[leg] ? along / lengths[leg] : 0;
+      el.style.left = `${(x0 + (x1 - x0) * f) / 10}%`;
+      el.style.top = `${((y0 + (y1 - y0) * f) / view.height) * 100}%`;
+      el.style.transform = `translate(-50%, -50%) rotate(${heading}deg)`;
+    };
+
+    onDock(docks[0] ?? null);
+    put();
+    if (prefersReducedMotion()) return () => onDock(null);
+
+    wait = pause;
+    let raf = 0;
+    let last = 0;
+    let fading = false;
+    const tick = (ts: number) => {
+      const dt = last ? Math.min(0.05, (ts - last) / 1000) : 0;
+      last = ts;
+      if (wait > 0) {
+        wait -= dt;
+        if (wait <= 0) {
+          if (fading) {
+            // Back to the start of the course.
+            fading = false;
+            leg = 0;
+            along = 0;
+            heading = course(0);
+            el.style.opacity = '1';
+            onDock(docks[0] ?? null);
+            wait = pause;
+          } else {
+            onDock(null);
+          }
+        }
+      } else {
+        along += speed * dt;
+        while (along >= lengths[leg]) {
+          along -= lengths[leg];
+          leg += 1;
+          if (leg >= lengths.length) {
+            // Made the last pin: rest there, then fade out and start over.
+            leg = lengths.length - 1;
+            along = lengths[leg];
+            onDock(docks[docks.length - 1] ?? null);
+            wait = END_SECONDS;
+            fading = true;
+            el.style.opacity = '0';
+            break;
+          }
+          if (docks[leg]) {
+            along = 0;
+            onDock(docks[leg]!);
+            wait = pause;
+            break;
+          }
+        }
+        // Ease the bow round onto the new leg instead of snapping.
+        const want = course(leg);
+        const turn = ((((want - heading) % 360) + 540) % 360) - 180;
+        heading += turn * Math.min(1, dt * 8);
+      }
+      put();
+      raf = requestAnimationFrame(tick);
+    };
+
+    // Only sail while the map is on screen.
+    const seen = new IntersectionObserver(([entry]) => {
+      cancelAnimationFrame(raf);
+      last = 0;
+      if (entry.isIntersecting) raf = requestAnimationFrame(tick);
+    });
+    seen.observe(el.parentElement ?? el);
+    return () => {
+      seen.disconnect();
+      cancelAnimationFrame(raf);
+      onDock(null);
+    };
+  }, [view, points, docks, onDock, travel]);
+
+  return (
+    <div ref={ref} className="pointer-events-none absolute z-[5] transition-opacity duration-500" aria-hidden>
+      <svg viewBox="-8 -12 16 24" className="h-6 w-4 drop-shadow-sm">
+        <path d="M0 -11 C5 -5 5 4 3.5 10 L-3.5 10 C-5 4 -5 -5 0 -11 Z" fill="var(--card)" stroke="var(--foreground)" strokeWidth="1.3" strokeLinejoin="round" />
+        <path d="M0 -4 Q 4.5 1.5 0.5 8" fill="none" stroke="var(--accent)" strokeWidth="2.2" strokeLinecap="round" />
+        <circle cy="-4" r="1.3" fill="var(--foreground)" />
+      </svg>
     </div>
   );
 }

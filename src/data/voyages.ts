@@ -147,6 +147,7 @@ export const delivery: RoutePoint[] = [
 
 /** The Charles is too narrow for the shoreline data, so it is drawn as a line. */
 export const charlesRiver: [number, number][] = [
+  [42.37, -71.0548],
   [42.3705, -71.0585],
   [42.3685, -71.0635],
   [42.3625, -71.0715],
@@ -157,3 +158,84 @@ export const charlesRiver: [number, number][] = [
   [42.3535, -71.1135],
   [42.3605, -71.1235],
 ];
+
+export interface TrackPoint {
+  lat: number;
+  lon: number;
+  /** The boat pauses here: a place id, or a delivery stop's marker id. */
+  at?: string;
+}
+
+// The boat's course on each view, kept to the water. Points without `at`
+// only steer it round headlands and through channels.
+// On the East Coast the boat pauses at the named stops (marker ids stop-<index>).
+const deliveryTrack: TrackPoint[] = delivery.map((pt, i) => ({ lat: pt.lat, lon: pt.lon, at: pt.name ? `stop-${i}` : undefined }));
+
+// Boston, Cape and Long Island legs are routed over water by
+// scripts/route-tracks.py; rerun it after changing a view's pins. Boston's run
+// down the Charles is added in front, along the river line.
+export const tracks: Record<MapViewId, TrackPoint[]> = {
+  'east-coast': deliveryTrack,
+  boston: [
+    { lat: 42.3595, lon: -71.0845 },
+    { lat: 42.360107, lon: -71.082749, at: 'crimson' },
+    { lat: 42.3602, lon: -71.0775 },
+    { lat: 42.3612, lon: -71.0737, at: 'cbi' },
+    { lat: 42.3625, lon: -71.0715 },
+    { lat: 42.3685, lon: -71.0635 },
+    { lat: 42.3705, lon: -71.0585 },
+    { lat: 42.37, lon: -71.0548 },
+    { lat: 42.3676, lon: -71.0488 },
+    { lat: 42.3388, lon: -71.0068 },
+    { lat: 42.3052, lon: -70.9828 },
+    { lat: 42.2812, lon: -71.014, at: 'squantum' },
+    { lat: 42.3052, lon: -70.9828 },
+    { lat: 42.3304, lon: -70.9744, at: 'mbsa' },
+    { lat: 42.3448, lon: -70.9492 },
+    { lat: 42.4924, lon: -70.8316 },
+    { lat: 42.5044, lon: -70.8304 },
+    { lat: 42.5068, lon: -70.8364 },
+    { lat: 42.5032, lon: -70.8436, at: 'marblehead' },
+  ],
+  cape: [
+    { lat: 41.638, lon: -70.276, at: 'hyannis' },
+    { lat: 41.634, lon: -70.272 },
+    { lat: 41.618, lon: -70.278 },
+    { lat: 41.294, lon: -70.094 },
+    { lat: 41.29, lon: -70.09 },
+    { lat: 41.286, lon: -70.096, at: 'nantucket' },
+  ],
+  'long-island': [
+    { lat: 40.796, lon: -72.7, at: 'westhampton' },
+    { lat: 40.77, lon: -72.75 },
+    { lat: 40.766, lon: -72.754 },
+    { lat: 40.764, lon: -72.752 },
+    { lat: 40.776, lon: -72.694 },
+    { lat: 40.838, lon: -72.478 },
+    { lat: 40.848, lon: -72.476 },
+    { lat: 40.876, lon: -72.492 },
+    { lat: 40.884, lon: -72.502 },
+    { lat: 40.894, lon: -72.502 },
+    { lat: 41.038, lon: -72.362 },
+    { lat: 41.042, lon: -72.31 },
+    { lat: 41.024, lon: -72.278 },
+    { lat: 41.026, lon: -72.27 },
+    { lat: 41.044, lon: -72.262 },
+    { lat: 41.278, lon: -72.022 },
+    { lat: 41.272, lon: -72.008 },
+    { lat: 41.27, lon: -72.006 },
+    { lat: 41.264, lon: -72.01, at: 'fishers' },
+    { lat: 41.27, lon: -72.006 },
+    { lat: 41.276, lon: -72.014 },
+    { lat: 41.276, lon: -72.072 },
+    { lat: 40.974, lon: -73.09 },
+    { lat: 40.972, lon: -73.092 },
+    { lat: 40.95, lon: -73.07, at: 'pjyc' },
+    { lat: 40.972, lon: -73.092 },
+    { lat: 40.98, lon: -73.12 },
+    { lat: 40.97, lon: -73.156 },
+    { lat: 40.968, lon: -73.158 },
+    { lat: 40.926, lon: -73.148 },
+    { lat: 40.92, lon: -73.15, at: 'stony-brook' },
+  ],
+};

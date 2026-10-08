@@ -239,11 +239,6 @@ mark {
   outline: none;
 }
 
-/* The sailing chart sits in a rounded, clipped frame: draw its ring inside. */
-#sail-chart:focus-visible {
-  outline-offset: -2px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
