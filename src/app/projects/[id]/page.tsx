@@ -71,6 +71,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <h2 className="text-xs uppercase tracking-[0.15em] text-muted">What it does</h2>
+            {project.summary && <p className="mt-4 text-lg leading-relaxed">{project.summary}</p>}
             <ul className="mt-4 space-y-3">
               {project.description.map((line, i) => (
                 <li key={i} className="flex gap-3 leading-relaxed">

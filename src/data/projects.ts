@@ -19,6 +19,8 @@ export interface Project {
   shots?: Shot[];
   /** In Jason's words: what he's proudest of. Shown on the case study when set. */
   proud?: string;
+  /** An overview paragraph in Jason's words, leading the case study. */
+  summary?: string;
 }
 
 export interface Shot {
@@ -134,6 +136,9 @@ export const projects: Project[] = [
     ],
     technologies: ['Python', 'Flan-T5', 'NLP', 'Fine-tuning'],
     githubUrl: 'https://github.com/jdank417/Flan-t5-sailing-JasonDank',
+    summary:
+      'Fine-tuning a Flan-T5 model for answering questions about sailing rules and interpreting racing scenarios. The model is trained on JSON data containing instructions, optional context, and expected outputs to create an assistant that can answer questions about sailing rules.',
+    shots: [{ src: '/projects/ai-model-fine-tuning/rules-assistant.webp', width: 485, height: 319, alt: 'The Sailing Rules Assistant (2025–2028 rules): a question, optional context and the answer panel, with example questions below', frame: 'desktop' }],
   },
   {
     id: 'remote-compute-environment',
@@ -144,9 +149,12 @@ export const projects: Project[] = [
       'Engineered a reproducible WSL2-based Linux training environment with containerized workflows on an HP ZBook Fury.',
       "Solved WSL2's idle shutdown behaviour, configured persistent SSH over Tailscale, and set up GPU passthrough for CUDA workloads — enabling remote fine-tuning with zero idle shutdowns.",
     ],
-    technologies: ['WSL2', 'Linux', 'CUDA', 'Tailscale', 'Docker'],
+    technologies: ['WSL2', 'Linux', 'CUDA', 'Tailscale', 'Docker', 'Windows', 'Ubuntu'],
     demoUrl: 'https://drive.google.com/file/d/1kRTeivItPW3HBvMCnBD8cd3wxtmspbez/view?usp=sharing',
     demoLabel: 'watch walkthrough',
+    summary:
+      'Systematic transformation of an HP ZBook Fury laptop into a robust, always-on home server infrastructure. Solved critical challenges including WSL2\'s idle shutdown behavior, secure SSH-over-Tailscale connectivity, and GPU passthrough configuration for CUDA workloads.',
+    shots: [{ src: '/projects/remote-compute-environment/server-motd.webp', width: 589, height: 388, alt: 'Logging in to the server: its banner and nvidia-smi showing the NVIDIA RTX A3000 laptop GPU available to CUDA', frame: 'desktop' }],
   },
   {
     id: 'huit-chatbot',
@@ -158,6 +166,9 @@ export const projects: Project[] = [
       'Integrated fuzzy search, semantic search (BERT embeddings), and named entity recognition so technicians can ask questions conversationally instead of digging through a knowledge base.',
     ],
     technologies: ['Python', 'NLP', 'BERT', 'spaCy', 'customtkinter'],
+    summary:
+      'A chatbot utilizing Natural Language Processing to assist new hires at Harvard University Information Technology by referencing documented information from past technicians, using natural language in a conversational format rather than fishing through a knowledge base.',
+    shots: [{ src: '/projects/huit-chatbot/chat.webp', width: 588, height: 384, alt: 'The HUIT chatbot answering questions in conversation, such as where to send Dell repairs', frame: 'desktop' }],
   },
   {
     id: 'stock-price-prediction',
@@ -170,6 +181,9 @@ export const projects: Project[] = [
     ],
     technologies: ['Python', 'TensorFlow', 'LSTM', 'CNN', 'yfinance'],
     githubUrl: 'https://github.com/jdank417/Deep-Learning-for-Stock-Market-Predictions',
+    summary:
+      'This project implements a Convolutional Neural Network (CNN) and Long Short-Term Memory (LSTM) model to predict stock prices. The model uses historical stock data, along with technical indicators, to forecast future stock prices.',
+    shots: [{ src: '/projects/stock-price-prediction/forecast.webp', width: 440, height: 292, alt: 'Actual price (blue) against the model’s prediction (red)', frame: 'desktop' }],
   },
   {
     id: 'linux-device-monitor',
@@ -180,6 +194,9 @@ export const projects: Project[] = [
       'Created a Python/PyQt5 desktop application that monitors multiple Linux systems from macOS or Windows over SSH across custom VLANs.',
       'Polls CPU, memory, disk, and uptime metrics; deployed and active across Harvard Athletics and SEAS field support operations.',
     ],
-    technologies: ['Python', 'PyQt5', 'SSH', 'Linux'],
+    technologies: ['Python', 'PyQt5', 'SSH', 'Linux', 'Sub-processes'],
+    summary:
+      'DSPM (Dank\'s Squash Pie Monitor) is a Python-based GUI application that monitors multiple Linux systems from a macOS or Windows environment. Leveraging SSH connections, the application periodically retrieves critical system metrics such as CPU usage, memory consumption, disk usage, and system uptime.',
+    shots: [{ src: '/projects/linux-device-monitor/dashboard.webp', width: 440, height: 289, alt: 'Dank\'s Squash Pie Monitor: a tile per host with CPU, memory, disk, uptime and last update (hostnames redacted)', frame: 'desktop' }],
   },
 ];
