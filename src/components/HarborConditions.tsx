@@ -3,12 +3,31 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { ExternalLink } from 'lucide-react';
 
-// NOAA CO-OPS station 8443970, Boston, MA. The visitor's browser asks NOAA
-// directly; nothing here needs a server, so it works on the static site.
+// NOAA CO-OPS station 8443970, Boston, MA, for the tide. Wind and water
+// temperature come from the same gauge when it reports them, and otherwise
+// from Open-Meteo's forecast model, with each tile saying which. The visitor's
+// browser asks both services directly, so this works on the static site.
 const STATION = '8443970';
 const API = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter';
 const STATION_PAGE = `https://tidesandcurrents.noaa.gov/stationhome.html?id=${STATION}`;
 const REFRESH_MS = 6 * 60 * 1000; // NOAA posts a new reading every six minutes.
+
+const METEO_WIND = `https://api.open-meteo.com/v1/forecast?${new URLSearchParams({
+  latitude: '42.33',
+  longitude: '-70.98',
+  current: 'wind_speed_10m,wind_direction_10m,wind_gusts_10m',
+  wind_speed_unit: 'kn',
+  timezone: 'America/New_York',
+})}`;
+// A point out in Massachusetts Bay, so the model cell is open water.
+const METEO_SEA = `https://marine-api.open-meteo.com/v1/marine?${new URLSearchParams({
+  latitude: '42.35',
+  longitude: '-70.75',
+  current: 'sea_surface_temperature',
+  timezone: 'America/New_York',
+})}`;
+
+type Source = 'gauge' | 'model';
 
 const query = (params: Record<string, string>) =>
   `${API}?${new URLSearchParams({
@@ -26,6 +45,7 @@ interface Wind {
   gust: number;
   dir: number;
   from: string;
+  source: Source;
 }
 interface Reading {
   t: string;
@@ -37,7 +57,7 @@ interface TideEvent extends Reading {
 interface Conditions {
   wind?: Wind;
   level?: Reading;
-  temp?: Reading;
+  temp?: Reading & { source: Source };
   curve?: Reading[];
   events?: TideEvent[];
 }
@@ -63,7 +83,7 @@ async function loadConditions(): Promise<Conditions> {
     const w = wind.value.data[0];
     const speed = parseFloat(w.s);
     if (Number.isFinite(speed)) {
-      out.wind = { t: w.t, speed, gust: parseFloat(w.g), dir: parseFloat(w.d), from: w.dr };
+      out.wind = { t: w.t, speed, gust: parseFloat(w.g), dir: parseFloat(w.d), from: w.dr, source: 'gauge' };
     }
   }
   const reading = (r: PromiseSettledResult<{ data?: { t: string; v: string }[] }>) => {
@@ -72,7 +92,8 @@ async function loadConditions(): Promise<Conditions> {
     return Number.isFinite(v) ? { t: r.value.data[0].t, v } : undefined;
   };
   out.level = reading(level);
-  out.temp = reading(temp);
+  const gaugeTemp = reading(temp);
+  if (gaugeTemp) out.temp = { ...gaugeTemp, source: 'gauge' };
   if (curve.status === 'fulfilled' && Array.isArray(curve.value.predictions)) {
     out.curve = curve.value.predictions.map((p: { t: string; v: string }) => ({ t: p.t, v: parseFloat(p.v) }));
   }
@@ -83,8 +104,38 @@ async function loadConditions(): Promise<Conditions> {
       type: p.type,
     }));
   }
+
+  // The gauge's wind and water sensors aren't always reporting; fall back to the model.
+  const [modelWind, modelSea] = await Promise.allSettled([
+    out.wind ? Promise.resolve(null) : getJson(METEO_WIND),
+    out.temp ? Promise.resolve(null) : getJson(METEO_SEA),
+  ]);
+  if (!out.wind && modelWind.status === 'fulfilled' && modelWind.value?.current) {
+    const c = modelWind.value.current;
+    if (Number.isFinite(c.wind_speed_10m) && Number.isFinite(c.wind_direction_10m)) {
+      out.wind = {
+        t: c.time.replace('T', ' '),
+        speed: c.wind_speed_10m,
+        gust: c.wind_gusts_10m,
+        dir: c.wind_direction_10m,
+        from: compass16(c.wind_direction_10m),
+        source: 'model',
+      };
+    }
+  }
+  if (!out.temp && modelSea.status === 'fulfilled' && modelSea.value?.current) {
+    const c = modelSea.value.current;
+    const celsius = (modelSea.value.current_units?.sea_surface_temperature ?? '°C') !== '°F';
+    const v = c.sea_surface_temperature;
+    if (Number.isFinite(v)) {
+      out.temp = { t: c.time.replace('T', ' '), v: celsius ? (v * 9) / 5 + 32 : v, source: 'model' };
+    }
+  }
   return out;
 }
+
+const POINTS = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+const compass16 = (deg: number) => POINTS[Math.round((((deg % 360) + 360) % 360) / 22.5) % 16];
 
 /** Today's date in Boston, as NOAA wants it: yyyyMMdd. */
 function today() {
@@ -226,6 +277,7 @@ function WindTile({ wind, loading }: { wind?: Wind; loading: boolean }) {
               {Number.isFinite(wind.gust) && wind.gust > wind.speed ? ` · gusts ${Math.round(wind.gust)}` : ''}
             </p>
           </div>
+          <SourceNote source={wind.source} gauge="Boston gauge" model="Open-Meteo model, Boston Harbor" />
         </div>
       ) : (
         <Placeholder loading={loading} />
@@ -330,7 +382,12 @@ function TideCurve({ curve, now, events }: { curve: Reading[]; now: string; even
   );
 }
 
-function TempTile({ temp, loading }: { temp?: Reading; loading: boolean }) {
+/** Says where a reading came from: the gauge itself, or the forecast model. */
+function SourceNote({ source, gauge, model }: { source: Source; gauge: string; model: string }) {
+  return <p className="basis-full text-xs text-muted">{source === 'gauge' ? gauge : model}</p>;
+}
+
+function TempTile({ temp, loading }: { temp?: Conditions['temp']; loading: boolean }) {
   return (
     <Tile label="Water">
       {temp ? (
@@ -339,7 +396,7 @@ function TempTile({ temp, loading }: { temp?: Reading; loading: boolean }) {
             {Math.round(temp.v)}
             <span className="ml-0.5 text-base font-normal text-muted">°F</span>
           </p>
-          <p className="text-sm text-muted">Surface temperature at the gauge</p>
+          <SourceNote source={temp.source} gauge="Surface, at the Boston gauge" model="Surface, Mass Bay · Open-Meteo model" />
         </>
       ) : (
         <Placeholder loading={loading} />
