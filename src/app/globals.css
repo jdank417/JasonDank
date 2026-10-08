@@ -299,3 +299,12 @@ mark {
     animation: none;
   }
 }
+
+/* Latitude ruler (LatitudeRuler): the alternating bars of a chart border. */
+.latitude-bars {
+  background: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--foreground) 70%, transparent) 0 14px,
+    var(--background) 14px 28px
+  );
+}

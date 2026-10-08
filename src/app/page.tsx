@@ -7,6 +7,7 @@ import Education from '@/components/sections/Education';
 import Skills from '@/components/sections/Skills';
 import Recommendations from '@/components/sections/Recommendations';
 import Contact from '@/components/sections/Contact';
+import LatitudeRuler from '@/components/LatitudeRuler';
 import { EMAIL, GITHUB_URL, LINKEDIN_URL } from '@/data/site';
 
 // Who this page is about, for search engines (schema.org Person).
@@ -33,6 +34,7 @@ export default function Home() {
         // JSON.stringify output is safe here: it's our own static object.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(person).replace(/</g, '\\u003c') }}
       />
+      <LatitudeRuler />
       <Hero />
       <About />
       <Work />
