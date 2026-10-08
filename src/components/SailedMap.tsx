@@ -84,6 +84,7 @@ export default function SailedMap() {
   const river = viewId === 'boston' ? charlesRiver.map(([lat, lon]) => project(lat, lon)) : [];
 
   const activeMarker = [...pins, ...stops].find((m) => m.id === active);
+  const dockedMarker = [...pins, ...stops].find((m) => m.id === docked);
   const points = (pts: [number, number][]) => pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
 
   const select = (id: MapViewId) => {
@@ -183,7 +184,11 @@ export default function SailedMap() {
 
             <Boat key={viewId} view={view} points={track} docks={docks} onDock={setDocked} travel={TRAVEL_SECONDS[viewId]} />
 
-            {activeMarker && <Callout marker={activeMarker} view={view} />}
+            {activeMarker ? (
+              <Callout marker={activeMarker} view={view} />
+            ) : (
+              dockedMarker && <DockLabel key={dockedMarker.id} marker={dockedMarker} view={view} />
+            )}
           </div>
         </div>
         <figcaption className="mt-2 text-[0.65rem] uppercase tracking-[0.12em] text-muted">
@@ -458,6 +463,21 @@ function MarkerIcon({ marker }: { marker: Marker }) {
   return (
     <span className="mt-1 flex h-[14px] w-[21px] shrink-0 items-center justify-center">
       <MarkerDot kind={marker.kind} active={false} />
+    </span>
+  );
+}
+
+/** The little name tag that appears where the boat has tied up. */
+function DockLabel({ marker, view }: { marker: Marker; view: MapView }) {
+  // Beside the pin at its own height, below any burgee staff; on the left
+  // when the pin is near the right edge.
+  const tx = marker.xy[0] > 700 ? 'calc(-100% - 12px)' : '12px';
+  return (
+    <span
+      className="map-fade pointer-events-none absolute z-[6] whitespace-nowrap rounded border border-foreground bg-background px-1.5 py-0.5 text-[0.65rem] font-medium leading-tight shadow-sm"
+      style={{ ...at(view, marker.xy), transform: `translate(${tx}, -50%)` }}
+    >
+      {marker.name}
     </span>
   );
 }

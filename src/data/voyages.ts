@@ -1,7 +1,8 @@
 // Places for the "Where I've sailed" map on /sailing. Coordinates for the
 // delivery stops, the Charles River boathouses, Squantum and PJYC come from
-// Jason's Navionics log; club and race venues not in the log are placed at
-// their harbors. Personal pins (home and the like) are deliberately left out.
+// Jason's Navionics log (Wentworth Sailing sits at the Crimson Sailing
+// Pavilion, where the team sailed); club and race venues not in the log are
+// placed at their harbors. Personal pins (home and the like) are deliberately left out.
 import type { BurgeeKey } from '@/components/Burgee';
 
 export type MapViewId = 'east-coast' | 'boston' | 'cape' | 'long-island';
@@ -33,7 +34,7 @@ export const mapViews: MapView[] = [
   {
     id: 'boston',
     label: 'Boston & Marblehead',
-    blurb: 'Home waters: the Charles River boathouses, Dorchester Bay, MBSA racing in the harbor, and Marblehead.',
+    blurb: 'Home waters: the Charles River boathouses, Dorchester Bay, the Great Chase out of Hull, and Marblehead.',
     bbox: [-71.2, 42.22, -70.74, 42.6],
     height: 1118.9,
     waters: [
@@ -83,10 +84,10 @@ export interface Place {
 export const places: Place[] = [
   // Boston
   { id: 'cbi', name: 'Community Boating', detail: 'Charles River · fleet-certified, Monday night Laser series', lat: 42.36022, lon: -71.073676, kind: 'club', flags: ['cbi'], views: ['boston', 'east-coast'] },
-  { id: 'crimson', name: 'Crimson Sailing Pavilion', detail: 'Charles River', lat: 42.360107, lon: -71.082749, kind: 'race', views: ['boston'] },
-  { id: 'wentworth', name: 'Wentworth Sailing', detail: 'Captain, then President · 2022–2026', lat: 42.336585, lon: -71.094309, kind: 'club', flags: ['wit'], views: ['boston'] },
+  { id: 'wentworth', name: 'Wentworth Sailing', detail: 'Ran the team out of the Crimson Sailing Pavilion · Captain, then President, 2022–2026', lat: 42.360107, lon: -71.082749, kind: 'club', flags: ['wit'], views: ['boston'] },
   { id: 'squantum', name: 'Squantum Yacht Club', detail: 'Quincy · Launch Chairman, Assistant Director of Adult Sailing', lat: 42.278956, lon: -71.014246, kind: 'club', flags: ['syc'], views: ['boston', 'east-coast'] },
-  { id: 'mbsa', name: 'MBSA racing', detail: 'Boston Harbor · Fawn Libowitz, 1st overall Thursday series', lat: 42.33, lon: -70.975, kind: 'race', flags: ['eyc'], views: ['boston'] },
+  // Placed on the Hull village waterfront; not from the log.
+  { id: 'hull', name: 'Hull Yacht Club', detail: 'The Great Chase race', lat: 42.2985, lon: -70.9125, kind: 'race', views: ['boston'] },
   { id: 'marblehead', name: 'Marblehead', detail: 'Eastern YC junior member · IODs Gypsey and Tango, Etchells, MRA', lat: 42.5045, lon: -70.8445, kind: 'club', flags: ['eyc', 'cyc', 'byc'], views: ['boston', 'east-coast'] },
 
   // Cape & Islands
@@ -178,7 +179,7 @@ export const tracks: Record<MapViewId, TrackPoint[]> = {
   'east-coast': deliveryTrack,
   boston: [
     { lat: 42.3595, lon: -71.0845 },
-    { lat: 42.360107, lon: -71.082749, at: 'crimson' },
+    { lat: 42.360107, lon: -71.082749, at: 'wentworth' },
     { lat: 42.3602, lon: -71.0775 },
     { lat: 42.3612, lon: -71.0737, at: 'cbi' },
     { lat: 42.3625, lon: -71.0715 },
@@ -189,10 +190,11 @@ export const tracks: Record<MapViewId, TrackPoint[]> = {
     { lat: 42.3388, lon: -71.0068 },
     { lat: 42.3052, lon: -70.9828 },
     { lat: 42.2812, lon: -71.014, at: 'squantum' },
-    { lat: 42.3052, lon: -70.9828 },
-    { lat: 42.3304, lon: -70.9744, at: 'mbsa' },
-    { lat: 42.3448, lon: -70.9492 },
-    { lat: 42.4924, lon: -70.8316 },
+    { lat: 42.2824, lon: -70.9348 },
+    { lat: 42.298, lon: -70.912, at: 'hull' },
+    { lat: 42.3016, lon: -70.9228 },
+    { lat: 42.3328, lon: -70.9192 },
+    { lat: 42.4936, lon: -70.8316 },
     { lat: 42.5044, lon: -70.8304 },
     { lat: 42.5068, lon: -70.8364 },
     { lat: 42.5032, lon: -70.8436, at: 'marblehead' },
