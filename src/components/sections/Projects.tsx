@@ -2,7 +2,8 @@
 
 import { useId, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ExternalLink, FileText, FlaskConical, Github, Smartphone } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, ExternalLink, FileText, FlaskConical, Github, Smartphone } from 'lucide-react';
 import SectionHeading from '../SectionHeading';
 import { filters, projects, type Category } from '@/data/projects';
 import { useSpotlight } from '@/lib/useSpotlight';
@@ -125,69 +126,71 @@ function ProjectBody({ project }: { project: Project }) {
         ))}
       </div>
 
-      {(project.githubUrl ||
-        project.demoUrl ||
-        project.appStoreUrl ||
-        project.paperUrl ||
-        project.betaUrl) && (
-        <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-t border-border pt-4">
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
-            >
-              <Github className="h-3.5 w-3.5" />
-              source
-            </a>
-          )}
-          {project.demoUrl && (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
-            >
-              <ExternalLink className="h-3.5 w-3.5" />
-              {project.demoLabel ?? 'demo'}
-            </a>
-          )}
-          {project.paperUrl && (
-            <a
-              href={project.paperUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
-            >
-              <FileText className="h-3.5 w-3.5" />
-              read the paper
-            </a>
-          )}
-          {project.betaUrl && (
-            <a
-              href={project.betaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
-            >
-              <FlaskConical className="h-3.5 w-3.5" />
-              testflight beta
-            </a>
-          )}
-          {project.appStoreUrl && (
-            <a
-              href={project.appStoreUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
-            >
-              <Smartphone className="h-3.5 w-3.5" />
-              app store
-            </a>
-          )}
-        </div>
-      )}
+      {/* Every project has a case study page, so this row always shows. */}
+      <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-t border-border pt-4">
+        <Link
+          href={`/projects/${project.id}`}
+          className="inline-flex items-center gap-1.5 py-1 text-sm font-bold underline decoration-accent decoration-2 underline-offset-4 hover:decoration-foreground"
+        >
+          case study
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
+          >
+            <Github className="h-3.5 w-3.5" />
+            source
+          </a>
+        )}
+        {project.demoUrl && (
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
+          >
+            <ExternalLink className="h-3.5 w-3.5" />
+            {project.demoLabel ?? 'demo'}
+          </a>
+        )}
+        {project.paperUrl && (
+          <a
+            href={project.paperUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
+          >
+            <FileText className="h-3.5 w-3.5" />
+            read the paper
+          </a>
+        )}
+        {project.betaUrl && (
+          <a
+            href={project.betaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
+          >
+            <FlaskConical className="h-3.5 w-3.5" />
+            testflight beta
+          </a>
+        )}
+        {project.appStoreUrl && (
+          <a
+            href={project.appStoreUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 py-1 text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground"
+          >
+            <Smartphone className="h-3.5 w-3.5" />
+            app store
+          </a>
+        )}
+      </div>
     </>
   );
 }

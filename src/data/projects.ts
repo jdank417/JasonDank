@@ -15,6 +15,19 @@ export interface Project {
   appStoreUrl?: string;
   paperUrl?: string;
   betaUrl?: string;
+  /** Screenshots for the case study page, in public/projects/<folder>/. */
+  shots?: Shot[];
+  /** In Jason's words: what he's proudest of. Shown on the case study when set. */
+  proud?: string;
+}
+
+export interface Shot {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  /** phone: an iPhone screen; desktop: a Mac screen; card: a small widget. */
+  frame: 'phone' | 'desktop' | 'card';
 }
 
 export const filters: { id: Category | 'all'; label: string }[] = [
@@ -52,6 +65,12 @@ export const projects: Project[] = [
     ],
     technologies: ['Angular', 'FastAPI', 'PostgreSQL', 'Docker', 'JWT', 'Render'],
     betaUrl: REGATTATRACK_BETA_URL,
+    shots: [
+      { src: '/projects/regattatrack/leg.webp', width: 600, height: 1300, alt: 'The Leg screen: heading to the next mark in true and magnetic, distance, rounding side and point of sail', frame: 'phone' },
+      { src: '/projects/regattatrack/countdown.webp', width: 600, height: 1300, alt: 'The start countdown at one minute to the gun, with sync and plus or minus one minute', frame: 'phone' },
+      { src: '/projects/regattatrack/map.webp', width: 600, height: 1300, alt: 'The Map screen with the night\'s course plotted mark to mark', frame: 'phone' },
+      { src: '/projects/regattatrack/live-activity.webp', width: 700, height: 297, alt: 'The lock-screen Live Activity: countdown, next leg, heading and wind', frame: 'card' },
+    ],
   },
   {
     id: 'bullbar',
@@ -65,6 +84,10 @@ export const projects: Project[] = [
     ],
     technologies: ['Swift', 'SwiftUI', 'macOS', 'Cloudflare Workers'],
     appStoreUrl: 'https://apps.apple.com/us/app/bullbar/id6745433379?mt=12',
+    shots: [
+      { src: '/projects/bullbar/ticker.webp', width: 828, height: 516, alt: 'BullBar\'s always-on-top strip of live stock quotes across the top of a Mac desktop', frame: 'desktop' },
+      { src: '/projects/bullbar/settings.webp', width: 828, height: 516, alt: 'BullBar settings: tickers, scroll speed, refresh interval and low-power mode', frame: 'desktop' },
+    ],
   },
   {
     id: 'bartender-gpt',
@@ -77,6 +100,13 @@ export const projects: Project[] = [
     ],
     technologies: ['Swift', 'iOS', 'iPadOS', 'App Store'],
     appStoreUrl: 'https://apps.apple.com/us/app/bartender-gpt/id6743064352?platform=iphone',
+    shots: [
+      { src: '/projects/bartender-gpt/cabinet.webp', width: 390, height: 853, alt: 'The home screen: liquor cabinet, custom cocktails and favorites with what you can make', frame: 'phone' },
+      { src: '/projects/bartender-gpt/search.webp', width: 390, height: 850, alt: 'Searching cocktails, each with ingredients and steps', frame: 'phone' },
+      { src: '/projects/bartender-gpt/custom.webp', width: 390, height: 850, alt: 'Adding a custom cocktail with ingredients and a description', frame: 'phone' },
+      { src: '/projects/bartender-gpt/grocery.webp', width: 390, height: 850, alt: 'The grocery list for missing ingredients', frame: 'phone' },
+      { src: '/projects/bartender-gpt/stores.webp', width: 390, height: 850, alt: 'Finding liquor and grocery stores nearby on a map', frame: 'phone' },
+    ],
   },
   {
     id: 'barcode-scanning-webapp',
