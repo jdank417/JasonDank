@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink, FileText, FlaskConical, Github, Smartphone } from 'lucide-react';
 import SectionHeading from '../SectionHeading';
+import ProjectThumb from '../animations/ProjectThumb';
 import { filters, projects, type Category } from '@/data/projects';
 import { useSpotlight } from '@/lib/useSpotlight';
 import { CarouselControls, useCarousel } from '../mobile/Carousel';
@@ -90,6 +91,16 @@ function ProjectBody({ project }: { project: Project }) {
 
   return (
     <>
+      {/* The case study's animation in miniature. The "case study" link below is the
+          one for keyboards and screen readers, so this one stays out of their way. */}
+      <Link
+        href={`/projects/${project.id}`}
+        tabIndex={-1}
+        aria-hidden="true"
+        className="-mx-5 -mt-5 mb-5 block overflow-hidden rounded-t-md border-b border-border bg-background sm:-mx-6 sm:-mt-6"
+      >
+        <ProjectThumb id={project.id} />
+      </Link>
       <span className="text-xs uppercase tracking-[0.1em] text-muted">
         {project.year}
       </span>
