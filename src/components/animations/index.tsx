@@ -45,7 +45,7 @@ const scenes: Record<string, { label: string; render: () => Scene }> = {
     render: barcode,
   },
   'ai-model-fine-tuning': {
-    label: 'Instruction records fine-tune Flan-T5, the loss comes down, and the assistant answers a rules question',
+    label: 'Instruction records flow forward through the network, backprop updates the weights layer by layer, the loss comes down, and the assistant answers a rules question',
     render: finetune,
   },
   'remote-compute-environment': {

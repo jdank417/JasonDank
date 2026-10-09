@@ -13,8 +13,27 @@ const RECORDS = [
 ];
 const ANSWER = ['Rule 10: on opposite tacks, a', 'port-tack boat shall keep clear', 'of a starboard-tack boat.'];
 
+/** Nodes per layer: input, three hidden, output. */
+const NET = [3, 5, 5, 5, 2];
+
+const nodes = (layer: number) => {
+  const x = 392 + layer * 48;
+  const count = NET[layer];
+  return Array.from({ length: count }, (_, k) => [x, 142 + (k - (count - 1) / 2) * 25] as [number, number]);
+};
+const edges = (layer: number) => nodes(layer).flatMap((a) => nodes(layer + 1).map((b) => [a, b] as const));
+/** A fixed, made-up weight per edge, so some connections read stronger than others. */
+const weight = (layer: number, k: number) => (Math.sin(layer * 12.9 + k * 78.2) * 43758.5453) % 1 * 0.5 + 0.5;
+
 export default function finetune(): Scene {
   const T = 14;
+  /** One forward-and-back training step. */
+  const PASS = 3.2;
+  const forwardAt = (layer: number) => 4 + layer * 9;
+  // Weights between layer l and l + 1 update after the layer above them.
+  const backAt = (layer: number) => 56 + (NET.length - 2 - layer) * 9;
+  // The output layer lights first, where the loss comes in; each layer below it as its weights update.
+  const nodeBackAt = (layer: number) => (layer === NET.length - 1 ? backAt(NET.length - 2) - 5 : backAt(layer));
   const SCROLL = 12;
   const lineHeight = 17;
   const lines = RECORDS.flatMap(([instruction, context, output]) => [
@@ -40,7 +59,14 @@ export default function finetune(): Scene {
     hide('ft-e1', [22, 24, 98, 100]),
     fade('ft-e2', [22, 24, 40, 42]),
     fade('ft-e3', [40, 42, 94, 98]),
-    keyframes('ft-layer', [[0, 'opacity:.25'], [12, 'opacity:1'], [30, 'opacity:.25'], [100, 'opacity:.25']]),
+    // One training step: activations go forward layer by layer, then the
+    // gradient comes back and every set of weights is updated in turn.
+    ...NET.map((_, l) => fade(`ft-node${l}`, [forwardAt(l) - 3, forwardAt(l), forwardAt(l) + 4, forwardAt(l) + 12])),
+    ...NET.slice(1).map((_, l) => fade(`ft-fwd-edge${l}`, [forwardAt(l) + 1, forwardAt(l) + 4, forwardAt(l + 1) + 2, forwardAt(l + 1) + 10])),
+    ...NET.slice(1).map((_, l) => fade(`ft-back-edge${l}`, [backAt(l) - 3, backAt(l), backAt(l) + 4, backAt(l) + 14])),
+    ...NET.map((_, l) => fade(`ft-node-back${l}`, [nodeBackAt(l) - 2, nodeBackAt(l), nodeBackAt(l) + 3, nodeBackAt(l) + 10], 0.85)),
+    fade('ft-fwd-label', [0, 2, 44, 48]),
+    fade('ft-back-label', [48, 52, 90, 96]),
     fade('ft-q', [60, 62, 94, 98]),
     fade('ft-thinking', [62, 63, 66, 67]),
     fade('ft-a', [66, 67, 94, 98]),
@@ -88,18 +114,37 @@ export default function finetune(): Scene {
       <path d="M320 140 H352" strokeWidth="2" strokeDasharray="4 4" className="stroke-muted" />
       <rect x="352.5" y="24.5" width="271" height="391" rx="16" className="fill-card stroke-border" />
       <text x="372" y="50" fontSize="11" letterSpacing="1.2" className="fill-muted">FINE-TUNING FLAN-T5</text>
-      {[0, 1, 2, 3, 4, 5].map((i) => (
-        <rect
-          key={i}
-          x={372 + (i % 2) * 6}
-          y={70 + i * 20}
-          width="226"
-          height="14"
-          rx="4"
-          fill="var(--accent)"
-          style={play('ft-layer', 2.4, { opacity: 0.25, animationDelay: `${i * 0.18}s` })}
-        />
+      <text x="488" y="74" fontSize="10" textAnchor="middle" fill="var(--accent)" style={play('ft-fwd-label', PASS, { opacity: 0 })}>forward →</text>
+      <text x="488" y="74" fontSize="10" textAnchor="middle" className="fill-signal" style={play('ft-back-label', PASS, { opacity: 0 })}>← update weights</text>
+      {/* Faint base network, then a glow per layer going forward and per set of weights coming back. */}
+      {NET.slice(1).map((_, l) =>
+        edges(l).map(([a, b], k) => (
+          <line key={`${l}-${k}`} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} strokeWidth="1" className="stroke-muted" strokeOpacity={0.12 + weight(l, k) * 0.25} />
+        )),
+      )}
+      {NET.slice(1).map((_, l) => (
+        <g key={l} style={play(`ft-fwd-edge${l}`, PASS, { opacity: 0 })}>
+          {edges(l).map(([a, b], k) => (
+            <line key={k} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} strokeWidth="1.2" stroke="var(--accent)" strokeOpacity={0.35 + weight(l, k) * 0.6} />
+          ))}
+        </g>
       ))}
+      {NET.slice(1).map((_, l) => (
+        <g key={l} style={play(`ft-back-edge${l}`, PASS, { opacity: 0 })}>
+          {edges(l).map(([a, b], k) => (
+            <line key={k} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} strokeWidth={0.8 + weight(l, k) * 1.6} stroke="var(--signal)" strokeOpacity={0.35 + weight(l, k) * 0.6} />
+          ))}
+        </g>
+      ))}
+      {NET.map((_, l) =>
+        nodes(l).map(([x, y], k) => (
+          <g key={`${l}-${k}`}>
+            <circle cx={x} cy={y} r="6" strokeWidth="1.5" className="fill-card stroke-muted" strokeOpacity="0.6" />
+            <circle cx={x} cy={y} r="6" fill="var(--accent)" style={play(`ft-node${l}`, PASS, { opacity: 0 })} />
+            <circle cx={x} cy={y} r="6" fill="var(--signal)" style={play(`ft-node-back${l}`, PASS, { opacity: 0 })} />
+          </g>
+        )),
+      )}
       <text x="372" y="214" fontSize="10" letterSpacing="1.2" className="fill-muted">TRAINING LOSS</text>
       <g fontSize="12" fontWeight="700" className="fill-foreground">
         <text x="604" y="214" textAnchor="end" style={play('ft-e1', T, { opacity: 0 })}>epoch 1/3</text>
