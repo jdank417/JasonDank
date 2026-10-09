@@ -51,10 +51,12 @@ jobs:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
+      # No static_site_generator here: with it, this step writes its own blank
+      # next.config.js, which Next.js loads instead of next.config.ts, dropping
+      # trailingSlash and every page's index.html with it. next.config.ts
+      # already sets output: 'export' and unoptimized images.
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          static_site_generator: next
 
       - name: Restore cache
         uses: actions/cache@v4
