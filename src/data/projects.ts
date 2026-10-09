@@ -77,6 +77,10 @@ export const projects: Project[] = [
       'We beat traditional CAPTCHA on both speed and accuracy, and the six liveness checks blocked more spoofing attempts than it did. Taking our capstone all the way to a written research paper with Jack is what I’m proudest of.',
     githubUrl: 'https://github.com/Dexteritize/HumanAuth',
     paperUrl: PAPER_URL,
+    shots: [
+      { src: '/projects/humanauth/arch.webp', width: 1925, height: 435, alt: 'System architecture from the paper: the Angular client sends frames to the Python WebSocket backend, where auth.py runs face landmarking, hand landmarking and the liveness checks, and returns the result', frame: 'desktop' },
+      { src: '/projects/humanauth/results.webp', width: 935, height: 350, alt: 'Results from the paper: 3.3 s average completion against 7 s for traditional CAPTCHA, and 76% of spoofing attempts blocked against 67%', frame: 'desktop' },
+    ],
   },
   {
     id: 'dankhome',

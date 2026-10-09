@@ -159,7 +159,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             {desktops.length + cards.length > 0 && (
               <div className="mt-6 grid items-start gap-8 md:grid-cols-2">
                 {desktops.map((shot) => (
-                  <figure key={shot.src} className="m-0">
+                  // Very wide images, like a diagram, take the full width so they stay legible.
+                  <figure key={shot.src} className={`m-0 ${shot.width / shot.height > 3 ? 'md:col-span-2' : ''}`}>
                     <Image
                       src={shot.src}
                       width={shot.width}
