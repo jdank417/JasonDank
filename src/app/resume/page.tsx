@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 // Projects listed in full; the rest share one line, which keeps it to two pages.
-const FEATURED = 5;
+const FEATURED = 4;
 
 const bare = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '');
 
