@@ -31,7 +31,7 @@ const ticker = [
 
 const stats = [
   { value: '7', label: 'roles' },
-  { value: '10', label: 'shipped projects' },
+  { value: '11', label: 'shipped projects' },
   { value: '2', label: 'apps on the App Store' },
   { value: '20k+', label: 'endpoints managed' },
 ];

@@ -52,6 +52,8 @@ export const projects: Project[] = [
       'Ships as a one-command Docker Compose stack and a Render blueprint, seeded with four Massachusetts Bay yacht clubs and their real mark data.',
     ],
     technologies: ['Angular', 'FastAPI', 'PostgreSQL', 'Docker', 'JWT', 'Render'],
+    proud:
+      'Sailors actually race with it. It started as a reference app for one club and is now a platform any club can run, with headings and distances people trust enough to sail by. The iPhone app, with its Leg screen, start countdown and Live Activity, is the part I’m happiest with.',
     betaUrl: REGATTATRACK_BETA_URL,
     shots: [
       { src: '/projects/regattatrack/leg.webp', width: 600, height: 1300, alt: 'The Leg screen: heading to the next mark in true and magnetic, distance, rounding side and point of sail', frame: 'phone' },
@@ -71,6 +73,8 @@ export const projects: Project[] = [
       'Across 50 trials with four participants: 3.3s average completion against 7.0s for traditional CAPTCHA, a 92% authentication success rate against 80%, and 76% of simulated presentation attacks blocked against 67%.',
     ],
     technologies: ['Angular', 'Python', 'Flask', 'MediaPipe', 'WebSocket', 'Computer Vision'],
+    proud:
+      'We beat traditional CAPTCHA on both speed and accuracy, and the six liveness checks blocked more spoofing attempts than it did. Taking our capstone all the way to a written research paper with Jack is what I’m proudest of.',
     githubUrl: 'https://github.com/Dexteritize/HumanAuth',
     paperUrl: PAPER_URL,
   },
@@ -86,6 +90,8 @@ export const projects: Project[] = [
       'Built for a screen that stays on: an idle night clock drifts each minute to avoid burn-in, dims the display and turns deep red after midnight, and unlocking a door or opening the garage always asks first. A demo mode with a fake home keeps it usable in the Simulator.',
     ],
     technologies: ['Swift', 'SwiftUI', 'HomeKit', 'Foundation Models', 'App Intents', 'MusicKit', 'Speech', 'Open-Meteo'],
+    proud:
+      'It’s on my wall and I use it every day. I can talk to my house without anything leaving the iPad, everyday commands run instantly without waiting on the model, and setting up a scene is as simple as doing it once.',
     githubUrl: 'https://github.com/jdank417/DankHome',
     summary:
       'DankHome is a home dashboard for a wall-mounted iPad. It reads and controls HomeKit accessories directly, shows the weather and what’s playing, and adds an assistant that runs entirely on the device, so you can talk to your house without sending a word to the cloud.',
@@ -100,6 +106,8 @@ export const projects: Project[] = [
       'Trained on structured JSON of instructions, optional context, and expected outputs; wrote the training and evaluation pipelines.',
     ],
     technologies: ['Python', 'Flan-T5', 'NLP', 'Fine-tuning'],
+    proud:
+      'It brought together the two things I spend the most time on, racing and machine learning, and I wrote the training and evaluation pipelines end to end.',
     githubUrl: 'https://github.com/jdank417/Flan-t5-sailing-JasonDank',
     summary:
       'Fine-tuning a Flan-T5 model for answering questions about sailing rules and interpreting racing scenarios. The model is trained on JSON data containing instructions, optional context, and expected outputs to create an assistant that can answer questions about sailing rules.',
@@ -116,6 +124,8 @@ export const projects: Project[] = [
       'Implemented customizable display, adjustable scroll speed, light/dark theming, and a low-power mode for battery efficiency.',
     ],
     technologies: ['Swift', 'SwiftUI', 'macOS', 'Cloudflare Workers'],
+    proud:
+      'I took it all the way through App Store review, and it costs nothing to run: clamped refresh intervals keep the Worker inside Cloudflare’s free tier.',
     appStoreUrl: 'https://apps.apple.com/us/app/bullbar/id6745433379?mt=12',
     shots: [
       { src: '/projects/bullbar/ticker.webp', width: 828, height: 516, alt: 'BullBar\'s always-on-top strip of live stock quotes across the top of a Mac desktop', frame: 'desktop' },
@@ -132,6 +142,8 @@ export const projects: Project[] = [
       'An ongoing project on the App Store that continues to receive feature updates.',
     ],
     technologies: ['Swift', 'iOS', 'iPadOS', 'App Store'],
+    proud:
+      'It was my first app on the App Store, and real people use it. Telling you what you can make from what’s already in your cabinet is my favorite feature, and it works as well on iPad as it does on iPhone.',
     appStoreUrl: 'https://apps.apple.com/us/app/bartender-gpt/id6743064352?platform=iphone',
     shots: [
       { src: '/projects/bartender-gpt/cabinet.webp', width: 390, height: 853, alt: 'The home screen: liquor cabinet, custom cocktails and favorites with what you can make', frame: 'phone' },
@@ -153,6 +165,8 @@ export const projects: Project[] = [
       'Implemented Excel-backed inventory uploads converted to SQLite, easing updates for non-technical stakeholders.',
     ],
     technologies: ['Flask', 'JavaScript', 'SQLite', 'Machine Learning', 'GitLab CI/CD'],
+    proud:
+      'I led the team as architect, service owner and PM, and we shipped it to production. I also made sure non-technical people could keep the inventory up to date with a simple Excel upload.',
     demoUrl: 'https://grocerybarcodescanner.onrender.com/',
     demoLabel: 'live demo',
   },
@@ -166,6 +180,8 @@ export const projects: Project[] = [
       'Polls CPU, memory, disk, and uptime metrics; deployed and active across Harvard Athletics and SEAS field support operations.',
     ],
     technologies: ['Python', 'PyQt5', 'SSH', 'Linux', 'Sub-processes'],
+    proud:
+      'I built it on the job to fix a real problem. Instead of SSHing into machines one at a time, everything is on one screen, and it flags a struggling or offline device before anyone notices.',
     summary:
       'DSPM (Dank\'s Squash Pie Monitor) is a Python-based GUI application that monitors multiple Linux systems from a macOS or Windows environment. Leveraging SSH connections, the application periodically retrieves critical system metrics such as CPU usage, memory consumption, disk usage, and system uptime.',
     shots: [{ src: '/projects/linux-device-monitor/dashboard.webp', width: 440, height: 289, alt: 'Dank\'s Squash Pie Monitor: a tile per host with CPU, memory, disk, uptime and last update (hostnames redacted)', frame: 'desktop' }],
@@ -180,6 +196,8 @@ export const projects: Project[] = [
       'Integrated fuzzy search, semantic search (BERT embeddings), and named entity recognition so technicians can ask questions conversationally instead of digging through a knowledge base.',
     ],
     technologies: ['Python', 'NLP', 'BERT', 'spaCy', 'customtkinter'],
+    proud:
+      'New hires actually used it, which meant fewer interruptions for senior techs and a way to keep what past technicians knew from getting lost. Under the hood it combines fuzzy search, BERT embeddings and entity recognition to find the right answer.',
     summary:
       'A chatbot utilizing Natural Language Processing to assist new hires at Harvard University Information Technology by referencing documented information from past technicians, using natural language in a conversational format rather than fishing through a knowledge base.',
     shots: [{ src: '/projects/huit-chatbot/chat.webp', width: 588, height: 384, alt: 'The HUIT chatbot answering questions in conversation, such as where to send Dell repairs', frame: 'desktop' }],
@@ -194,6 +212,8 @@ export const projects: Project[] = [
       "Solved WSL2's idle shutdown behaviour, configured persistent SSH over Tailscale, and set up GPU passthrough for CUDA workloads — enabling remote fine-tuning with zero idle shutdowns.",
     ],
     technologies: ['WSL2', 'Linux', 'CUDA', 'Tailscale', 'Docker', 'Windows', 'Ubuntu'],
+    proud:
+      'I turned a laptop into an always-on server. Beating WSL2’s idle shutdown and getting CUDA passthrough working were the hard parts, and now I can start a training run from anywhere over Tailscale.',
     demoUrl: 'https://drive.google.com/file/d/1kRTeivItPW3HBvMCnBD8cd3wxtmspbez/view?usp=sharing',
     demoLabel: 'watch walkthrough',
     summary:
@@ -210,6 +230,8 @@ export const projects: Project[] = [
       'Engineered technical indicators (RSI, MACD, Bollinger Bands) from yfinance data and added logging, model management, and actual-vs-predicted visualisation.',
     ],
     technologies: ['Python', 'TensorFlow', 'LSTM', 'CNN', 'yfinance'],
+    proud:
+      'Engineering features like RSI, MACD and Bollinger Bands from raw prices, and pairing a CNN for local patterns with an LSTM for the sequence, taught me a lot. So did learning how hard markets really are to predict.',
     githubUrl: 'https://github.com/jdank417/Deep-Learning-for-Stock-Market-Predictions',
     summary:
       'This project implements a Convolutional Neural Network (CNN) and Long Short-Term Memory (LSTM) model to predict stock prices. The model uses historical stock data, along with technical indicators, to forecast future stock prices.',

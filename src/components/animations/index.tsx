@@ -20,7 +20,7 @@ export default function ProjectAnimation({ id }: { id: string }) {
   const scene = scenes[id];
   if (!scene) return null;
   return (
-    <section className="project-anim border-b border-border bg-card/60" aria-label="Illustration">
+    <section className="project-anim border-b border-border bg-card/60" aria-label="Illustration" data-still={scene.still}>
       <figure className="mx-auto m-0 max-w-6xl px-5 py-10 sm:px-8 sm:py-12">
         <SceneSvg id={id} className="mx-auto block h-auto w-full max-w-4xl" />
         <figcaption className="mx-auto mt-3 max-w-4xl text-xs leading-snug text-muted">{scene.label}</figcaption>

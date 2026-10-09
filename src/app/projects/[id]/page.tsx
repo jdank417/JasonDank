@@ -23,9 +23,22 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const project = projects.find((p) => p.id === id);
   if (!project) return {};
   const { name } = split(project.title);
+  const title = `${name} — Jason Dank`;
+  const description = project.description[0];
+  // Drawn from the project's animation by scripts/build-og.mjs.
+  const image = { url: `/og/${project.id}.png`, width: 1200, height: 630, alt: `${project.title}: case study` };
   return {
-    title: `${name} — Jason Dank`,
-    description: project.description[0],
+    title,
+    description,
+    openGraph: {
+      type: 'article',
+      url: `/projects/${project.id}/`,
+      siteName: 'Jason Dank',
+      title,
+      description,
+      images: [image],
+    },
+    twitter: { card: 'summary_large_image', title, description, images: [image] },
   };
 }
 
