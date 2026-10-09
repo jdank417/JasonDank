@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, ExternalLink, FileText, FlaskConical, Github, Smartphone } from 'lucide-react';
-import ProjectAnimation from '@/components/ProjectAnimation';
+import ProjectAnimation from '@/components/animations';
 import { projects, type Project, type Shot } from '@/data/projects';
 
 // One static page per project, generated at build time for the Pages export.
@@ -65,18 +65,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         </div>
       </section>
 
-      {phones.length > 0 && (
-        <section className="border-b border-border bg-card/60" aria-label="Screenshots">
-          <div className="no-scrollbar mx-auto flex max-w-6xl snap-x snap-mandatory gap-5 overflow-x-auto px-5 py-10 sm:px-8 sm:py-12">
-            {phones.map((shot) => (
-              <Phone key={shot.src} shot={shot} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* No screenshots yet: an animated sketch of the project instead. */}
-      {shots.length === 0 && <ProjectAnimation id={project.id} />}
+      <ProjectAnimation id={project.id} />
 
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-12">
@@ -98,23 +87,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                 <p className="mt-2 text-lg leading-relaxed">{project.proud}</p>
               </blockquote>
             )}
-
-            {desktops.length > 0 && (
-              <div className="mt-10 space-y-5">
-                {desktops.map((shot) => (
-                  <figure key={shot.src} className="m-0">
-                    <Image
-                      src={shot.src}
-                      width={shot.width}
-                      height={shot.height}
-                      alt={shot.alt}
-                      className="h-auto w-full rounded-lg border border-border shadow-[0_20px_50px_-30px_rgba(0,0,0,0.5)]"
-                    />
-                    <figcaption className="mt-2 text-xs text-muted">{shot.alt}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            )}
           </div>
 
           <aside className="space-y-8 lg:col-span-5">
@@ -128,19 +100,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                 ))}
               </div>
             </div>
-
-            {cards.map((shot) => (
-              <figure key={shot.src} className="m-0">
-                <Image
-                  src={shot.src}
-                  width={shot.width}
-                  height={shot.height}
-                  alt={shot.alt}
-                  className="h-auto w-full rounded-[1.4rem] shadow-[0_20px_50px_-30px_rgba(0,0,0,0.6)]"
-                />
-                <figcaption className="mt-2 text-xs text-muted">{shot.alt}</figcaption>
-              </figure>
-            ))}
 
             {project.betaUrl && (
               <div className="flex items-center gap-5 rounded-md border border-border bg-card p-5">
@@ -171,6 +130,50 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         </div>
       </section>
 
+      {shots.length > 0 && (
+        <section className="border-b border-border bg-card/60" aria-labelledby="screenshots">
+          <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
+            <h2 id="screenshots" className="text-xs uppercase tracking-[0.15em] text-muted">
+              Screenshots
+            </h2>
+            {phones.length > 0 && (
+              <div className="no-scrollbar -mx-5 mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 sm:-mx-8 sm:px-8">
+                {phones.map((shot) => (
+                  <Phone key={shot.src} shot={shot} />
+                ))}
+              </div>
+            )}
+            {desktops.length + cards.length > 0 && (
+              <div className="mt-6 grid items-start gap-8 md:grid-cols-2">
+                {desktops.map((shot) => (
+                  <figure key={shot.src} className="m-0">
+                    <Image
+                      src={shot.src}
+                      width={shot.width}
+                      height={shot.height}
+                      alt={shot.alt}
+                      className="h-auto w-full rounded-lg border border-border shadow-[0_20px_50px_-30px_rgba(0,0,0,0.5)]"
+                    />
+                    <figcaption className="mt-2 text-xs text-muted">{shot.alt}</figcaption>
+                  </figure>
+                ))}
+                {cards.map((shot) => (
+                  <figure key={shot.src} className="m-0">
+                    <Image
+                      src={shot.src}
+                      width={shot.width}
+                      height={shot.height}
+                      alt={shot.alt}
+                      className="h-auto w-full rounded-[1.4rem] shadow-[0_20px_50px_-30px_rgba(0,0,0,0.6)]"
+                    />
+                    <figcaption className="mt-2 text-xs text-muted">{shot.alt}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
     </main>
   );
 }
