@@ -42,6 +42,22 @@ export const filters: { id: Category | 'all'; label: string }[] = [
 
 export const projects: Project[] = [
   {
+    id: 'dankhome',
+    title: 'DankHome — HomeKit Wall Panel for iPad',
+    year: '2026',
+    categories: ['apple', 'automation'],
+    description: [
+      'A SwiftUI dashboard that turns a wall-mounted iPad into a smart-home panel: lights, thermostat, locks, garage door, shades, fans and outlets from HomeKit, plus a weather forecast and Apple Music, all on one screen that never scrolls.',
+      'An on-device assistant built on Apple’s Foundation Models framework controls the home through tool calls — lights, devices, thermostat, scenes and music — so nothing leaves the iPad. Everyday commands like “dim the kitchen to 30%” skip the model entirely and run instantly, and voice input uses on-device speech recognition.',
+      'Scene buttons are recorded rather than configured: tap record, set the lights, thermostat and music the way you want them, and DankHome keeps only what changed. Any scene, light-off or assistant request is also available from Siri and Shortcuts through App Intents.',
+      'Built for a screen that stays on: an idle night clock drifts each minute to avoid burn-in, dims the display and turns deep red after midnight, and unlocking a door or opening the garage always asks first. A demo mode with a fake home keeps it usable in the Simulator.',
+    ],
+    technologies: ['Swift', 'SwiftUI', 'HomeKit', 'Foundation Models', 'App Intents', 'MusicKit', 'Speech', 'Open-Meteo'],
+    githubUrl: 'https://github.com/jdank417/DankHome',
+    summary:
+      'DankHome is a home dashboard for a wall-mounted iPad. It reads and controls HomeKit accessories directly, shows the weather and what’s playing, and adds an assistant that runs entirely on the device, so you can talk to your house without sending a word to the cloud.',
+  },
+  {
     id: 'humanauth',
     title: 'HumanAuth — Replacing CAPTCHA with Real-Time Computer Vision',
     year: '2026',

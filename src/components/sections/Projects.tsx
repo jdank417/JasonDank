@@ -25,7 +25,7 @@ export default function Projects() {
   return (
     <section id="projects" className="border-b border-border py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <SectionHeading index="02" title="Projects" kicker="10 projects — 2 on the App Store, 1 in public beta, 1 written up as a paper." />
+        <SectionHeading index="02" title="Projects" kicker="11 projects — 2 on the App Store, 1 in public beta, 1 written up as a paper." />
 
         {/* Horizontally scrollable on phones so the filters never wrap into a wall. */}
         <div className="-mx-5 mb-8 overflow-x-auto px-5 pb-2 sm:mx-0 sm:px-0">
