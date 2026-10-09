@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, ExternalLink, FileText, FlaskConical, Github, Smartphone } from 'lucide-react';
+import ProjectAnimation from '@/components/ProjectAnimation';
 import { projects, type Project, type Shot } from '@/data/projects';
 
 // One static page per project, generated at build time for the Pages export.
@@ -73,6 +74,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </div>
         </section>
       )}
+
+      {/* No screenshots yet: an animated sketch of the project instead. */}
+      {shots.length === 0 && <ProjectAnimation id={project.id} />}
 
       <section className="border-b border-border">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-12">

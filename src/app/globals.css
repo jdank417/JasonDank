@@ -311,6 +311,14 @@ mark {
   }
 }
 
+/* Case study animations (ProjectAnimation). Each element's resting style is
+   the finished frame, so stopping the animation leaves a complete picture. */
+@media (prefers-reduced-motion: reduce) {
+  .project-anim * {
+    animation: none !important;
+  }
+}
+
 /* Latitude ruler (LatitudeRuler): the alternating bars of a chart border. */
 .latitude-bars {
   background: repeating-linear-gradient(
