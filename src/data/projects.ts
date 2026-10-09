@@ -42,7 +42,7 @@ export const filters: { id: Category | 'all'; label: string }[] = [
 
 export const projects: Project[] = [
   {
-    id: 'regatta-positioning-system',
+    id: 'regattatrack',
     title: 'RegattaTrack — Regatta Positioning System',
     year: '2026',
     categories: ['web', 'apple'],
@@ -101,7 +101,7 @@ export const projects: Project[] = [
       'DankHome is a home dashboard for a wall-mounted iPad. It reads and controls HomeKit accessories directly, shows the weather and what’s playing, and adds an assistant that runs entirely on the device, so you can talk to your house without sending a word to the cloud.',
   },
   {
-    id: 'ai-model-fine-tuning',
+    id: 'sailing-rules-assistant',
     title: 'AI Model Fine-Tuning — Sailing Rules Assistant',
     year: '2024',
     categories: ['ml'],
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/jdank417/Flan-t5-sailing-JasonDank',
     summary:
       'Fine-tuning a Flan-T5 model for answering questions about sailing rules and interpreting racing scenarios. The model is trained on JSON data containing instructions, optional context, and expected outputs to create an assistant that can answer questions about sailing rules.',
-    shots: [{ src: '/projects/ai-model-fine-tuning/rules-assistant.webp', width: 485, height: 319, alt: 'The Sailing Rules Assistant (2025–2028 rules): a question, optional context and the answer panel, with example questions below', frame: 'desktop' }],
+    shots: [{ src: '/projects/sailing-rules-assistant/rules-assistant.webp', width: 485, height: 319, alt: 'The Sailing Rules Assistant (2025–2028 rules): a question, optional context and the answer panel, with example questions below', frame: 'desktop' }],
   },
   {
     id: 'bullbar',
@@ -158,7 +158,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: 'barcode-scanning-webapp',
+    id: 'barcode-scanner',
     title: 'Barcode Scanning WebApp',
     year: '2023',
     categories: ['web', 'ml'],
@@ -207,7 +207,7 @@ export const projects: Project[] = [
     shots: [{ src: '/projects/huit-chatbot/chat.webp', width: 588, height: 384, alt: 'The HUIT chatbot answering questions in conversation, such as where to send Dell repairs', frame: 'desktop' }],
   },
   {
-    id: 'remote-compute-environment',
+    id: 'remote-gpu-server',
     title: 'Remote Compute Environment for AI Fine-Tuning',
     year: '2024',
     categories: ['automation'],
@@ -222,10 +222,10 @@ export const projects: Project[] = [
     demoLabel: 'watch walkthrough',
     summary:
       'Systematic transformation of an HP ZBook Fury laptop into a robust, always-on home server infrastructure. Solved critical challenges including WSL2\'s idle shutdown behavior, secure SSH-over-Tailscale connectivity, and GPU passthrough configuration for CUDA workloads.',
-    shots: [{ src: '/projects/remote-compute-environment/server-motd.webp', width: 589, height: 388, alt: 'Logging in to the server: its banner and nvidia-smi showing the NVIDIA RTX A3000 laptop GPU available to CUDA', frame: 'desktop' }],
+    shots: [{ src: '/projects/remote-gpu-server/server-motd.webp', width: 589, height: 388, alt: 'Logging in to the server: its banner and nvidia-smi showing the NVIDIA RTX A3000 laptop GPU available to CUDA', frame: 'desktop' }],
   },
   {
-    id: 'stock-price-prediction',
+    id: 'stock-prediction',
     title: 'CNN-LSTM Stock Market Prediction',
     year: '2023',
     categories: ['ml'],
@@ -239,6 +239,6 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/jdank417/Deep-Learning-for-Stock-Market-Predictions',
     summary:
       'This project implements a Convolutional Neural Network (CNN) and Long Short-Term Memory (LSTM) model to predict stock prices. The model uses historical stock data, along with technical indicators, to forecast future stock prices.',
-    shots: [{ src: '/projects/stock-price-prediction/forecast.webp', width: 440, height: 292, alt: 'Actual price (blue) against the model’s prediction (red)', frame: 'desktop' }],
+    shots: [{ src: '/projects/stock-prediction/forecast.webp', width: 440, height: 292, alt: 'Actual price (blue) against the model’s prediction (red)', frame: 'desktop' }],
   },
 ];

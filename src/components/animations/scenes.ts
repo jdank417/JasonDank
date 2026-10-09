@@ -33,7 +33,7 @@ export const scenes: Record<string, SceneEntry> = {
     still: 0.85,
     render: humanAuth,
   },
-  'regatta-positioning-system': {
+  regattatrack: {
     label: 'The night’s course plotted mark to mark, then sailed leg by leg with true and magnetic headings',
     still: 0.5,
     render: regatta,
@@ -53,17 +53,17 @@ export const scenes: Record<string, SceneEntry> = {
     still: 0.85,
     render: bartender,
   },
-  'barcode-scanning-webapp': {
+  'barcode-scanner': {
     label: 'The camera finds a barcode, decodes it and looks the item up in the inventory',
     still: 0.85,
     render: barcode,
   },
-  'ai-model-fine-tuning': {
+  'sailing-rules-assistant': {
     label: 'Instruction records flow forward through the network, backprop updates the weights layer by layer, the loss comes down, and the assistant answers a rules question',
     still: 0.88,
     render: finetune,
   },
-  'remote-compute-environment': {
+  'remote-gpu-server': {
     label: 'SSH over Tailscale into WSL2 on the ZBook, where a container trains on the GPU',
     still: 0.85,
     render: compute,
@@ -73,7 +73,7 @@ export const scenes: Record<string, SceneEntry> = {
     still: 0.6,
     render: chatbot,
   },
-  'stock-price-prediction': {
+  'stock-prediction': {
     label: 'Actual price against the CNN-LSTM’s prediction, with Bollinger Bands and RSI, and the forecast running ahead',
     still: 0.85,
     render: stocks,
