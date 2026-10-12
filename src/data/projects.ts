@@ -84,21 +84,23 @@ export const projects: Project[] = [
   },
   {
     id: 'dankhome',
-    title: 'DankHome — HomeKit Wall Panel for iPad',
+    title: 'DankHome — HomeKit Wall Panel for iPad and iPhone',
     year: '2026',
     categories: ['apple', 'automation'],
     description: [
-      'A SwiftUI dashboard that turns a wall-mounted iPad into a smart-home panel: lights, thermostat, locks, garage door, shades, fans and outlets from HomeKit, plus a weather forecast and Apple Music, all on one screen that never scrolls.',
-      'An on-device assistant built on Apple’s Foundation Models framework controls the home through tool calls — lights, devices, thermostat, scenes and music — so nothing leaves the iPad. Everyday commands like “dim the kitchen to 30%” skip the model entirely and run instantly, and voice input uses on-device speech recognition.',
-      'Scene buttons are recorded rather than configured: tap record, set the lights, thermostat and music the way you want them, and DankHome keeps only what changed. Any scene, light-off or assistant request is also available from Siri and Shortcuts through App Intents.',
-      'Built for a screen that stays on: an idle night clock drifts each minute to avoid burn-in, dims the display and turns deep red after midnight, and unlocking a door or opening the garage always asks first. A demo mode with a fake home keeps it usable in the Simulator.',
+      'A SwiftUI dashboard that turns a wall-mounted iPad into a smart-home panel: lights, thermostat, locks, garage door, shades, fans and outlets from HomeKit, plus a weather forecast and Apple Music, all on one screen that never scrolls. On iPhone it becomes its own scrolling dashboard of full-width cards, with rooms and scenes as chips and lights you swipe sideways to dim.',
+      'An on-device assistant built on Apple’s Foundation Models framework runs the house and the app itself, so nothing leaves the device. Most requests never wait on the model: everyday commands, several commands in one sentence (“turn off the kitchen and lock the front door”) and common questions (“is the garage open?”, “what’s using power?”) are answered instantly from the home’s state. When the model is needed, each kind of request goes to a small session with only the tools it needs.',
+      'Beyond devices, the assistant can change the app: “switch to the ocean background”, “go to the living room”, “save this as Movie Night” or “wake me up at 6:30 on weekdays”. Scene buttons can also be recorded by hand: tap record, set things the way you want, and DankHome keeps only what changed. Scenes and requests are available from Siri and Shortcuts through App Intents.',
+      'Timers and routines: “turn off the lights in 30 minutes” or “every night at 10, run Good Night”. Routines that run a Home app scene are saved to the home hub as HomeKit triggers, so they fire even when the app is closed. A wake-up light fades a room from a warm glow to daylight by the alarm time, and adaptive lighting moves white lights with the sun.',
+      'A What’s On view reads live watts and kWh from plugs that report them, shows how long everything has been on, and turns anything off in one tap. Plugs, fans and switches left on too long turn orange in the status line under the clock.',
+      'Built for a screen that stays on: an idle night clock drifts each minute to avoid burn-in, dims the display and turns deep red after midnight, and unlocking a door or opening the garage always asks first. A demo mode with a fake home keeps it usable in the Simulator, and Swift Testing suites cover the schedules, lighting curves, quick commands and the unlock safety rule.',
     ],
-    technologies: ['Swift', 'SwiftUI', 'HomeKit', 'Foundation Models', 'App Intents', 'MusicKit', 'Speech', 'Open-Meteo'],
+    technologies: ['Swift', 'SwiftUI', 'HomeKit', 'Foundation Models', 'App Intents', 'MusicKit', 'Speech', 'Swift Testing', 'Open-Meteo'],
     proud:
-      'It’s on my wall and I use it every day. I can talk to my house without anything leaving the iPad, everyday commands run instantly without waiting on the model, and setting up a scene is as simple as doing it once.',
+      'It’s on my wall and I use it every day. I can talk to my house without anything leaving the device, and most of what I ask happens instantly because it never has to wait on the model. The assistant can set up a routine or a wake-up light as easily as it turns off a lamp.',
     githubUrl: 'https://github.com/jdank417/DankHome',
     summary:
-      'DankHome is a home dashboard for a wall-mounted iPad. It reads and controls HomeKit accessories directly, shows the weather and what’s playing, and adds an assistant that runs entirely on the device, so you can talk to your house without sending a word to the cloud.',
+      'DankHome is a home dashboard for a wall-mounted iPad, with its own layout on iPhone. It reads and controls HomeKit accessories directly, shows the weather, what’s playing and what’s drawing power, runs timers and routines, and adds an assistant that runs entirely on the device, so you can talk to your house without sending a word to the cloud.',
   },
   {
     id: 'sailing-rules-assistant',

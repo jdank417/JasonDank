@@ -39,8 +39,8 @@ export const scenes: Record<string, SceneEntry> = {
     render: regatta,
   },
   dankhome: {
-    label: 'A scene button and then the assistant run the lights on a wall-mounted iPad, before the idle night clock takes over',
-    still: 0.6,
+    label: 'A scene lights the house on the iPad and iPhone, one sentence turns off the kitchen and locks the door instantly, the assistant switches the background, and the iPad drifts into its night clock',
+    still: 0.7,
     render: dankHome,
   },
   bullbar: {
