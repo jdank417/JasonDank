@@ -54,7 +54,7 @@ export default function dankHome(): Scene {
   ];
 
   const tile = (i: number) => ({ x: 368 + (i % 3) * 150, y: 114 + Math.floor(i / 3) * 92 });
-  const phoneTile = (i: number) => ({ x: 706 + (i % 2) * 85, y: 142 + Math.floor(i / 2) * 58 });
+  const phoneTile = (i: number) => ({ x: 706 + (i % 2) * 80, y: 142 + Math.floor(i / 2) * 58 });
   const scenesRow = ['Bright', 'Relax', 'Movie', 'Good Night'];
   const circumference = 2 * Math.PI * 44;
   const sparkle = (x: number, y: number, s = 1, fill = '#fff') => (
@@ -67,14 +67,14 @@ export default function dankHome(): Scene {
   const lightStates = (i: number, x: number, y: number, size: 'pad' | 'phone') => {
     const light = lights[i];
     const pad = size === 'pad';
-    const w = pad ? 138 : 79;
+    const w = pad ? 138 : 72;
     const h = pad ? 80 : 50;
     const r = pad ? 16 : 11;
     const icon = pad ? { cx: x + 24, cy: y + 24, r: 9, halo: 16 } : { cx: x + 14, cy: y + 15, r: 6, halo: 10 };
     const nameY = pad ? y + 56 : y + 34;
     const levelY = pad ? y + 71 : y + 45;
     const textX = pad ? x + 16 : x + 9;
-    const nameSize = pad ? 13 : 9;
+    const nameSize = pad ? 13 : 8.5;
     const levelSize = pad ? 11 : 8;
     const kitchenOff = light.kitchen;
     return (
@@ -274,14 +274,14 @@ export default function dankHome(): Scene {
 
           <text x="706" y="72" fontSize="15" fontWeight="700" fill="#fff">Good evening</text>
           <text x="706" y="86" fontSize="9" fill="#fff" fillOpacity="0.6">Friday, October 9</text>
-          <circle cx="850" cy="67" r="10" fill="#fff" fillOpacity="0.12" />
-          {sparkle(850, 67, 0.6)}
+          <circle cx="848" cy="67" r="10" fill="#fff" fillOpacity="0.12" />
+          {sparkle(848, 67, 0.6)}
           {statusLine(706, 104, 8.5)}
 
           {[
-            { label: 'All', x: 706, w: 28, on: true },
-            { label: 'Living Room', x: 740, w: 70 },
-            { label: 'Kitchen', x: 816, w: 54 },
+            { label: 'All', x: 706, w: 26, on: true },
+            { label: 'Living Room', x: 738, w: 66 },
+            { label: 'Kitchen', x: 810, w: 48 },
           ].map((room) => (
             <g key={room.label}>
               <rect x={room.x} y="113" width={room.w} height="20" rx="10" fill="#fff" fillOpacity={room.on ? 1 : 0.1} />
@@ -296,14 +296,14 @@ export default function dankHome(): Scene {
             return lightStates(i, x, y, 'phone');
           })}
 
-          <rect x="706" y="318" width="164" height="58" rx="12" fill="#fff" fillOpacity="0.07" />
+          <rect x="706" y="318" width="152" height="58" rx="12" fill="#fff" fillOpacity="0.07" />
           <text x="716" y="336" fontSize="9" fill="#fff" fillOpacity="0.6">Thermostat</text>
           <text x="716" y="362" fontSize="22" fontWeight="300" fill="#fff" style={play('dh-t68', T, { opacity: 0 })}>68°</text>
           <text x="716" y="362" fontSize="22" fontWeight="300" fill="#fff" style={play('dh-t70', T, { opacity: 1 })}>70°</text>
-          <text x="858" y="336" fontSize="8" fontWeight="600" fill="#ff9f43" textAnchor="end">HEATING</text>
+          <text x="848" y="336" fontSize="8" fontWeight="600" fill="#ff9f43" textAnchor="end">HEATING</text>
 
           {/* The weather card, cut off where the column scrolls on */}
-          <rect x="706" y="384" width="164" height="60" rx="12" fill="#fff" fillOpacity="0.07" />
+          <rect x="706" y="384" width="152" height="60" rx="12" fill="#fff" fillOpacity="0.07" />
           <circle cx="722" cy="402" r="6" fill="#ffd25a" />
           <text x="734" y="406" fontSize="11" fill="#fff">64°</text>
         </g>
