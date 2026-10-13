@@ -7,7 +7,10 @@ export interface Project {
   title: string;
   year: string;
   categories: Category[];
+  /** The full write-up, shown on the case study. */
   description: string[];
+  /** A shorter list for the home page card, when the write-up runs long. */
+  highlights?: string[];
   technologies: string[];
   githubUrl?: string;
   demoUrl?: string;
@@ -51,6 +54,11 @@ export const projects: Project[] = [
       'Ported a static single-club reference app into a full client/server platform any yacht club can run — an Angular front end (standalone components and signals) over a FastAPI and PostgreSQL backend with JWT auth, plus a club-admin console for mark list CRUD and spreadsheet uploads.',
       'Ships as a one-command Docker Compose stack and a Render blueprint, seeded with four Massachusetts Bay yacht clubs and their real mark data.',
     ],
+    highlights: [
+      'Course plotting for one-design racing: build the night’s course from the club’s mark list and get true and magnetic headings and a distance for every leg.',
+      'Grew a single-club reference app into a platform any club can run: Angular over FastAPI and PostgreSQL, with JWT auth and a club-admin console.',
+      'Ships as one Docker Compose stack, seeded with four Massachusetts Bay clubs’ real marks. iPhone app in TestFlight beta.',
+    ],
     technologies: ['Angular', 'FastAPI', 'PostgreSQL', 'Docker', 'JWT', 'Render'],
     proud:
       'Sailors actually race with it. It started as a reference app for one club and is now a platform any club can run, with headings and distances people trust enough to sail by. The iPhone app, with its Leg screen, start countdown and Live Activity, is the part I’m happiest with.',
@@ -71,6 +79,11 @@ export const projects: Project[] = [
       'Senior capstone with Jack Denholm: a web-based biometric system that tells humans from automated agents in real time, using continuous behavioral analysis instead of static challenge solving.',
       'An Angular front end streams webcam frames over a persistent WebSocket to a Python Flask backend, where MediaPipe face and hand landmark models feed six complementary liveness checks — micro-movement, 3D facial consistency, blink patterns, texture analysis, gesture challenge-response, and hand tracking.',
       'Across 50 trials with four participants: 3.3s average completion against 7.0s for traditional CAPTCHA, a 92% authentication success rate against 80%, and 76% of simulated presentation attacks blocked against 67%.',
+    ],
+    highlights: [
+      'Senior capstone with Jack Denholm: tells humans from bots in real time with continuous behavioral checks instead of a CAPTCHA puzzle.',
+      'Angular streams webcam frames over WebSocket to Flask, where MediaPipe face and hand landmarks feed six liveness checks.',
+      'Beat traditional CAPTCHA in 50 trials: 3.3s vs 7.0s to complete, 92% vs 80% success, 76% vs 67% of spoofing attempts blocked.',
     ],
     technologies: ['Angular', 'Python', 'Flask', 'MediaPipe', 'WebSocket', 'Computer Vision'],
     proud:
@@ -94,6 +107,11 @@ export const projects: Project[] = [
       'Timers and routines: “turn off the lights in 30 minutes” or “every night at 10, run Good Night”. Routines that run a Home app scene are saved to the home hub as HomeKit triggers, so they fire even when the app is closed. A wake-up light fades a room from a warm glow to daylight by the alarm time, and adaptive lighting moves white lights with the sun.',
       'A What’s On view reads live watts and kWh from plugs that report them, shows how long everything has been on, and turns anything off in one tap. Plugs, fans and switches left on too long turn orange in the status line under the clock.',
       'Built for a screen that stays on: an idle night clock drifts each minute to avoid burn-in, dims the display and turns deep red after midnight, and unlocking a door or opening the garage always asks first. A demo mode with a fake home keeps it usable in the Simulator, and Swift Testing suites cover the schedules, lighting curves, quick commands and the unlock safety rule.',
+    ],
+    highlights: [
+      'A SwiftUI smart-home panel for a wall-mounted iPad, with its own iPhone layout: HomeKit devices, weather, music and live power use on one screen.',
+      'An on-device assistant on Apple’s Foundation Models runs the house and the app. Nothing leaves the device, and everyday commands skip the model entirely.',
+      'Timers, routines saved as HomeKit triggers, a wake-up light, and a burn-in-safe night clock, with Swift Testing suites behind them.',
     ],
     technologies: ['Swift', 'SwiftUI', 'HomeKit', 'Foundation Models', 'App Intents', 'MusicKit', 'Speech', 'Swift Testing', 'Open-Meteo'],
     proud:
@@ -169,6 +187,11 @@ export const projects: Project[] = [
       'Drove the full-stack integration effort and delivered a production-ready web application with 80%+ barcode detection accuracy.',
       'Managed Agile project management in GitLab; led DevOps and hosting and built the CI/CD pipelines.',
       'Implemented Excel-backed inventory uploads converted to SQLite, easing updates for non-technical stakeholders.',
+    ],
+    highlights: [
+      'Led design and delivery as chief architect, service owner and PM, owning the roadmap for ML-based barcode detection.',
+      'Shipped a production web app with 80%+ detection accuracy, with GitLab CI/CD, hosting and Agile delivery under my lead.',
+      'Excel-backed inventory uploads, converted to SQLite, let non-technical staff keep the data current.',
     ],
     technologies: ['Flask', 'JavaScript', 'SQLite', 'Machine Learning', 'GitLab CI/CD'],
     proud:

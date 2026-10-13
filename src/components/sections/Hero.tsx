@@ -30,7 +30,7 @@ const ticker = [
 ];
 
 const stats = [
-  { value: '7', label: 'roles' },
+  { value: '5', label: 'platforms shipped to' },
   { value: '11', label: 'shipped projects' },
   { value: '2', label: 'apps on the App Store' },
   { value: '20k+', label: 'endpoints managed' },
@@ -99,8 +99,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-9 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center"
         >
-          {/* The two calls to action share a row of their own on phones so
-              neither label wraps; everything sits inline from sm up. */}
+          {/* On phones the calls to action and the profile links each fill a row of
+              their own, so neither label wraps; everything sits inline from sm up. */}
           <div className="flex gap-2.5">
             <button
               onClick={() => scrollTo('projects')}
@@ -123,19 +123,21 @@ export default function Hero() {
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted transition-colors hover:border-foreground hover:text-foreground"
+              className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-md border border-border text-sm text-muted transition-colors hover:border-foreground hover:text-foreground sm:w-11 sm:flex-none"
               aria-label="GitHub"
             >
               <Github className="h-4 w-4" />
+              <span className="sm:hidden">github</span>
             </a>
             <a
               href={LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted transition-colors hover:border-foreground hover:text-foreground"
+              className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-md border border-border text-sm text-muted transition-colors hover:border-foreground hover:text-foreground sm:w-11 sm:flex-none"
               aria-label="LinkedIn"
             >
               <Linkedin className="h-4 w-4" />
+              <span className="sm:hidden">linkedin</span>
             </a>
           </div>
         </motion.div>
