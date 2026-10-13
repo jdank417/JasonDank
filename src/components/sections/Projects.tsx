@@ -87,7 +87,9 @@ export default function Projects() {
 function ProjectBody({ project }: { project: Project }) {
   const [expanded, setExpanded] = useState(false);
   const listId = useId();
-  const extra = project.description.length - 1;
+  // The card shows the short list when there is one; the case study has the rest.
+  const lines = project.highlights ?? project.description;
+  const extra = lines.length - 1;
 
   return (
     <>
@@ -107,7 +109,7 @@ function ProjectBody({ project }: { project: Project }) {
       <h3 className="font-display mt-2 font-bold leading-snug">{project.title}</h3>
 
       <ul id={listId} className="mt-4 flex-1 space-y-2.5">
-        {project.description.map((line, i) => (
+        {lines.map((line, i) => (
           <li key={i} className={`${i > 0 && !expanded ? 'hidden md:flex' : 'flex'} gap-3 text-sm text-muted`}>
             <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-muted" />
             <span>{line}</span>

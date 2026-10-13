@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 export interface RulerSection {
   id: string;
   name: string;
-  /** The section's number as its heading shows it (§00 → "00"); unnumbered ones get a dot. */
+  /** The section's number as its heading shows it (§00 → "00"); unnumbered ones get a round marker. */
   mark?: string;
 }
 
@@ -93,13 +93,22 @@ export default function LatitudeRuler({ sections = HOME_SECTIONS }: { sections?:
             title={m.name}
           >
             <span className={`h-px w-4 ${current === m.id ? 'bg-accent' : 'bg-foreground/60'}`} />
-            <span
-              className={`ml-0.5 text-[0.55rem] tabular-nums transition-colors group-hover:text-foreground ${
-                current === m.id ? 'text-foreground' : 'text-muted'
-              }`}
-            >
-              {m.mark ?? '·'}
-            </span>
+            {m.mark ? (
+              <span
+                className={`ml-0.5 text-[0.55rem] tabular-nums transition-colors group-hover:text-foreground ${
+                  current === m.id ? 'text-foreground' : 'text-muted'
+                }`}
+              >
+                {m.mark}
+              </span>
+            ) : (
+              // Unnumbered sections lead with a dot in their heading, so the ruler shows one too.
+              <span
+                className={`ml-1 h-1.5 w-1.5 rounded-full transition-colors group-hover:bg-foreground ${
+                  current === m.id ? 'bg-foreground' : 'bg-muted'
+                }`}
+              />
+            )}
           </button>
         ))}
 
