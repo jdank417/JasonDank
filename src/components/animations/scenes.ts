@@ -65,7 +65,7 @@ export const scenes: Record<string, SceneEntry> = {
     render: finetune,
   },
   'live-boston': {
-    label: 'Every train moving on the map while the commute counts down to leaving, an Orange Line shuttle and a freight delay come up in the alerts, then a ride along on the Red Line into the cab view',
+    label: 'Downtown Boston from North Station to South Station, drawn from the MBTA’s own track and station data: each train runs its real track at its true length and eases into every stop while the commute counts down to leaving, a closed station and a freight delay come up in the alerts, then a ride along on the Red Line out over the Longfellow Bridge',
     still: 0.45,
     render: liveBoston,
   },
