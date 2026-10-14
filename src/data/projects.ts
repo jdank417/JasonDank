@@ -138,6 +138,37 @@ export const projects: Project[] = [
     shots: [{ src: '/projects/sailing-rules-assistant/rules-assistant.webp', width: 485, height: 319, alt: 'The Sailing Rules Assistant (2025–2028 rules): a question, optional context and the answer panel, with example questions below', frame: 'desktop' }],
   },
   {
+    id: 'live-boston',
+    title: 'Live Boston — Every T Train, Live in 3D',
+    year: '2026',
+    categories: ['web'],
+    description: [
+      'A live 3D map of Boston transit in the browser: every subway train, commuter rail train, Silver Line bus and harbor ferry, plus the Amtrak trains that share the MBTA’s tracks. Up close each train is a three.js model with the real number of cars the MBTA reports and true car dimensions, drawn in a MapLibre custom layer over a custom vector basemap; zoomed out, each one is a crisp dot in its line’s color.',
+      'Built to be accurate, not just animated. Every position report is snapped onto the exact shape its trip runs, moved forward by how old the report is, then coasted at its measured speed, never past the stop it’s heading to. The drawn train follows that estimate under each line’s real top speed and a service-braking curve, so it eases into stations instead of jumping between reports. Amtrak’s positions are matched to the commuter rail tracks it runs on.',
+      'An Alerts tab turns the MBTA’s service alerts into something you can see: suspended stretches and closed stations go amber on the map, outside causes like freight trains, drawbridges and Amtrak traffic are called out, and trains running bunched up are detected from their live positions. One search box finds any station, line, train number, ferry or Bluebikes dock.',
+      'My commute pins a departure from any station and counts down to when you need to leave, allowing for the walk, with a reminder when it’s time to go. You can ride along behind any train or switch to the view from the cab, and the city’s sky and light follow the real sun and weather. It’s a static site with no backend, installable as an app on a phone.',
+    ],
+    highlights: [
+      'A live 3D map of every Boston subway train, commuter rail train, Silver Line bus and ferry, plus Amtrak, drawn with three.js over MapLibre.',
+      'Accurate between reports: each train is snapped to its trip’s track, projected forward from its report’s age, and eased into stops with real top speeds and braking.',
+      'Service alerts and bunching on the map, one search for everything, and a commute countdown that says when to leave.',
+    ],
+    technologies: ['TypeScript', 'three.js', 'MapLibre GL', 'Vite', 'MBTA V3 API', 'PWA', 'GitHub Pages'],
+    proud:
+      'I use it to plan my commute. Instead of trusting a countdown, I can see exactly where my train is and get told the moment to walk out the door. And watching the whole system move across the city in 3D still hasn’t gotten old.',
+    summary:
+      'Live Boston is a live 3D map of Boston’s transit: every subway train, commuter rail train, Silver Line bus, ferry and nearby Amtrak train, drawn where it actually is right now. It shows what’s disrupting service, finds anything by name or number, and counts down to when you need to leave for your own commute.',
+    demoUrl: 'https://jdank417.github.io/live-boston/',
+    demoLabel: 'live site',
+    shots: [
+      { src: '/projects/live-boston/overview.webp', width: 1200, height: 750, alt: 'Every line and train across Boston at night, with live counts for each line in the sidebar', frame: 'desktop' },
+      { src: '/projects/live-boston/ride.webp', width: 1200, height: 750, alt: 'Riding along behind a Red Line train between 3D buildings, with its next stop, arrival and speed', frame: 'desktop' },
+      { src: '/projects/live-boston/cab.webp', width: 1200, height: 750, alt: 'The cab view: looking down the Red Line track from the front of the train toward the skyline', frame: 'desktop' },
+      { src: '/projects/live-boston/alerts.webp', width: 1200, height: 750, alt: 'The Alerts tab: disruptions, bunched trains and elevator outages, with each service alert by line', frame: 'desktop' },
+      { src: '/projects/live-boston/station.webp', width: 600, height: 1298, alt: 'Park Street on a phone: live departures for each line, with a pin to make one your commute', frame: 'phone' },
+    ],
+  },
+  {
     id: 'bullbar',
     title: 'BullBar — SwiftUI macOS App',
     year: '2025',

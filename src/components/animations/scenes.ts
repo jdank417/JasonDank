@@ -7,6 +7,7 @@ import dankHome from './dankhome';
 import finetune from './finetune';
 import humanAuth from './humanauth';
 import type { Scene } from './kit';
+import liveBoston from './liveboston';
 import monitor from './monitor';
 import regatta from './regatta';
 import stocks from './stocks';
@@ -62,6 +63,11 @@ export const scenes: Record<string, SceneEntry> = {
     label: 'Instruction records flow forward through the network, backprop updates the weights layer by layer, the loss comes down, and the assistant answers a rules question',
     still: 0.88,
     render: finetune,
+  },
+  'live-boston': {
+    label: 'Every train moving on the map while the commute counts down to leaving, an Orange Line shuttle and a freight delay come up in the alerts, then a ride along on the Red Line into the cab view',
+    still: 0.45,
+    render: liveBoston,
   },
   'remote-gpu-server': {
     label: 'SSH over Tailscale into WSL2 on the ZBook, where a container trains on the GPU',
