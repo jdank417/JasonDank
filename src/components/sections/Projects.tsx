@@ -52,13 +52,14 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Below md: a swipeable row. From md up: the original two-column grid. */}
+        {/* Below md: a swipeable row. From md up: the original two-column grid. Either
+            way every card stretches to the tallest beside it, so they line up. */}
         <motion.div
           ref={gridRef}
           layout
           role="region"
           aria-label="Projects"
-          className="spotlight-group no-scrollbar relative -mx-5 flex snap-x snap-mandatory scroll-px-5 items-start gap-3 overflow-x-auto px-5 pb-1 sm:-mx-8 sm:scroll-px-8 sm:px-8 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:items-stretch md:gap-4 md:overflow-visible md:px-0 md:pb-0"
+          className="spotlight-group no-scrollbar relative -mx-5 flex snap-x snap-mandatory scroll-px-5 items-stretch gap-3 overflow-x-auto px-5 pb-1 sm:-mx-8 sm:scroll-px-8 sm:px-8 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pb-0"
         >
           <AnimatePresence mode="popLayout">
             {visible.map((project) => (
