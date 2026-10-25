@@ -7,6 +7,7 @@ import dankHome from './dankhome';
 import finetune from './finetune';
 import humanAuth from './humanauth';
 import type { Scene } from './kit';
+import lime from './lime';
 import liveBoston from './liveboston';
 import monitor from './monitor';
 import regatta from './regatta';
@@ -43,6 +44,11 @@ export const scenes: Record<string, SceneEntry> = {
     label: 'A scene lights the house on the iPad and iPhone, one sentence turns off the kitchen and locks the door instantly, the assistant switches the background, and the iPad drifts into its night clock',
     still: 0.7,
     render: dankHome,
+  },
+  lime: {
+    label: 'A photo Shift-dragged out of Finder opens the glass wheel of formats, the JPG slice lights up lime, and after the drop the island at the top of the screen fills its progress bar and the new JPG appears beside the original',
+    still: 0.4,
+    render: lime,
   },
   bullbar: {
     label: 'A strip of live quotes floating above every window, fed through a Cloudflare Worker',
