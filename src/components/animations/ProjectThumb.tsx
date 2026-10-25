@@ -7,7 +7,7 @@ import { scenes } from './scenes';
 /**
  * A project's scene in miniature, for its card. It rests on a still frame and
  * plays only while it has attention: while the card is hovered where there's a
- * mouse, or while it's on screen on touch devices. Twelve scenes running at once
+ * mouse, or while it's on screen on touch devices. Thirteen scenes running at once
  * would be a lot to look at, and a lot of work for a phone.
  */
 export default function ProjectThumb({ id }: { id: string }) {

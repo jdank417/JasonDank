@@ -172,6 +172,27 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: 'lime',
+    title: 'Lime — Convert and Edit Files Right from Finder',
+    year: '2026',
+    categories: ['apple', 'automation'],
+    description: [
+      'A free, open source macOS menu bar app that converts files where you already are. Hold Shift while dragging any file in Finder and a Liquid Glass wheel of formats opens under the pointer; drop the file on a slice and the converted copy is saved beside the original. Hold Option instead and the wheel fills with tools for that kind of file.',
+      'Everything runs on the Mac with Apple’s own frameworks and the command-line tools macOS ships with: ImageIO and Core Image, AVFoundation, PDFKit, AppKit’s document readers, ditto, tar and hdiutil. Nothing is uploaded and there’s nothing extra to install. It converts images (PNG, JPG, HEIC, AVIF, TIFF, GIF, BMP, SVG, PDF and DOCX), video, audio, PDFs, documents, subtitles, archives and folders.',
+      'The tools open small glass editor windows: compress a photo to an exact file size, adjust its light and color, crop, annotate, redact, add a background or read its QR codes; trim, crop, speed up, split or join video; trim audio on its waveform, normalize it or change its channels; reorder PDF pages; and read, edit or strip metadata. A pill at the top of the screen shows each job’s progress, then a button to show the result in Finder.',
+      'Lime spots file drags anywhere on the Mac by watching the global mouse state and the drag pasteboard, so it needs no accessibility permission, and it shrinks Finder’s big drag preview over the wheel so the slices stay readable. It ships as a signed and notarized DMG on GitHub Releases, built by a script and a GitHub Actions workflow, with tests that run every converter and tool on generated files.',
+    ],
+    highlights: [
+      'Hold Shift while dragging any file in Finder and a Liquid Glass wheel of formats opens under the pointer; Option brings up tools for that file.',
+      'Converts images, video, audio, PDFs, documents, subtitles and archives entirely on the Mac, with editor windows to crop, trim, compress, redact and edit metadata.',
+      'Free and open source, shipped as a signed and notarized DMG on GitHub Releases.',
+    ],
+    technologies: ['Swift', 'SwiftUI', 'AppKit', 'Liquid Glass', 'AVFoundation', 'Core Image', 'PDFKit', 'GitHub Actions'],
+    githubUrl: 'https://github.com/jdank417/Lime',
+    demoUrl: 'https://github.com/jdank417/Lime/releases/latest/download/Lime.dmg',
+    demoLabel: 'download for Mac',
+  },
+  {
     id: 'bullbar',
     title: 'BullBar — SwiftUI macOS App',
     year: '2025',
