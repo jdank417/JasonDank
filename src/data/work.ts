@@ -29,7 +29,7 @@ export const experiences: ExperienceItem[] = [
     title: 'Endpoint Systems Engineer Intern',
     company: 'Harvard University Information Technology',
     location: 'Cambridge, MA — Hybrid',
-    period: 'Jan 2025 — Mar 2026 · two terms',
+    period: 'Jan 2025 — Apr 2025 · Aug 2025 — Mar 2026',
     achievements: [
       'Managed over 20,000 macOS, Windows, and Linux endpoints; maintained system stability across the university.',
       "Acted as service owner and engineer for the university's data retention service.",
