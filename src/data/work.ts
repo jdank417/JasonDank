@@ -29,7 +29,7 @@ export const experiences: ExperienceItem[] = [
     title: 'Endpoint Systems Engineer Intern',
     company: 'Harvard University Information Technology',
     location: 'Cambridge, MA — Hybrid',
-    period: 'Jan 2025 — Apr 2025 · Aug 2025 — Mar 2026',
+    period: 'Jan 2025 — Apr 2025 · Aug 2025 — Dec 2025',
     achievements: [
       'Managed over 20,000 macOS, Windows, and Linux endpoints; maintained system stability across the university.',
       "Acted as service owner and engineer for the university's data retention service.",
@@ -92,10 +92,10 @@ export const experiences: ExperienceItem[] = [
   },
   {
     id: 'pjyc',
-    title: 'Sailing Instructor',
+    title: 'Sailing Instructor / Race Team Coach',
     company: 'Port Jefferson Yacht Club',
     location: 'Port Jefferson, NY',
-    period: 'May 2019 — Aug 2023',
+    period: 'May 2019 — Jan 2024',
     achievements: [
       'Taught sailing to 300–400 students (ages 6–75), developing comfort on the water and racing skills.',
       'Instructed in group and private settings, bringing students to readiness for their first races.',
